@@ -121,7 +121,7 @@ public class EquazioneSecondoGradoModificabileConRisolutore {
      * risolta di nuovo.
      */
     public void solve() {
-        EquazioneSecondoGrado equazione = new EquazioneSecondoGrado(a,b,c);
+        EquazioneSecondoGrado equazione = new EquazioneSecondoGrado(a, b, c);
         if (!isSolved()) {
             double delta = Math.pow(getB(), 2) - 4 * getA() * getC();
             // se delta è uguale a 0
@@ -154,7 +154,7 @@ public class EquazioneSecondoGradoModificabileConRisolutore {
      *                               almeno uno dei parametri
      */
     public SoluzioneEquazioneSecondoGrado getSolution() {
-        if(!isSolved()) {
+        if (!isSolved()) {
             throw new IllegalArgumentException("L'equazione risulta non risolta");
         }
         return lastSolution;

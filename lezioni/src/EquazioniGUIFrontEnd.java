@@ -1,7 +1,6 @@
 /**
  * 
  */
-package it.unicam.cs.asdl2223.slides.javaeoop;
 
 import javax.swing.JOptionPane;
 

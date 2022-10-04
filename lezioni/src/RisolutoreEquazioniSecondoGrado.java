@@ -1,5 +1,3 @@
-package it.unicam.cs.asdl2223.slides.javaeoop;
-
 /**
  * Un oggetto di questa classe è un attore che risolve equazioni di secondo
  * grado cercando soluzioni reali. Questo è un tipico esempio di classe

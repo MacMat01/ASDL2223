@@ -1,7 +1,6 @@
 /**
  * 
  */
-package it.unicam.cs.asdl2223.slides.javaeoop;
 
 /**
  * Un oggetto di questa classe è un attore che risolve una equazione di secondo

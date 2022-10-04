@@ -1,5 +1,3 @@
-package it.unicam.cs.asdl2223.slides.javaeoop;
-
 /**
  * Classe che implementa dei test tramite un metodo main che usa alcune
  * funzionalità delle classi relative alle equazioni di secondo grado e comunica

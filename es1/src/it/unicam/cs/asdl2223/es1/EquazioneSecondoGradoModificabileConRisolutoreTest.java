@@ -5,6 +5,7 @@ package it.unicam.cs.asdl2223.es1;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -20,7 +21,7 @@ class EquazioneSecondoGradoModificabileConRisolutoreTest {
     @Test
     final void testEquazioneSecondoGradoModificabileConRisolutore() {
         // controllo che il valore 0 su a lanci l'eccezione
-        assertThrows(IllegalArgumentException.class, () -> new EquazioneSecondoGradoModificabileConRisolutore(0, 1, 1));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new EquazioneSecondoGradoModificabileConRisolutore(0, 1, 1));
         // devo controllare che comunque nel caso normale il costruttore
         // funziona
         EquazioneSecondoGradoModificabileConRisolutore eq = new EquazioneSecondoGradoModificabileConRisolutore(1, 1, 1);
@@ -35,7 +36,7 @@ class EquazioneSecondoGradoModificabileConRisolutoreTest {
         // controllo che il valore restituito sia quello che ho messo
         // all'interno
         // dell'oggetto
-        assertTrue(x == e1.getA());
+        Assertions.assertTrue(x == e1.getA());
         // in generale si dovrebbe usare assertTrue(Math.abs(x -
         // e1.getA())<EPSILON) ma in
         // questo caso il valore che testiamo non ha subito manipolazioni quindi
@@ -104,8 +105,8 @@ class EquazioneSecondoGradoModificabileConRisolutoreTest {
         e8.solve();
         double soluzione1 = e8.getSolution().getS1();
         double soluzione2 = e8.getSolution().getS2();
-        assertEquals(2, soluzione1);
-        assertEquals(1, soluzione2);
+        Assertions.assertEquals(2, soluzione1);
+        Assertions.assertEquals(1, soluzione2);
     }
 
 }
