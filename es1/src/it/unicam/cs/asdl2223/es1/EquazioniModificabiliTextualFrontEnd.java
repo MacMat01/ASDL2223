@@ -37,6 +37,8 @@ public class EquazioniModificabiliTextualFrontEnd {
                     if (Math.abs(a) < EPSILON) {
                         System.out.println("Errore: Il valore del parametro a non può essere zero! Ritenta...");
                         retry = true;
+                    } else {    // inserito l'else per modificare il valore di retry
+                        retry = false;
                     }
                 } catch (IOException e) {
                     System.err.println("Errore di Input/Output!");
@@ -52,6 +54,7 @@ public class EquazioniModificabiliTextualFrontEnd {
                 try {
                     String aInput = input.readLine();
                     b = Double.parseDouble(aInput);
+                    retry = false;  // aggiunto il retry = false per uscire dal ciclo
                 } catch (IOException e) {
                     System.err.println("Errore di Input/Output!");
                     System.exit(1);
@@ -66,6 +69,7 @@ public class EquazioniModificabiliTextualFrontEnd {
                 try {
                     String aInput = input.readLine();
                     c = Double.parseDouble(aInput);
+                    retry = false;  // aggiunto il retry = false per uscire dal ciclo
                 } catch (IOException e) {
                     System.err.println("Errore di Input/Output!");
                     System.exit(1);
