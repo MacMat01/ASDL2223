@@ -70,6 +70,7 @@ public class EquazioneSecondoGradoModificabileConRisolutore {
             throw new IllegalArgumentException("Il parametro a deve essere diverso da 0");
         }
         this.a = a;
+        this.solved = false;
     }
 
     /**
@@ -87,6 +88,7 @@ public class EquazioneSecondoGradoModificabileConRisolutore {
      */
     public void setB(double b) {
         this.b = b;
+        this.solved = false;
     }
 
     /**
@@ -104,6 +106,7 @@ public class EquazioneSecondoGradoModificabileConRisolutore {
      */
     public void setC(double c) {
         this.c = c;
+        this.solved = false;
     }
 
     /**
