@@ -8,7 +8,7 @@
  */
 public class CombinationLock {
     private String aCombination = "";   // creo una stringa che rappresenta la combinazione
-    private StringBuffer insertedCombination = new StringBuffer(26);    // creo un buffer per rappresentare le combinazioni inserite
+    private StringBuffer insertedCombination = new StringBuffer();    // creo un buffer per rappresentare le combinazioni inserite
     private boolean unlocked = true;    // creo una variabile booleana per indicare se la cassaforte è aperta o meno
 
     /**
@@ -60,7 +60,7 @@ public class CombinationLock {
             if (insertedCombination.toString().equals(aCombination)) {
                 unlocked = true;
             } else {
-                insertedCombination.delete(0, 3);
+                insertedCombination.delete(0, insertedCombination.length());
             }
         }
     }
@@ -83,6 +83,7 @@ public class CombinationLock {
      */
     public void lock() {
         unlocked = false;
+        insertedCombination.delete(0, insertedCombination.length());
     }
 
     /**
@@ -111,6 +112,8 @@ public class CombinationLock {
         if (unlocked) {
             lock();
             if (!aCombination.equals(this.aCombination)) this.aCombination = aCombination;
+        } else {
+            insertedCombination.delete(0, insertedCombination.length());
         }
     }
 }
