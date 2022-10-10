@@ -1,5 +1,3 @@
-package it.unicam.cs.asdl2223.es1;
-
 /**
  * Una equazione di secondo grado è un oggetto il cui stato contiene i parametri
  * che identificano l'equazione stessa.

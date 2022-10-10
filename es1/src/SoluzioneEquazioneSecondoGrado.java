@@ -1,5 +1,3 @@
-package it.unicam.cs.asdl2223.es1;
-
 /**
  * Un oggetto di questa classe rappresenta le soluzioni di una certa equazione
  * di secondo grado. Le soluzioni possono essere zero, una o due.

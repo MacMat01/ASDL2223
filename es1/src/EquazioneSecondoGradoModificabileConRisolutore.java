@@ -1,7 +1,6 @@
 /**
  *
  */
-package it.unicam.cs.asdl2223.es1;
 
 /**
  * Un oggetto di questa classe permette di rappresentare una equazione di
