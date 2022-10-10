@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * Uno scassinatore è un oggetto che prende una certa cassaforte e trova la
  * combinazione utilizzando la "forza bruta".
@@ -5,8 +7,8 @@
  * @author Luca Tesei
  */
 public class Burglar {
-
-    // TODO inserire le variabili istanza che servono
+    private CombinationLock aCombinationLock;
+    private int attempts = -1;
 
     /**
      * Costruisce uno scassinatore per una certa cassaforte.
@@ -15,7 +17,10 @@ public class Burglar {
      * @throw NullPointerException se la cassaforte passata è nulla
      */
     public Burglar(CombinationLock aCombinationLock) {
-        // TODO implementare
+        if (aCombinationLock == null) {
+            throw new NullPointerException("La cassaforte passata è nulla");
+        }
+        this.aCombinationLock = aCombinationLock;
     }
 
     /**
@@ -24,8 +29,21 @@ public class Burglar {
      * @return la combinazione della cassaforte forzata.
      */
     public String findCombination() {
-        // TODO implementare
-        return null;
+        for (int i = 0; i < 26; i++) {
+            for (int j = 0; j < 26; j++) {
+                for (int k = 0; k < 26; k++) {
+                    aCombinationLock.setPosition((char) (i + 'A'));
+                    aCombinationLock.setPosition((char) (j + 'A'));
+                    aCombinationLock.setPosition((char) (k + 'A'));
+                    aCombinationLock.open();
+                    attempts++;
+                    if (aCombinationLock.isOpen()) {
+                        return "" + (char) (i + 'A') + (char) (j + 'A') + (char) (k + 'A');
+                    }
+                }
+            }
+        }
+        throw new IllegalStateException();
     }
 
     /**
@@ -37,7 +55,7 @@ public class Burglar {
      * forzata.
      */
     public long getAttempts() {
-        // TODO implementare
-        return -1;
+        // risultato 0 sta per 1 tentativo
+        return attempts;
     }
 }
