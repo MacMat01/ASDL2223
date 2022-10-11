@@ -147,31 +147,12 @@ public class TimeSlot implements Comparable<TimeSlot> {
         if (this.start.before(o.start) && (this.stop.before(o.start))) {
             return -1;
         }
-        if (this.start.equals(o.start) && this.stop.equals(o.stop)) {
-            return (int) this.stop.getTimeInMillis() / 60000;
+        GregorianCalendar lastStart = this.start.after(o.start) ? this.start : o.start;
+        GregorianCalendar firstStop = this.stop.before(o.stop) ? this.stop : o.stop;
+        if (lastStart.before(firstStop)) {
+            return (int) ((firstStop.getTimeInMillis() - lastStart.getTimeInMillis()) / 60000);
         }
-        if (this.stop.equals(o.start) || this.start.equals(o.stop)) {
-            return -1;
-        }
-        if (this.stop.after(o.start)) {
-            if (this.start.before(o.start)) {
-                if (this.stop.after(o.stop)) { // [ <> ]
-                    return (int) ((o.stop.getTimeInMillis() - o.start.getTimeInMillis()) / 60000);
-                }
-                return (int) ((this.stop.getTimeInMillis() - o.start.getTimeInMillis()) / 60000);
-            }
-            if (this.start.before(o.stop)) {
-                if (this.start.after(o.start) && this.stop.before(o.stop)) { // < [] >
-                    return (int) ((this.stop.getTimeInMillis() - this.start.getTimeInMillis()) / 60000);
-                }
-                return (int) ((o.stop.getTimeInMillis() - this.start.getTimeInMillis()) / 60000);
-            }
-            return -1;
-        }
-        if (this.start.after(o.start) && this.stop.after(o.stop)) {
-            return (int) ((o.stop.getTimeInMillis() - this.start.getTimeInMillis()) / 60000);
-        }
-        throw new IllegalStateException();
+        return -1;
     }
 
     /**
