@@ -111,56 +111,56 @@ class TimeSlotTest {
         GregorianCalendar g4 = new GregorianCalendar(2019, 10, 4, 16, 00);
         TimeSlot ts2 = new TimeSlot(g3, g4);
         // [ ] < >
-        assertTrue(ts1.getMinutesOfOverlappingWith(ts2) == -1);
-        assertTrue(ts2.getMinutesOfOverlappingWith(ts1) == -1);
+        assertEquals(-1, ts1.getMinutesOfOverlappingWith(ts2));
+        assertEquals(-1, ts2.getMinutesOfOverlappingWith(ts1));
         TimeSlot ts3 = new TimeSlot(new GregorianCalendar(2019, 10, 4, 13, 00), g4);
         // [ ]< >
-        assertTrue(ts1.getMinutesOfOverlappingWith(ts3) == -1);
-        assertTrue(ts3.getMinutesOfOverlappingWith(ts1) == -1);
+        assertEquals(-1, ts1.getMinutesOfOverlappingWith(ts3));
+        assertEquals(-1, ts3.getMinutesOfOverlappingWith(ts1));
         TimeSlot ts4 = new TimeSlot(new GregorianCalendar(2019, 10, 4, 12, 56), g4);
         // [ < 4 min ] >
-        assertTrue(ts1.getMinutesOfOverlappingWith(ts4) == 4);
-        assertTrue(ts4.getMinutesOfOverlappingWith(ts1) == 4);
+        assertEquals(4, ts1.getMinutesOfOverlappingWith(ts4));
+        assertEquals(4, ts4.getMinutesOfOverlappingWith(ts1));
         TimeSlot ts4Bis = new TimeSlot(new GregorianCalendar(2019, 10, 4, 12, 55, 53), g4);
         // [ < 4 min e rotti ] >
-        assertTrue(ts1.getMinutesOfOverlappingWith(ts4Bis) == 4);
-        assertTrue(ts4Bis.getMinutesOfOverlappingWith(ts1) == 4);
+        assertEquals(4, ts1.getMinutesOfOverlappingWith(ts4Bis));
+        assertEquals(4, ts4Bis.getMinutesOfOverlappingWith(ts1));
         TimeSlot ts5 = new TimeSlot(new GregorianCalendar(2019, 10, 4, 12, 55), g4);
         // [ < 5 min ] >
-        assertTrue(ts1.getMinutesOfOverlappingWith(ts5) == 5);
-        assertTrue(ts5.getMinutesOfOverlappingWith(ts1) == 5);
+        assertEquals(5, ts1.getMinutesOfOverlappingWith(ts5));
+        assertEquals(5, ts5.getMinutesOfOverlappingWith(ts1));
         TimeSlot ts6 = new TimeSlot(new GregorianCalendar(2019, 10, 4, 12, 54), g4);
         // [ < 6 min ] >
-        assertTrue(ts1.getMinutesOfOverlappingWith(ts6) == 6);
-        assertTrue(ts6.getMinutesOfOverlappingWith(ts1) == 6);
+        assertEquals(6, ts1.getMinutesOfOverlappingWith(ts6));
+        assertEquals(6, ts6.getMinutesOfOverlappingWith(ts1));
         TimeSlot ts7 = new TimeSlot(new GregorianCalendar(2019, 10, 4, 12, 00), new GregorianCalendar(2019, 10, 4, 12, 30));
         // [ < 30 min > ]
-        assertTrue(ts1.getMinutesOfOverlappingWith(ts7) == 30);
-        assertTrue(ts7.getMinutesOfOverlappingWith(ts1) == 30);
+        assertEquals(30, ts1.getMinutesOfOverlappingWith(ts7));
+        assertEquals(30, ts7.getMinutesOfOverlappingWith(ts1));
         TimeSlot ts8 = new TimeSlot(new GregorianCalendar(2019, 10, 4, 12, 00), new GregorianCalendar(2019, 10, 4, 12, 6));
         // [ < 6 min > ]
-        assertTrue(ts1.getMinutesOfOverlappingWith(ts8) == 6);
-        assertTrue(ts8.getMinutesOfOverlappingWith(ts1) == 6);
+        assertEquals(6, ts1.getMinutesOfOverlappingWith(ts8));
+        assertEquals(6, ts8.getMinutesOfOverlappingWith(ts1));
         TimeSlot ts9 = new TimeSlot(new GregorianCalendar(2019, 10, 4, 12, 00), new GregorianCalendar(2019, 10, 4, 12, 5));
         // [ < 5 min > ]
-        assertTrue(ts1.getMinutesOfOverlappingWith(ts9) == 5);
-        assertTrue(ts9.getMinutesOfOverlappingWith(ts1) == 5);
+        assertEquals(5, ts1.getMinutesOfOverlappingWith(ts9));
+        assertEquals(5, ts9.getMinutesOfOverlappingWith(ts1));
         TimeSlot ts10 = new TimeSlot(new GregorianCalendar(2019, 10, 4, 10, 30), new GregorianCalendar(2019, 10, 4, 11, 30));
         // < [ 30 min > ]
-        assertTrue(ts1.getMinutesOfOverlappingWith(ts10) == 30);
-        assertTrue(ts10.getMinutesOfOverlappingWith(ts1) == 30);
+        assertEquals(30, ts1.getMinutesOfOverlappingWith(ts10));
+        assertEquals(30, ts10.getMinutesOfOverlappingWith(ts1));
         TimeSlot ts11 = new TimeSlot(new GregorianCalendar(2019, 10, 4, 10, 30), new GregorianCalendar(2019, 10, 4, 11, 6));
         // < [ 6 min > ]
-        assertTrue(ts1.getMinutesOfOverlappingWith(ts11) == 6);
-        assertTrue(ts11.getMinutesOfOverlappingWith(ts1) == 6);
+        assertEquals(6, ts1.getMinutesOfOverlappingWith(ts11));
+        assertEquals(6, ts11.getMinutesOfOverlappingWith(ts1));
         TimeSlot ts12 = new TimeSlot(new GregorianCalendar(2019, 10, 4, 10, 30), new GregorianCalendar(2019, 10, 4, 11, 4));
         // < [ 4 min > ]
-        assertTrue(ts1.getMinutesOfOverlappingWith(ts12) == 4);
-        assertTrue(ts12.getMinutesOfOverlappingWith(ts1) == 4);
+        assertEquals(4, ts1.getMinutesOfOverlappingWith(ts12));
+        assertEquals(4, ts12.getMinutesOfOverlappingWith(ts1));
         TimeSlot ts13 = new TimeSlot(new GregorianCalendar(2019, 10, 4, 10, 30), new GregorianCalendar(2019, 10, 4, 10, 58));
         // < > [ ]
-        assertTrue(ts1.getMinutesOfOverlappingWith(ts13) == -1);
-        assertTrue(ts13.getMinutesOfOverlappingWith(ts1) == -1);
+        assertEquals(-1, ts1.getMinutesOfOverlappingWith(ts13));
+        assertEquals(-1, ts13.getMinutesOfOverlappingWith(ts1));
     }
 
     @Test

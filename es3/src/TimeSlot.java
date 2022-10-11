@@ -37,7 +37,12 @@ public class TimeSlot implements Comparable<TimeSlot> {
      *                                  stop
      */
     public TimeSlot(GregorianCalendar start, GregorianCalendar stop) {
-        // TODO implementare
+        if (start == null || stop == null) {
+            throw new NullPointerException("Uno dei due istanti è null");
+        }
+        if (start == stop || start.after(start)) {
+            throw new IllegalArgumentException("Start è uguale o successivo a stop");
+        }
         this.start = start;
         this.stop = stop;
     }
@@ -63,8 +68,17 @@ public class TimeSlot implements Comparable<TimeSlot> {
      */
     @Override
     public boolean equals(Object obj) {
-        // TODO implementare
-        return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof TimeSlot)) {
+            return false;
+        }
+        TimeSlot other = (TimeSlot) obj;
+        return start.equals(other.start) && stop.equals(other.stop);
     }
 
     /*
@@ -74,8 +88,11 @@ public class TimeSlot implements Comparable<TimeSlot> {
      */
     @Override
     public int hashCode() {
-        // TODO implementare
-        return -1;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((start == null) ? 0 : start.hashCode());
+        result = prime * result + ((stop == null) ? 0 : stop.hashCode());
+        return result;
     }
 
     /*
@@ -85,8 +102,23 @@ public class TimeSlot implements Comparable<TimeSlot> {
      */
     @Override
     public int compareTo(TimeSlot o) {
-        // TODO implementare
-        return -1;
+        if (o == null) {
+            throw new NullPointerException("Tentativo di confrontare con null");
+        }
+        if (this.start.after(o.start)) {
+            return 1;
+        } else if (this.start.before(o.start)) {
+            return -1;
+        }
+        if (this.start.equals(o.start)) {
+            if (this.stop.after(o.stop)) {
+                return 1;
+            } else if (this.stop.before(o.stop)) {
+                return -1;
+            }
+        }
+        // se uguali
+        return 0;
     }
 
     /**
@@ -109,8 +141,37 @@ public class TimeSlot implements Comparable<TimeSlot> {
      *                                  superano Integer.MAX_VALUE
      */
     public int getMinutesOfOverlappingWith(TimeSlot o) {
-        // TODO implementare
-        return -1;
+        if (o == null) {
+            throw new NullPointerException("Il time slot passato è nullo");
+        }
+        if (this.start.before(o.start) && (this.stop.before(o.start))) {
+            return -1;
+        }
+        if (this.start.equals(o.start) && this.stop.equals(o.stop)) {
+            return (int) this.stop.getTimeInMillis() / 60000;
+        }
+        if (this.stop.equals(o.start) || this.start.equals(o.stop)) {
+            return -1;
+        }
+        if (this.stop.after(o.start)) {
+            if (this.start.before(o.start)) {
+                if (this.stop.after(o.stop)) { // [ <> ]
+                    return (int) ((o.stop.getTimeInMillis() - o.start.getTimeInMillis()) / 60000);
+                }
+                return (int) ((this.stop.getTimeInMillis() - o.start.getTimeInMillis()) / 60000);
+            }
+            if (this.start.before(o.stop)) {
+                if (this.start.after(o.start) && this.stop.before(o.stop)) { // < [] >
+                    return (int) ((this.stop.getTimeInMillis() - this.start.getTimeInMillis()) / 60000);
+                }
+                return (int) ((o.stop.getTimeInMillis() - this.start.getTimeInMillis()) / 60000);
+            }
+            return -1;
+        }
+        if (this.start.after(o.start) && this.stop.after(o.stop)) {
+            return (int) ((o.stop.getTimeInMillis() - this.start.getTimeInMillis()) / 60000);
+        }
+        throw new IllegalStateException();
     }
 
     /**
@@ -139,8 +200,7 @@ public class TimeSlot implements Comparable<TimeSlot> {
      */
     @Override
     public String toString() {
-        // TODO implementare
-        return null;
+        return "[" + getStart() + " - " + getStop() + "]";
     }
 
 }

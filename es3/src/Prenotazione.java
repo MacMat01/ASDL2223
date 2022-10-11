@@ -24,9 +24,13 @@ public class Prenotazione implements Comparable<Prenotazione> {
      *                              null
      */
     public Prenotazione(String aula, TimeSlot timeSlot, String docente, String motivo) {
-        // TODO implementare
+        if (aula == null || timeSlot == null || docente == null || motivo == null) {
+            throw new NullPointerException("Uno degli oggetti passati è nullo");
+        }
         this.aula = aula;
         this.timeSlot = timeSlot;
+        this.docente = docente;
+        this.motivo = motivo;
     }
 
     /**
@@ -78,8 +82,17 @@ public class Prenotazione implements Comparable<Prenotazione> {
      */
     @Override
     public boolean equals(Object obj) {
-        // TODO implementare
-        return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Prenotazione)) {
+            return false;
+        }
+        Prenotazione other = (Prenotazione) obj;
+        return timeSlot.equals(other.timeSlot) && aula.equals(other.aula);
     }
 
     /*
@@ -88,8 +101,11 @@ public class Prenotazione implements Comparable<Prenotazione> {
      */
     @Override
     public int hashCode() {
-        // TODO implementare
-        return -1;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((aula == null) ? 0 : aula.hashCode());
+        result = prime * result + ((timeSlot == null) ? 0 : timeSlot.hashCode());
+        return result;
     }
 
     /*
@@ -99,8 +115,13 @@ public class Prenotazione implements Comparable<Prenotazione> {
      */
     @Override
     public int compareTo(Prenotazione o) {
-        // TODO implementare
-        return -1;
+        if (o == null) {
+            throw new NullPointerException("Tentativo di confrontare con un null");
+        }
+        if (this.timeSlot.equals(o.timeSlot)) {
+            return this.aula.compareTo(o.aula);
+        }
+        return this.timeSlot.compareTo(o.timeSlot);
     }
 
     @Override
