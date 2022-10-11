@@ -150,7 +150,11 @@ public class TimeSlot implements Comparable<TimeSlot> {
         GregorianCalendar lastStart = this.start.after(o.start) ? this.start : o.start;
         GregorianCalendar firstStop = this.stop.before(o.stop) ? this.stop : o.stop;
         if (lastStart.before(firstStop)) {
-            return (int) ((firstStop.getTimeInMillis() - lastStart.getTimeInMillis()) / 60000);
+            long overlappingMinutes = (firstStop.getTimeInMillis() - lastStart.getTimeInMillis()) / 60000;
+            if (overlappingMinutes > Integer.MAX_VALUE) {
+                throw new IllegalArgumentException("I minuti di sovrapposizione superano Integer.MAX_VALUE");
+            }
+            return (int) overlappingMinutes;
         }
         return -1;
     }
