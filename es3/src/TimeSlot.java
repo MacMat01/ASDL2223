@@ -4,6 +4,7 @@
 
 // TODO completare gli import se necessario
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
@@ -40,7 +41,7 @@ public class TimeSlot implements Comparable<TimeSlot> {
         if (start == null || stop == null) {
             throw new NullPointerException("Uno dei due istanti è null");
         }
-        if (start == stop || start.after(start)) {
+        if (start.equals(stop) || start.after(stop)) {
             throw new IllegalArgumentException("Start è uguale o successivo a stop");
         }
         this.start = start;
@@ -170,7 +171,12 @@ public class TimeSlot implements Comparable<TimeSlot> {
      * @throws NullPointerException se il time slot passato è nullo
      */
     public boolean overlapsWith(TimeSlot o) {
-        // TODO implementare
+        if (o == null) {
+            throw new NullPointerException("Il time slot passato è nullo");
+        }
+        if (this.getMinutesOfOverlappingWith(o) > MINUTES_OF_TOLERANCE_FOR_OVERLAPPING) {
+            return true;
+        }
         return false;
     }
 
@@ -185,7 +191,11 @@ public class TimeSlot implements Comparable<TimeSlot> {
      */
     @Override
     public String toString() {
-        return "[" + getStart() + " - " + getStop() + "]";
+        return "[" + getStart().get(Calendar.DAY_OF_MONTH) + "/" + (getStart().get(Calendar.MONTH) + 1) + "/"
+                + getStart().get(Calendar.YEAR) + " " + getStart().get(Calendar.HOUR_OF_DAY) + "."
+                + getStart().get(Calendar.MINUTE) + " - " + getStop().get(Calendar.DAY_OF_MONTH) + "/"
+                + (getStop().get(Calendar.MONTH) + 1) + "/" + getStop().get(Calendar.YEAR) + " "
+                + getStop().get(Calendar.HOUR_OF_DAY) + "." + getStop().get(Calendar.MINUTE) + "]";
     }
 
 }
