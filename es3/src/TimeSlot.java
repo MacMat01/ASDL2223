@@ -191,10 +191,10 @@ public class TimeSlot implements Comparable<TimeSlot> {
      */
     @Override
     public String toString() {
-        return "[" + getStart().get(Calendar.DAY_OF_MONTH) + "/" + (getStart().get(Calendar.MONTH) + 1) + "/"
+        return "[" + getStart().get(Calendar.DAY_OF_MONTH) + "/" + getStart().get(Calendar.MONTH) + "/"
                 + getStart().get(Calendar.YEAR) + " " + getStart().get(Calendar.HOUR_OF_DAY) + "."
                 + getStart().get(Calendar.MINUTE) + " - " + getStop().get(Calendar.DAY_OF_MONTH) + "/"
-                + (getStop().get(Calendar.MONTH) + 1) + "/" + getStop().get(Calendar.YEAR) + " "
+                + getStop().get(Calendar.MONTH) + "/" + getStop().get(Calendar.YEAR) + " "
                 + getStop().get(Calendar.HOUR_OF_DAY) + "." + getStop().get(Calendar.MINUTE) + "]";
     }
 

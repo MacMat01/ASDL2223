@@ -228,8 +228,8 @@ class TimeSlotTest {
         GregorianCalendar g3 = new GregorianCalendar(2019, 10, 10, 11, 15);
         GregorianCalendar g4 = new GregorianCalendar(2019, 10, 10, 23, 45);
         TimeSlot ts2 = new TimeSlot(g3, g4);
-        assertEquals("[4/11/2019 11.0 - 4/11/2019 13.0]", ts1.toString());
-        assertEquals("[10/11/2019 11.15 - 10/11/2019 23.45]", ts2.toString());
+        assertEquals("[4/10/2019 11.0 - 4/10/2019 13.0]", ts1.toString());
+        assertEquals("[10/10/2019 11.15 - 10/10/2019 23.45]", ts2.toString());
     }
 
 }
