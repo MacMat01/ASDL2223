@@ -109,7 +109,20 @@ public class Book implements ShelfItem {
     @Override
     public boolean equals(Object obj) {
         // TODO implementare
-        return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Book)) {
+            return false;
+        }
+        Book other = (Book) obj;
+        if (!(this.iSBN.equals(other.iSBN))) {
+            return false;
+        }
+        return true;
     }
 
     /*
@@ -118,7 +131,10 @@ public class Book implements ShelfItem {
     @Override
     public int hashCode() {
         // TODO implementare
-        return -1;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (this.iSBN.hashCode());
+        return result;
     }
 
     // TODO inserire eventuali metodi accessori privati per fini di

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package it.unicam.cs.asdl2223.mp1;
 
@@ -9,10 +9,9 @@ package it.unicam.cs.asdl2223.mp1;
  * ha il diametro della base. Ridefinisce il metodo di default per calcolare la
  * superficie occupata restituiendo l'area del cerchio che corrisponde alla
  * base. Una lampada è identificata dal nome e dal nome del brand.
- * 
- * @author Luca Tesei (template) // TODO INSERIRE NOME, COGNOME ED EMAIL
- *         xxxx@studenti.unicam.it DELLO STUDENTE (implementazione)
  *
+ * @author Luca Tesei (template) // TODO INSERIRE NOME, COGNOME ED EMAIL
+ * xxxx@studenti.unicam.it DELLO STUDENTE (implementazione)
  */
 public class RoundLamp implements ShelfItem {
 
@@ -28,17 +27,12 @@ public class RoundLamp implements ShelfItem {
     // implementare tutti i metodi
 
     /**
-     * @param diameter
-     *                      diametro della base in cm
-     * @param weight
-     *                      peso in grammi
-     * @param name
-     *                      nome del modello della lampada
-     * @param brandName
-     *                      nome del brand della lampada
+     * @param diameter  diametro della base in cm
+     * @param weight    peso in grammi
+     * @param name      nome del modello della lampada
+     * @param brandName nome del brand della lampada
      */
-    public RoundLamp(double diameter, double weight, String name,
-            String brandName) {
+    public RoundLamp(double diameter, double weight, String name, String brandName) {
         this.diameter = diameter;
         this.weight = weight;
         this.name = name;
@@ -51,7 +45,8 @@ public class RoundLamp implements ShelfItem {
     @Override
     public double getOccupiedSurface() {
         // TODO implementare
-        return Double.NaN;
+        double area = (Math.PI * Math.pow(this.diameter, 2)) / 4;
+        return area;
     }
 
     /*
@@ -103,7 +98,20 @@ public class RoundLamp implements ShelfItem {
     @Override
     public boolean equals(Object obj) {
         // TODO implementare
-        return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof RoundLamp)) {
+            return false;
+        }
+        RoundLamp other = (RoundLamp) obj;
+        if (!(this.name.equals(other.name) && this.brandName.equals(other.brandName))) {
+            return false;
+        }
+        return true;
     }
 
     /*
@@ -113,7 +121,11 @@ public class RoundLamp implements ShelfItem {
     @Override
     public int hashCode() {
         // TODO implementare
-        return -1;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (this.name.hashCode());
+        result = prime * result + (this.brandName.hashCode());
+        return result;
     }
 
     // TODO inserire eventuali metodi accessori privati per fini di
