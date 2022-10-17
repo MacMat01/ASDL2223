@@ -45,8 +45,7 @@ public class RoundLamp implements ShelfItem {
     @Override
     public double getOccupiedSurface() {
         // TODO implementare
-        double area = (Math.PI * Math.pow(this.diameter, 2)) / 4;
-        return area;
+        return (Math.PI * Math.pow(this.diameter, 2)) / 4;
     }
 
     /*

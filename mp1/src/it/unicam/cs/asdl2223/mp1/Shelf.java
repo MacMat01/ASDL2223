@@ -104,26 +104,37 @@ public class Shelf {
         if (i == null) {
             throw new NullPointerException("L'oggetto passato è nullo");
         }
-        if ((i.getWeight() + getCurrentTotalWeight()) > this.maxTotalWeight || (i.getOccupiedSurface() + getCurrentTotalOccupiedSurface()) > this.maxOccupableSurface || i.getLength() > this.maxLength || i.getWidth() > this.maxWidth) {
-            throw new IllegalArgumentException("Il valore del peso, della superficie occupata," + "della lunghezza o della larghezza dell'oggetto superano i limiti previsti");
+        if ((i.getWeight() + getCurrentTotalWeight()) > this.maxTotalWeight) {
+            throw new IllegalArgumentException("Il peso dell'oggetto eccede il limite");
         }
-        for (int j = 0; j < this.items.length; j++) {
-            if (this.items[j].equals(i)) {
-                // oggetto già inserito
-                return false;
-            }
-            // se la casella è vuota inserisco l'oggetto
-            else if (this.items[j] == null) {
-                this.items[j] = i;
-                numberOfItems++;
-                return true;
-            }
-            // se sono arrivato all'ultima iterazione senza aver inserito l'oggetto, raddoppio lo spazio dell'array
-            if (j == this.items.length - 1) {
-                this.items = new ShelfItem[INITIAL_SIZE * 2];
+        if ((i.getOccupiedSurface() + getCurrentTotalOccupiedSurface()) > this.maxOccupableSurface) {
+            throw new IllegalArgumentException("La superficie occupata dell'oggetto eccede il limite");
+        }
+        if (i.getLength() > this.maxLength) {
+            throw new IllegalArgumentException("La lunghezza dell'oggetto eccede il limite");
+        }
+        if (i.getWidth() > this.maxWidth) {
+            throw new IllegalArgumentException("La larghezza dell'oggetto eccede il limite");
+        }
+        if (numberOfItems > 0) {
+            for (int j = 0; j < this.numberOfItems; j++) {
+                if (this.items[j].equals(i)) {
+                    // oggetto già inserito
+                    return false;
+                }
             }
         }
-        throw new IllegalStateException("");
+        // se gli oggetti presenti hanno riempinto l'array, lo raddoppio
+        if (this.numberOfItems == this.items.length) {
+            ShelfItem[] tmps = this.items;
+            this.items = new ShelfItem[this.items.length * 2];
+            for (int k = 0; k < tmps.length; k++) {
+                this.items[k] = tmps[k];
+            }
+        }
+        // inserisco l'oggetto alla prima posizione libera
+        this.items[numberOfItems++] = i;
+        return true;
     }
 
     /**
@@ -142,10 +153,10 @@ public class Shelf {
             throw new NullPointerException("L'oggetto passato è nullo");
         }
         // ciclo per ricercare l'oggetto i
-        for (int j = 0; j < items.length; j++) {
-            if (items[j].equals(i)) {
+        for (int j = 0; j < this.items.length; j++) {
+            if (this.items[j].equals(i)) {
                 // ritorno l'oggetto della mensola
-                return items[j];
+                return this.items[j];
             }
         }
         // se i non è stato trovato ritorna null
@@ -172,8 +183,10 @@ public class Shelf {
     public double getCurrentTotalWeight() {
         // TODO implementare
         double totalCurrentWeight = 0;
-        for (int i = 0; i < items.length; i++) {
-            totalCurrentWeight += items[i].getWeight();
+        if (this.numberOfItems >= 1) {
+            for (int i = 0; i < this.numberOfItems; i++) {
+                totalCurrentWeight += this.items[i].getWeight();
+            }
         }
         return totalCurrentWeight;
     }
@@ -184,8 +197,10 @@ public class Shelf {
     public double getCurrentTotalOccupiedSurface() {
         // TODO implementare
         double totalCurrentOccupiedSurface = 0;
-        for (int i = 0; i < items.length; i++) {
-            totalCurrentOccupiedSurface += items[i].getOccupiedSurface();
+        if (this.numberOfItems >= 1) {
+            for (int i = 0; i < this.numberOfItems; i++) {
+                totalCurrentOccupiedSurface += this.items[i].getOccupiedSurface();
+            }
         }
         return totalCurrentOccupiedSurface;
     }
