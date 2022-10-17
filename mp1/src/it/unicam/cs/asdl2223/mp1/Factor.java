@@ -1,3 +1,5 @@
+package it.unicam.cs.asdl2223.mp1;
+
 /**
  * Un oggetto di quest classe rappresenta un fattore primo di un numero naturale
  * con una certa molteplicità.
