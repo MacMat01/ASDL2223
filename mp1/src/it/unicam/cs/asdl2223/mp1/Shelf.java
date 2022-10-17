@@ -107,19 +107,19 @@ public class Shelf {
         if ((i.getWeight() + getCurrentTotalWeight()) > this.maxTotalWeight || (i.getOccupiedSurface() + getCurrentTotalOccupiedSurface()) > this.maxOccupableSurface || i.getLength() > this.maxLength || i.getWidth() > this.maxWidth) {
             throw new IllegalArgumentException("Il valore del peso, della superficie occupata," + "della lunghezza o della larghezza dell'oggetto superano i limiti previsti");
         }
-        for (int j = 0; j < items.length; j++) {
-            if (items[j].equals(i)) {
+        for (int j = 0; j < this.items.length; j++) {
+            if (this.items[j].equals(i)) {
                 // oggetto già inserito
                 return false;
             }
             // se la casella è vuota inserisco l'oggetto
-            else if (items[j] == null) {
-                items[j] = i;
+            else if (this.items[j] == null) {
+                this.items[j] = i;
                 numberOfItems++;
                 return true;
             }
             // se sono arrivato all'ultima iterazione senza aver inserito l'oggetto, raddoppio lo spazio dell'array
-            if (j == items.length - 1) {
+            if (j == this.items.length - 1) {
                 this.items = new ShelfItem[INITIAL_SIZE * 2];
             }
         }
