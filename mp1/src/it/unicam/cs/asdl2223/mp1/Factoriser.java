@@ -9,9 +9,6 @@ package it.unicam.cs.asdl2223.mp1;
  */
 public class Factoriser {
 
-    // TODO definire ulteriori variabili istanza che si ritengono necessarie per
-    // implementare tutti i metodi
-
     private CrivelloDiEratostene crivello;
 
     private Factor[] factors;
@@ -29,7 +26,6 @@ public class Factoriser {
      *                                  numero minore di 1.
      */
     public Factor[] getFactors(int n) {
-        // TODO implementare
         if (n < 1) {
             throw new IllegalArgumentException("Inserire un numero maggiore di 0");
         }
@@ -69,7 +65,4 @@ public class Factoriser {
         }
         return preciseArray;
     }
-
-    // TODO inserire eventuali metodi accessori privati per fini di
-    // implementazione
 }

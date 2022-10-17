@@ -20,9 +20,6 @@ public class Factor implements Comparable<Factor> {
      */
     private final int multiplicity;
 
-    // TODO definire ulteriori variabili istanza che si ritengono necessarie per
-    // implementare tutti i metodi
-
     /**
      * Crea un fattore primo di un numero naturale, formato da un numero primo e
      * dalla sua molteplicità.
@@ -34,7 +31,6 @@ public class Factor implements Comparable<Factor> {
      *                                  uguale di 0.
      */
     public Factor(int primeValue, int multiplicity) {
-        // TODO implementare
         if (multiplicity < 1 || primeValue <= 0) {
             throw new IllegalArgumentException("La molteplicità è minore di 1 oppure il valore primo è minore o uguale a 0");
         }
@@ -62,7 +58,6 @@ public class Factor implements Comparable<Factor> {
      */
     @Override
     public int hashCode() {
-        // TODO implentare
         final int prime = 31;
         int result = 1;
         result = prime * result + (primeValue ^ (primeValue >>> 32));
@@ -76,7 +71,6 @@ public class Factor implements Comparable<Factor> {
      */
     @Override
     public boolean equals(Object obj) {
-        // TODO implementare
         if (this == obj) {
             return true;
         }
@@ -100,7 +94,6 @@ public class Factor implements Comparable<Factor> {
      */
     @Override
     public int compareTo(Factor o) {
-        // TODO implementare
         if (this.primeValue < o.primeValue) {
             // Minore
             return -1;
@@ -126,11 +119,6 @@ public class Factor implements Comparable<Factor> {
      */
     @Override
     public String toString() {
-        // TODO implementare
         return getPrimeValue() + "^" + getMultiplicity();
     }
-
-    // TODO inserire eventuali metodi accessori privati per fini di
-    // implementazione
-
 }

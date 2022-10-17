@@ -105,17 +105,6 @@ public class CrivelloDiEratostene {
         if (n < 2 || n >= crivello.length) {
             throw new IllegalArgumentException("Il numero passato eccede la capacità del crivello o il numero è minore di 2");
         }
-        //// creo un ciclo che va da 2 alla lunghezza del crivello
-        //for (int i = 2; i <= crivello.length; i++) {
-        //    // se il numero passato modulo i è uguale a zero e non sono lo stesso numero, allora n non è primo
-        //    if (n % i == 0 && i != n) {
-        //        return false;
-        //    }
-        //    // altrimenti se il modulo è zero e sono lo stesso numero allora è primo
-        //    else if (n % i == 0 && i == n) {
-        //        return true;
-        //    }
-        //}
         return crivello[n];
     }
 
