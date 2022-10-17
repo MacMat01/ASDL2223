@@ -104,7 +104,7 @@ public class Shelf {
         if (i == null) {
             throw new NullPointerException("L'oggetto passato è nullo");
         }
-        if (i.getWeight() > maxTotalWeight || i.getOccupiedSurface() > maxOccupableSurface || i.getLength() > maxLength || i.getWidth() > maxWidth) {
+        if ((i.getWeight() + getCurrentTotalWeight()) > this.maxTotalWeight || (i.getOccupiedSurface() + getCurrentTotalOccupiedSurface()) > this.maxOccupableSurface || i.getLength() > this.maxLength || i.getWidth() > this.maxWidth) {
             throw new IllegalArgumentException("Il valore del peso, della superficie occupata," + "della lunghezza o della larghezza dell'oggetto superano i limiti previsti");
         }
         for (int j = 0; j < items.length; j++) {
@@ -138,6 +138,17 @@ public class Shelf {
      */
     public ShelfItem search(ShelfItem i) {
         // TODO implementare
+        if (i == null) {
+            throw new NullPointerException("L'oggetto passato è nullo");
+        }
+        // ciclo per ricercare l'oggetto i
+        for (int j = 0; j < items.length; j++) {
+            if (items[j].equals(i)) {
+                // ritorno l'oggetto della mensola
+                return items[j];
+            }
+        }
+        // se i non è stato trovato ritorna null
         return null;
     }
 
@@ -160,7 +171,11 @@ public class Shelf {
      */
     public double getCurrentTotalWeight() {
         // TODO implementare
-        return Double.NaN;
+        double totalCurrentWeight = 0;
+        for (int i = 0; i < items.length; i++) {
+            totalCurrentWeight += items[i].getWeight();
+        }
+        return totalCurrentWeight;
     }
 
     /**
@@ -168,7 +183,11 @@ public class Shelf {
      */
     public double getCurrentTotalOccupiedSurface() {
         // TODO implementare
-        return Double.NaN;
+        double totalCurrentOccupiedSurface = 0;
+        for (int i = 0; i < items.length; i++) {
+            totalCurrentOccupiedSurface += items[i].getOccupiedSurface();
+        }
+        return totalCurrentOccupiedSurface;
     }
 
     /**

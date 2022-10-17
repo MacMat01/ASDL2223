@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package it.unicam.cs.asdl2223.mp1;
 
@@ -8,10 +8,9 @@ package it.unicam.cs.asdl2223.mp1;
  * tipiche ci sono la lunghezza, la larghezza e il peso. Queste servono per
  * implementare i metodi dell'interfaccia ShelfItem. Un libro è identificato dal
  * suo codice ISBN.
- * 
- * @author Luca Tesei (template) // TODO INSERIRE NOME, COGNOME ED EMAIL
- *         xxxx@studenti.unicam.it DELLO STUDENTE (implementazione)
  *
+ * @author Luca Tesei (template) // TODO INSERIRE NOME, COGNOME ED EMAIL
+ * xxxx@studenti.unicam.it DELLO STUDENTE (implementazione)
  */
 public class Book implements ShelfItem {
     private final String author;
@@ -34,25 +33,16 @@ public class Book implements ShelfItem {
     // implementare tutti i metodi
 
     /**
-     * @param author
-     *                      stringa contenente l'autore
-     * @param title
-     *                      stringa contente il titolo
-     * @param year
-     *                      anno di pubblicazione
-     * @param publisher
-     *                      stringa con il nome dell'editore
-     * @param iSBN
-     *                      codice univoco del libro
-     * @param length
-     *                      lunghezza in cm
-     * @param width
-     *                      larghezza in cm
-     * @param weight
-     *                      peso in grammi
+     * @param author    stringa contenente l'autore
+     * @param title     stringa contente il titolo
+     * @param year      anno di pubblicazione
+     * @param publisher stringa con il nome dell'editore
+     * @param iSBN      codice univoco del libro
+     * @param length    lunghezza in cm
+     * @param width     larghezza in cm
+     * @param weight    peso in grammi
      */
-    public Book(String author, String title, int year, String publisher,
-            String iSBN, double length, double width, double weight) {
+    public Book(String author, String title, int year, String publisher, String iSBN, double length, double width, double weight) {
         this.author = author;
         this.title = title;
         this.year = year;
