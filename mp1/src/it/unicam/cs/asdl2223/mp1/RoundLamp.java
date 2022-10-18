@@ -23,9 +23,6 @@ public class RoundLamp implements ShelfItem {
 
     private final String brandName;
 
-    // TODO definire ulteriori variabili istanza che si ritengono necessarie per
-    // implementare tutti i metodi
-
     /**
      * @param diameter  diametro della base in cm
      * @param weight    peso in grammi
@@ -44,7 +41,6 @@ public class RoundLamp implements ShelfItem {
      */
     @Override
     public double getOccupiedSurface() {
-        // TODO implementare
         return (Math.PI * Math.pow(this.diameter, 2)) / 4;
     }
 
@@ -96,7 +92,6 @@ public class RoundLamp implements ShelfItem {
      */
     @Override
     public boolean equals(Object obj) {
-        // TODO implementare
         if (this == obj) {
             return true;
         }
@@ -119,15 +114,10 @@ public class RoundLamp implements ShelfItem {
      */
     @Override
     public int hashCode() {
-        // TODO implementare
         final int prime = 31;
         int result = 1;
         result = prime * result + (this.name.hashCode());
         result = prime * result + (this.brandName.hashCode());
         return result;
     }
-
-    // TODO inserire eventuali metodi accessori privati per fini di
-    // implementazione
-
 }

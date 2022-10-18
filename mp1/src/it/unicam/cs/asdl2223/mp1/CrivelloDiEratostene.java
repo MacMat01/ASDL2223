@@ -71,7 +71,6 @@ public class CrivelloDiEratostene {
                 }
             }
         }
-
     }
 
     /**
@@ -96,10 +95,11 @@ public class CrivelloDiEratostene {
      *                                  2.
      */
     public boolean isPrime(int n) {
-        if (n < 2 || n >= crivello.length) {
+        if (n < 2 || n >= this.crivello.length) {
             throw new IllegalArgumentException("Il numero passato eccede la capacità del crivello o il numero è minore di 2");
         }
-        return crivello[n];
+        // se crivello[n] è true allora è primo
+        return this.crivello[n];
     }
 
     /**
@@ -117,10 +117,10 @@ public class CrivelloDiEratostene {
      * numeri primi di questo crivello.
      */
     public boolean hasNextPrime() {
-        // Creo un ciclo che va dall'ultimo numero primo + 1 fino alla lunghezza della crivella
-        for (int i = lastPrime + 1; i < crivello.length; i++) {
+        // creo un ciclo che va dall'ultimo numero primo + 1 fino alla lunghezza della crivella
+        for (int i = this.lastPrime + 1; i < this.crivello.length; i++) {
             // se il numero nella posizione i della crivella è primo allora restituisce true
-            if (crivello[i]) {
+            if (this.crivello[i]) {
                 return true;
             }
         }
@@ -141,15 +141,15 @@ public class CrivelloDiEratostene {
      */
     public int nextPrime() {
         if (hasNextPrime()) {
-            for (int i = lastPrime + 1; i < crivello.length; i++) {
+            for (int i = this.lastPrime + 1; i < this.crivello.length; i++) {
                 // se il numero nella posizione i della crivella è primo allora aggiorno il valore di last prime e lo
                 // restituisce
-                if (crivello[i]) {
-                    return lastPrime = i;
+                if (this.crivello[i]) {
+                    return this.lastPrime = i;
                 }
             }
-        } else throw new IllegalStateException("L'elenco è terminato e non è ancora ripartito");
-        return -1;
+        }
+        throw new IllegalStateException("L'elenco è terminato e non è ancora ripartito");
     }
 
     /**
@@ -159,6 +159,6 @@ public class CrivelloDiEratostene {
      * comunque di ricominciare da 2.
      */
     public void restartPrimeIteration() {
-        lastPrime = 1;
+        this.lastPrime = 1;
     }
 }

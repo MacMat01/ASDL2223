@@ -60,8 +60,8 @@ public class Factor implements Comparable<Factor> {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + (primeValue ^ (primeValue >>> 32));
-        result = prime * result + (multiplicity ^ (multiplicity >>> 32));
+        result = prime * result + (this.primeValue ^ (this.primeValue >>> 32));
+        result = prime * result + (this.multiplicity ^ (this.multiplicity >>> 32));
         return result;
     }
 
@@ -95,22 +95,22 @@ public class Factor implements Comparable<Factor> {
     @Override
     public int compareTo(Factor o) {
         if (this.primeValue < o.primeValue) {
-            // Minore
+            // minore
             return -1;
         } else if (this.primeValue > o.primeValue) {
-            // Maggiore
+            // maggiore
             return 1;
         }
         if (this.primeValue == o.primeValue) {
             if (this.multiplicity < o.multiplicity) {
-                // Minore
+                // minore
                 return -1;
             } else if (this.multiplicity > o.multiplicity) {
                 // Maggiore
                 return 1;
             }
         }
-        // Se uguali
+        // uguali
         return 0;
     }
 

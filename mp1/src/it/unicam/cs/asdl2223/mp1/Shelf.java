@@ -56,9 +56,6 @@ public class Shelf {
      */
     private int numberOfItems;
 
-    // TODO definire ulteriori variabili istanza che si ritengono necessarie per
-    // implementare tutti i metodi
-
     /**
      * Costruisce una mensola con le sue caratteristiche. All'inizio nessun
      * oggetto è posato sulla mensola.
@@ -79,7 +76,6 @@ public class Shelf {
         this.maxTotalWeight = maxTotalWeight;
         this.items = new ShelfItem[INITIAL_SIZE];
         this.numberOfItems = 0;
-        // TODO implementare
     }
 
     /**
@@ -100,7 +96,6 @@ public class Shelf {
      * @throws NullPointerException     se l'oggetto passato è null
      */
     public boolean addItem(ShelfItem i) {
-        // TODO implementare
         if (i == null) {
             throw new NullPointerException("L'oggetto passato è nullo");
         }
@@ -116,7 +111,8 @@ public class Shelf {
         if (i.getWidth() > this.maxWidth) {
             throw new IllegalArgumentException("La larghezza dell'oggetto eccede il limite");
         }
-        if (numberOfItems > 0) {
+        // se esiste almeno un oggetto, controllo se ce ne sia uno uguale
+        if (this.numberOfItems > 0) {
             for (int j = 0; j < this.numberOfItems; j++) {
                 if (this.items[j].equals(i)) {
                     // oggetto già inserito
@@ -124,7 +120,7 @@ public class Shelf {
                 }
             }
         }
-        // se gli oggetti presenti hanno riempinto l'array, lo raddoppio
+        // se gli oggetti presenti hanno riempito l'array, lo raddoppio
         if (this.numberOfItems == this.items.length) {
             ShelfItem[] tmps = this.items;
             this.items = new ShelfItem[this.items.length * 2];
@@ -148,12 +144,11 @@ public class Shelf {
      * @throws NullPointerException se l'oggetto passato è null
      */
     public ShelfItem search(ShelfItem i) {
-        // TODO implementare
         if (i == null) {
             throw new NullPointerException("L'oggetto passato è nullo");
         }
         // ciclo per ricercare l'oggetto i
-        if (this.numberOfItems >= 1) {
+        if (this.numberOfItems > 0) {
             for (int j = 0; j < this.numberOfItems; j++) {
                 if (this.items[j].equals(i)) {
                     // ritorno l'oggetto della mensola
@@ -183,9 +178,9 @@ public class Shelf {
      * @return the currentTotalWeight
      */
     public double getCurrentTotalWeight() {
-        // TODO implementare
         double totalCurrentWeight = 0;
-        if (this.numberOfItems >= 1) {
+        // se c'è almeno un oggetto svolgo il ciclo
+        if (this.numberOfItems > 0) {
             for (int i = 0; i < this.numberOfItems; i++) {
                 totalCurrentWeight += this.items[i].getWeight();
             }
@@ -197,9 +192,9 @@ public class Shelf {
      * @return the currentTotalOccupiedSurface
      */
     public double getCurrentTotalOccupiedSurface() {
-        // TODO implementare
         double totalCurrentOccupiedSurface = 0;
-        if (this.numberOfItems >= 1) {
+        // se c'è almeno un oggetto svolgo il ciclo
+        if (this.numberOfItems > 0) {
             for (int i = 0; i < this.numberOfItems; i++) {
                 totalCurrentOccupiedSurface += this.items[i].getOccupiedSurface();
             }
@@ -234,8 +229,4 @@ public class Shelf {
     public double getMaxTotalWeight() {
         return maxTotalWeight;
     }
-
-    // TODO inserire eventuali metodi accessori privati per fini di
-    // implementazione
-
 }

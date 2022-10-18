@@ -29,39 +29,47 @@ public class Factoriser {
         if (n < 1) {
             throw new IllegalArgumentException("Inserire un numero maggiore di 0");
         }
+        // se n è uguale a 1, creo il nuovo fattore e lo restituisco
         if (n == 1) {
-            factors = new Factor[0];
-            return factors;
+            this.factors = new Factor[0];
+            return this.factors;
         }
-        factors = new Factor[(int) Math.sqrt(n)];
-        crivello = new CrivelloDiEratostene(n);
-        if (crivello.isPrime(n)) {
-            factors[0] = new Factor(n, 1);
-            return factors;
+        // creo un array di fattori con lunghezza imprecisa usando la radice di n
+        this.factors = new Factor[(int) Math.sqrt(n)];
+        this.crivello = new CrivelloDiEratostene(n);
+        // se n è primo restituisco factors
+        if (this.crivello.isPrime(n)) {
+            this.factors[0] = new Factor(n, 1);
+            return this.factors;
         }
         int multiplicity = 0;
         int nextPrime;
         int index = 0;
-        while (crivello.hasNextPrime()) {
-            nextPrime = crivello.nextPrime();
+        // controllo se nel crivello ci sono altri primi
+        while (this.crivello.hasNextPrime()) {
+            nextPrime = this.crivello.nextPrime();
+            // se n è divisibile per il numero primo allora incremento la molteplicità e lo divido
             while (n % nextPrime == 0) {
                 multiplicity++;
                 n /= nextPrime;
             }
+            // se la moltiplicità è stata modificata allora inserisco il fattore primo e resetto la molteplicità
             if (multiplicity != 0) {
-                factors[index++] = new Factor(nextPrime, multiplicity);
+                this.factors[index++] = new Factor(nextPrime, multiplicity);
                 multiplicity = 0;
             }
         }
         int newLength = 0;
-        for (int i = 0; i < factors.length; i++) {
-            if (factors[i] != null) {
+        // prendo tutte le caselle occupate di factors e incremento ogni volta newLength
+        for (int i = 0; i < this.factors.length; i++) {
+            if (this.factors[i] != null) {
                 newLength++;
             }
         }
+        // creo un nuovo array passandogli la lunghezza precisa usando newLength e passandogli i fattori
         Factor[] preciseArray = new Factor[newLength];
         for (int i = 0; i < preciseArray.length; i++) {
-            preciseArray[i] = factors[i];
+            preciseArray[i] = this.factors[i];
         }
         return preciseArray;
     }

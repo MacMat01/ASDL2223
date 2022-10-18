@@ -29,9 +29,6 @@ public class Book implements ShelfItem {
 
     private final double weight;
 
-    // TODO definire ulteriori variabili istanza che si ritengono necessarie per
-    // implementare tutti i metodi
-
     /**
      * @param author    stringa contenente l'autore
      * @param title     stringa contente il titolo
@@ -108,7 +105,6 @@ public class Book implements ShelfItem {
      */
     @Override
     public boolean equals(Object obj) {
-        // TODO implementare
         if (this == obj) {
             return true;
         }
@@ -130,13 +126,9 @@ public class Book implements ShelfItem {
      */
     @Override
     public int hashCode() {
-        // TODO implementare
         final int prime = 31;
         int result = 1;
         result = prime * result + (this.iSBN.hashCode());
         return result;
     }
-
-    // TODO inserire eventuali metodi accessori privati per fini di
-    // implementazione
 }
