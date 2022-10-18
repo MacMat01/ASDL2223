@@ -3,9 +3,8 @@ package it.unicam.cs.asdl2223.mp1;
 /**
  * Interfaccia che accomuna tutti gli oggetti che possono essere posati su una
  * mensola.
- * 
- * @author Luca Tesei
  *
+ * @author Luca Tesei
  */
 public interface ShelfItem {
     /**
@@ -29,7 +28,7 @@ public interface ShelfItem {
      * per la larghezza, assumendo che l'oggetto appoggi una superficie
      * rettangolare. Nel caso di forma diversa l'implementazione di default deve
      * essere ridefinita.
-     * 
+     *
      * @return la superficie occupata dall'oggetto
      */
     default double getOccupiedSurface() {

@@ -59,21 +59,15 @@ public class CrivelloDiEratostene {
         }
         this.capacity = capacity;
         this.crivello = new boolean[this.capacity + 1];
-        //     for (int i = 2; i < crivello.length; i++) {
-        //         if (isPrime(i)) {
-        //             crivello[i] = true;
-        //         }
-        //     }
-
         //  metto tutte le caselle a true
-        for (int i = 2; i < crivello.length; i++) {
-            crivello[i] = true;
+        for (int i = 2; i < this.crivello.length; i++) {
+            this.crivello[i] = true;
         }
-        // metto a false tutti i numeri non primi
-        for (int i = 2; i < crivello.length; i++) {
-            if (crivello[i]) {
-                for (int j = 2; i * j < crivello.length; j++) {
-                    crivello[i * j] = false;
+        // metto a false tutti i numeri non primi seguendo la logica che i multipli di un numero non sono primi
+        for (int i = 2; i < this.crivello.length; i++) {
+            if (this.crivello[i]) {
+                for (int j = 2; i * j < this.crivello.length; j++) {
+                    this.crivello[i * j] = false;
                 }
             }
         }

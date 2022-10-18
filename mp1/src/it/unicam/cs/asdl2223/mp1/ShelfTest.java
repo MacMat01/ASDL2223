@@ -10,23 +10,15 @@ class ShelfTest {
      */
     private static final double EPSILON = 1.0E-15;
 
-    private Book b1 = new Book(
-            "Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest,"
-                    + " Clifford Stein",
-            "Introduzione agli algoritmi e strutture dati", 2010,
-            "McGraw-Hill Education", "978-8838665158", 26.6, 19.08, 1720);
+    private Book b1 = new Book("Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest," + " Clifford Stein", "Introduzione agli algoritmi e strutture dati", 2010, "McGraw-Hill Education", "978-8838665158", 26.6, 19.08, 1720);
 
     private Book b1Equals = new Book("", "", 0, "", "978-8838665158", 0, 0, 0);
 
-    private Book b2 = new Book("Maurizio Gabbrielli, Simone Martini",
-            "Linguaggi di programmazione. Principi e paradigmi", 2011,
-            "McGraw-Hill Education", "978-8838665738", 24.13, 17.15, 939);
+    private Book b2 = new Book("Maurizio Gabbrielli, Simone Martini", "Linguaggi di programmazione. Principi e paradigmi", 2011, "McGraw-Hill Education", "978-8838665738", 24.13, 17.15, 939);
 
     private Book b2Equals = new Book("", "", 0, "", "978-8838665738", 0, 0, 0);
 
-    private Book b3 = new Book("Cay S. Horstmann",
-            "Concetti di informatica e fondamenti di Java. 7a edizione", 2020,
-            "Maggioli Editore", "978-8891639431", 26.6, 19.08, 1280);
+    private Book b3 = new Book("Cay S. Horstmann", "Concetti di informatica e fondamenti di Java. 7a edizione", 2020, "Maggioli Editore", "978-8891639431", 26.6, 19.08, 1280);
 
     private Book b3Equals = new Book("", "", 0, "", "978-8891639431", 0, 0, 0);
 
@@ -243,8 +235,7 @@ class ShelfTest {
         shelf.addItem(l1);
         assertTrue(shelf.getCurrentTotalWeight() == 1230);
         shelf.addItem(l2);
-        assertTrue(Math
-                .abs(shelf.getCurrentTotalWeight() - (1230 + 1550)) < EPSILON);
+        assertTrue(Math.abs(shelf.getCurrentTotalWeight() - (1230 + 1550)) < EPSILON);
     }
 
     @Test
@@ -252,12 +243,9 @@ class ShelfTest {
         Shelf shelf = new Shelf(27, 20, 508, 2800);
         assertTrue(shelf.getCurrentTotalOccupiedSurface() == 0);
         shelf.addItem(l1);
-        assertTrue(Math.abs(shelf.getCurrentTotalOccupiedSurface()
-                - (5 * 5 * Math.PI)) < EPSILON);
+        assertTrue(Math.abs(shelf.getCurrentTotalOccupiedSurface() - (5 * 5 * Math.PI)) < EPSILON);
         shelf.addItem(l2);
-        assertTrue(Math
-                .abs(shelf.getCurrentTotalOccupiedSurface() - ((5 * 5 * Math.PI)
-                        + ((13.0 / 2) * (13.0 / 2) * Math.PI))) < EPSILON);
+        assertTrue(Math.abs(shelf.getCurrentTotalOccupiedSurface() - ((5 * 5 * Math.PI) + ((13.0 / 2) * (13.0 / 2) * Math.PI))) < EPSILON);
     }
 
 }

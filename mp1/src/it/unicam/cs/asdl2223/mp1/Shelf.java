@@ -153,10 +153,12 @@ public class Shelf {
             throw new NullPointerException("L'oggetto passato è nullo");
         }
         // ciclo per ricercare l'oggetto i
-        for (int j = 0; j < this.items.length; j++) {
-            if (this.items[j].equals(i)) {
-                // ritorno l'oggetto della mensola
-                return this.items[j];
+        if (this.numberOfItems >= 1) {
+            for (int j = 0; j < this.numberOfItems; j++) {
+                if (this.items[j].equals(i)) {
+                    // ritorno l'oggetto della mensola
+                    return this.items[j];
+                }
             }
         }
         // se i non è stato trovato ritorna null
