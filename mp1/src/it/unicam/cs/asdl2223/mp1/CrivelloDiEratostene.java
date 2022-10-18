@@ -22,8 +22,8 @@ package it.unicam.cs.asdl2223.mp1;
  * qualsiasi momento chiamando il metodo restartPrimeIteration() e si interrompe
  * non appena il metodo hasNextPrime() restituisce false.
  *
- * @author Luca Tesei (template) // TODO INSERIRE NOME, COGNOME ED EMAIL
- * xxxx@studenti.unicam.it DELLO STUDENTE (implementazione)
+ * @author Matteo Machella
+ * matteo.machella@studenti.unicam.it
  */
 public class CrivelloDiEratostene {
     /*

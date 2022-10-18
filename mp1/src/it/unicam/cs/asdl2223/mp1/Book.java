@@ -9,8 +9,8 @@ package it.unicam.cs.asdl2223.mp1;
  * implementare i metodi dell'interfaccia ShelfItem. Un libro è identificato dal
  * suo codice ISBN.
  *
- * @author Luca Tesei (template) // TODO INSERIRE NOME, COGNOME ED EMAIL
- * xxxx@studenti.unicam.it DELLO STUDENTE (implementazione)
+ * @author Matteo Machella
+ * matteo.machella@studenti.unicam.it
  */
 public class Book implements ShelfItem {
     private final String author;

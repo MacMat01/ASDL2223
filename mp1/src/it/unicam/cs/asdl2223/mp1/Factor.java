@@ -4,8 +4,8 @@ package it.unicam.cs.asdl2223.mp1;
  * Un oggetto di quest classe rappresenta un fattore primo di un numero naturale
  * con una certa molteplicità.
  *
- * @author Luca Tesei (template) // TODO INSERIRE NOME, COGNOME ED EMAIL
- * xxxx@studenti.unicam.it DELLO STUDENTE (implementazione)
+ * @author Matteo Machella
+ * matteo.machella@studenti.unicam.it
  */
 public class Factor implements Comparable<Factor> {
 
