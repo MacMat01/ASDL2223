@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Luca Tesei
- *
  */
 class AulaTest {
 
@@ -19,16 +18,11 @@ class AulaTest {
      */
     @Test
     final void testHashCode() {
-        PresenceFacility f1 = new PresenceFacility("HDMI",
-                "Presenza di un proiettore HDMI");
-        Facility f2 = new PresenceFacility("HDMI",
-                "Presenza di proiettore HDMI");
-        QuantitativeFacility f3 = new QuantitativeFacility("POSTI",
-                "Presenza di posti a sedere normali", 60);
-        QuantitativeFacility f4 = new QuantitativeFacility("POSTI",
-                "Presenza di posti a sedere normali", 50);
-        QuantitativeFacility f5 = new QuantitativeFacility("POSTITC",
-                "Presenza di posti a sedere con Thin Client", 50);
+        PresenceFacility f1 = new PresenceFacility("HDMI", "Presenza di un proiettore HDMI");
+        Facility f2 = new PresenceFacility("HDMI", "Presenza di proiettore HDMI");
+        QuantitativeFacility f3 = new QuantitativeFacility("POSTI", "Presenza di posti a sedere normali", 60);
+        QuantitativeFacility f4 = new QuantitativeFacility("POSTI", "Presenza di posti a sedere normali", 50);
+        QuantitativeFacility f5 = new QuantitativeFacility("POSTITC", "Presenza di posti a sedere con Thin Client", 50);
         Aula a = new Aula("LA1", "Polo Lodovici Piano Terra");
         a.addFacility(f1);
         a.addFacility(f2);
@@ -47,8 +41,7 @@ class AulaTest {
     final void testAulaStringString() {
         // Testa se il controllo di null è corretto
         assertThrows(NullPointerException.class, () -> new Aula("LA1", null));
-        assertThrows(NullPointerException.class,
-                () -> new Aula(null, "Polo Lodovici Piano Terra"));
+        assertThrows(NullPointerException.class, () -> new Aula(null, "Polo Lodovici Piano Terra"));
         assertThrows(NullPointerException.class, () -> new Aula(null, null));
         Aula a = new Aula("LA1", "Polo Lodovici Piano Terra");
         // Controllo inizializzazione dei set
@@ -60,7 +53,6 @@ class AulaTest {
         assertTrue(a.getNumeroPrenotazioni() == 0);
     }
 
-    
 
     /**
      * Test method for
@@ -69,16 +61,11 @@ class AulaTest {
     @SuppressWarnings("unlikely-arg-type")
     @Test
     final void testEqualsObject() {
-        PresenceFacility f1 = new PresenceFacility("HDMI",
-                "Presenza di un proiettore HDMI");
-        Facility f2 = new PresenceFacility("HDMI",
-                "Presenza di proiettore HDMI");
-        QuantitativeFacility f3 = new QuantitativeFacility("POSTI",
-                "Presenza di posti a sedere normali", 60);
-        QuantitativeFacility f4 = new QuantitativeFacility("POSTI",
-                "Presenza di posti a sedere normali", 50);
-        QuantitativeFacility f5 = new QuantitativeFacility("POSTITC",
-                "Presenza di posti a sedere con Thin Client", 50);
+        PresenceFacility f1 = new PresenceFacility("HDMI", "Presenza di un proiettore HDMI");
+        Facility f2 = new PresenceFacility("HDMI", "Presenza di proiettore HDMI");
+        QuantitativeFacility f3 = new QuantitativeFacility("POSTI", "Presenza di posti a sedere normali", 60);
+        QuantitativeFacility f4 = new QuantitativeFacility("POSTI", "Presenza di posti a sedere normali", 50);
+        QuantitativeFacility f5 = new QuantitativeFacility("POSTITC", "Presenza di posti a sedere con Thin Client", 50);
         Aula a = new Aula("LA1", "Polo Lodovici Piano Terra");
         a.addFacility(f1);
         a.addFacility(f2);
@@ -119,16 +106,11 @@ class AulaTest {
      */
     @Test
     final void testGetFacilities() {
-        PresenceFacility f1 = new PresenceFacility("HDMI",
-                "Presenza di un proiettore HDMI");
-        Facility f2 = new PresenceFacility("HDMI",
-                "Presenza di proiettore HDMI");
-        QuantitativeFacility f3 = new QuantitativeFacility("POSTI",
-                "Presenza di posti a sedere normali", 60);
-        QuantitativeFacility f4 = new QuantitativeFacility("POSTI",
-                "Presenza di posti a sedere normali", 50);
-        QuantitativeFacility f5 = new QuantitativeFacility("POSTITC",
-                "Presenza di posti a sedere con Thin Client", 50);
+        PresenceFacility f1 = new PresenceFacility("HDMI", "Presenza di un proiettore HDMI");
+        Facility f2 = new PresenceFacility("HDMI", "Presenza di proiettore HDMI");
+        QuantitativeFacility f3 = new QuantitativeFacility("POSTI", "Presenza di posti a sedere normali", 60);
+        QuantitativeFacility f4 = new QuantitativeFacility("POSTI", "Presenza di posti a sedere normali", 50);
+        QuantitativeFacility f5 = new QuantitativeFacility("POSTITC", "Presenza di posti a sedere con Thin Client", 50);
         Aula a = new Aula("LA1", "Polo Lodovici Piano Terra");
         a.addFacility(f1);
         a.addFacility(f2);
@@ -182,16 +164,11 @@ class AulaTest {
      */
     @Test
     final void testAddFacility() {
-        PresenceFacility f1 = new PresenceFacility("HDMI",
-                "Presenza di un proiettore HDMI");
-        Facility f2 = new PresenceFacility("HDMI",
-                "Presenza di proiettore HDMI");
-        QuantitativeFacility f3 = new QuantitativeFacility("POSTI",
-                "Presenza di posti a sedere normali", 60);
-        QuantitativeFacility f4 = new QuantitativeFacility("POSTI",
-                "Presenza di posti a sedere normali", 50);
-        QuantitativeFacility f5 = new QuantitativeFacility("POSTITC",
-                "Presenza di posti a sedere con Thin Client", 50);
+        PresenceFacility f1 = new PresenceFacility("HDMI", "Presenza di un proiettore HDMI");
+        Facility f2 = new PresenceFacility("HDMI", "Presenza di proiettore HDMI");
+        QuantitativeFacility f3 = new QuantitativeFacility("POSTI", "Presenza di posti a sedere normali", 60);
+        QuantitativeFacility f4 = new QuantitativeFacility("POSTI", "Presenza di posti a sedere normali", 50);
+        QuantitativeFacility f5 = new QuantitativeFacility("POSTITC", "Presenza di posti a sedere con Thin Client", 50);
         Aula a = new Aula("LA1", "Polo Lodovici Piano Terra");
         a.addFacility(f1);
         a.addFacility(f2);
@@ -206,8 +183,7 @@ class AulaTest {
         assertTrue(cmp[3] == null);
         a.addFacility(new PresenceFacility("HDMI", ""));
         assertTrue(a.getNumeroFacilities() == 3);
-        a.addFacility(new QuantitativeFacility("POSTI",
-                "Presenza di posti a sedere normali", 60));
+        a.addFacility(new QuantitativeFacility("POSTI", "Presenza di posti a sedere normali", 60));
         assertTrue(a.getNumeroFacilities() == 3);
         a.addFacility(new QuantitativeFacility("PIPPO", "", 0));
         assertTrue(a.getNumeroFacilities() == 4);
@@ -216,7 +192,7 @@ class AulaTest {
         // raddoppio dell'array
         a.addFacility(new PresenceFacility("MINNIE", ""));
         assertTrue(a.getNumeroFacilities() == 6);
-        assertTrue(a.getFacilities().length == 10);       
+        assertTrue(a.getFacilities().length == 10);
     }
 
     /**
@@ -252,19 +228,15 @@ class AulaTest {
     @Test
     final void testSatisfiesFacilities() {
         Aula a = new Aula("LA1", "Polo Lodovici Piano Terra");
-        assertThrows(NullPointerException.class,
-                () -> a.satisfiesFacilities(null));
+        assertThrows(NullPointerException.class, () -> a.satisfiesFacilities(null));
         Facility[] requestedFacilities = new Facility[3];
         // a deve soddisfare sempre l'insieme vuoto di facilities richieste
         assertTrue(a.satisfiesFacilities(requestedFacilities));
         a.addFacility(new PresenceFacility("WHITEBOARD", ""));
         assertTrue(a.satisfiesFacilities(requestedFacilities));
-        Facility f1 = new PresenceFacility("HDMI",
-                "Presenza di un proiettore HDMI");
-        QuantitativeFacility f2 = new QuantitativeFacility("POSTI",
-                "Presenza di posti a sedere normali", 80);
-        QuantitativeFacility f3 = new QuantitativeFacility("POSTITC",
-                "Presenza di posti a sedere con Thin Client", 40);
+        Facility f1 = new PresenceFacility("HDMI", "Presenza di un proiettore HDMI");
+        QuantitativeFacility f2 = new QuantitativeFacility("POSTI", "Presenza di posti a sedere normali", 80);
+        QuantitativeFacility f3 = new QuantitativeFacility("POSTITC", "Presenza di posti a sedere con Thin Client", 40);
         requestedFacilities[0] = f1;
         requestedFacilities[1] = f2;
         requestedFacilities[2] = f3;
@@ -294,16 +266,11 @@ class AulaTest {
         GregorianCalendar g4 = new GregorianCalendar(2019, 10, 4, 16, 00);
         TimeSlot ts2 = new TimeSlot(g3, g4);
         // Controllo null
-        assertThrows(NullPointerException.class,
-                () -> a.addPrenotazione(null, "Luca Tesei", "Lezione ASDL"));
-        assertThrows(NullPointerException.class,
-                () -> a.addPrenotazione(ts1, null, "Lezione ASDL"));
-        assertThrows(NullPointerException.class,
-                () -> a.addPrenotazione(ts1, "Luca Tesei", null));
-        assertThrows(NullPointerException.class,
-                () -> a.addPrenotazione(null, null, "Lezione ASDL"));
-        assertThrows(NullPointerException.class,
-                () -> a.addPrenotazione(ts1, null, null));
+        assertThrows(NullPointerException.class, () -> a.addPrenotazione(null, "Luca Tesei", "Lezione ASDL"));
+        assertThrows(NullPointerException.class, () -> a.addPrenotazione(ts1, null, "Lezione ASDL"));
+        assertThrows(NullPointerException.class, () -> a.addPrenotazione(ts1, "Luca Tesei", null));
+        assertThrows(NullPointerException.class, () -> a.addPrenotazione(null, null, "Lezione ASDL"));
+        assertThrows(NullPointerException.class, () -> a.addPrenotazione(ts1, null, null));
         // Controllo inserimenti
         assertTrue(a.getNumeroPrenotazioni() == 0);
         a.addPrenotazione(ts1, "Luca Tesei", "Lezione ASDL");
@@ -313,8 +280,7 @@ class AulaTest {
         GregorianCalendar g5 = new GregorianCalendar(2019, 10, 4, 10, 00);
         GregorianCalendar g6 = new GregorianCalendar(2019, 10, 4, 12, 00);
         TimeSlot ts3 = new TimeSlot(g5, g6);
-        assertThrows(IllegalArgumentException.class,
-                () -> a.addPrenotazione(ts3, "Luca Tesei", "Pippo"));
+        assertThrows(IllegalArgumentException.class, () -> a.addPrenotazione(ts3, "Luca Tesei", "Pippo"));
     }
 
 }

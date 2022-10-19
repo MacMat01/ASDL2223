@@ -24,7 +24,6 @@ public class Prenotazione implements Comparable<Prenotazione> {
      *                              null
      */
     public Prenotazione(Aula aula, TimeSlot timeSlot, String docente, String motivo) {
-        // TODO implementare
         if (aula == null) {
             throw new NullPointerException("L'aula non è stata passata");
         }

@@ -41,7 +41,6 @@ public class TimeSlot implements Comparable<TimeSlot> {
      *                                      stop
      */
     public TimeSlot(GregorianCalendar start, GregorianCalendar stop) {
-        // TODO implementare - riutilizzare il codice della ES 3 o migliorarlo
         if (start == null || stop == null) {
             throw new NullPointerException("Uno dei due istanti è null");
         }
@@ -73,7 +72,6 @@ public class TimeSlot implements Comparable<TimeSlot> {
      */
     @Override
     public boolean equals(Object obj) {
-        // TODO implementare - riutilizzare il codice della ES 3 o migliorarlo
         if (this == obj) {
             return true;
         }
@@ -94,7 +92,6 @@ public class TimeSlot implements Comparable<TimeSlot> {
      */
     @Override
     public int hashCode() {
-        // TODO implementare - riutilizzare il codice della ES 3 o migliorarlo
         final int prime = 31;
         int result = 1;
         result = prime * result + ((start == null) ? 0 : start.hashCode());
@@ -109,7 +106,6 @@ public class TimeSlot implements Comparable<TimeSlot> {
      */
     @Override
     public int compareTo(TimeSlot o) {
-        // TODO implementare - riutilizzare il codice della ES 3 o migliorarlo
         if (o == null) {
             throw new NullPointerException("Tentativo di confrontare con null");
         }
@@ -152,7 +148,6 @@ public class TimeSlot implements Comparable<TimeSlot> {
      *                                      superano Integer.MAX_VALUE
      */
     public int getMinutesOfOverlappingWith(TimeSlot o) {
-        // TODO implementare - riutilizzare il codice della ES 3 o migliorarlo
         if (o == null) {
             throw new NullPointerException("Il time slot passato è nullo");
         }
@@ -184,7 +179,6 @@ public class TimeSlot implements Comparable<TimeSlot> {
      *                                  se il time slot passato è nullo
      */
     public boolean overlapsWith(TimeSlot o) {
-        // TODO implementare - riutilizzare il codice della ES 3 o migliorarlo
         if (o == null) {
             throw new NullPointerException("Il time slot passato è nullo");
         }
@@ -205,15 +199,10 @@ public class TimeSlot implements Comparable<TimeSlot> {
      */
     @Override
     public String toString() {
-        // TODO implementare - riutilizzare il codice della ES 3 o migliorarlo
         return "[" + getStart().get(Calendar.DAY_OF_MONTH) + "/" + getStart().get(Calendar.MONTH) + "/"
                 + getStart().get(Calendar.YEAR) + " " + getStart().get(Calendar.HOUR_OF_DAY) + "."
                 + getStart().get(Calendar.MINUTE) + " - " + getStop().get(Calendar.DAY_OF_MONTH) + "/"
                 + getStop().get(Calendar.MONTH) + "/" + getStop().get(Calendar.YEAR) + " "
                 + getStop().get(Calendar.HOUR_OF_DAY) + "." + getStop().get(Calendar.MINUTE) + "]";
     }
-
-    // TODO aggiungere eventuali metodi privati a scopo di implementazione -
-    // riutilizzare il codice della ES 3 o migliorarlo
-
 }
