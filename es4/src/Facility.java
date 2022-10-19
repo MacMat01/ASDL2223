@@ -2,9 +2,8 @@
  * Una facility generica è una caratteristica o delle dotazioni che una certa
  * aula può avere. La classe va specificata ulteriormente per definire i diversi
  * tipi di facilities.
- * 
- * @author Template: Luca Tesei, Implementation: Collective
  *
+ * @author Template: Luca Tesei, Implementation: Collective
  */
 public abstract class Facility {
 
@@ -14,17 +13,17 @@ public abstract class Facility {
 
     /**
      * Costruisce una certa facility generica.
-     * 
-     * @param codice
-     *                        identifica la facility univocamente
-     * @param descrizione
-     *                        descrizione della facility
-     * @throws NullPointerException
-     *                                  se una qualsiasi delle informazioni
-     *                                  richieste è nulla.
+     *
+     * @param codice      identifica la facility univocamente
+     * @param descrizione descrizione della facility
+     * @throws NullPointerException se una qualsiasi delle informazioni
+     *                              richieste è nulla.
      */
     public Facility(String codice, String descrizione) {
         // TODO implementare
+        if (codice == null || descrizione == null) {
+            throw new NullPointerException("Il codice o la descrizione non sono stati passati");
+        }
         this.codice = codice;
         this.descrizione = descrizione;
     }
@@ -50,7 +49,9 @@ public abstract class Facility {
     @Override
     public int hashCode() {
         // TODO implementare
-        return -1;
+        final int prime = 31;
+        int result = 1;
+        return prime * result + (this.codice.hashCode());
     }
 
     /*
@@ -59,13 +60,25 @@ public abstract class Facility {
     @Override
     public boolean equals(Object obj) {
         // TODO implementare
-        return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Facility)) {
+            return false;
+        }
+        Facility other = (Facility) obj;
+        if (!(this.codice.equals(other.codice))) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "Facility [codice=" + codice + ", descrizione=" + descrizione
-                + "]";
+        return "Facility [codice=" + codice + ", descrizione=" + descrizione + "]";
     }
 
     /**
@@ -76,13 +89,11 @@ public abstract class Facility {
      * essa soddisfa ogni altra facility che indica che ci sono un numero di
      * posti minore o uguale a 30. Il metodo dipende dal tipo di facility, per
      * questo è astratto e va definito nelle varie sottoclassi.
-     * 
-     * @param o
-     *              l'altra facility con cui determinare la compatibilità
+     *
+     * @param o l'altra facility con cui determinare la compatibilità
      * @return true se questa facility soddisfa la facility passata, false
-     *         altrimenti
-     * @throws NullPointerException
-     *                                  se la facility passata è nulla.
+     * altrimenti
+     * @throws NullPointerException se la facility passata è nulla.
      */
     public abstract boolean satisfies(Facility o);
 
