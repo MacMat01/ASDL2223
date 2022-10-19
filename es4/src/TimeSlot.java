@@ -2,6 +2,7 @@
  * 
  */
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
@@ -41,6 +42,12 @@ public class TimeSlot implements Comparable<TimeSlot> {
      */
     public TimeSlot(GregorianCalendar start, GregorianCalendar stop) {
         // TODO implementare - riutilizzare il codice della ES 3 o migliorarlo
+        if (start == null || stop == null) {
+            throw new NullPointerException("Uno dei due istanti è null");
+        }
+        if (start.equals(stop) || start.after(stop)) {
+            throw new IllegalArgumentException("Start è uguale o successivo a stop");
+        }
         this.start = start;
         this.stop = stop;
     }
@@ -67,7 +74,17 @@ public class TimeSlot implements Comparable<TimeSlot> {
     @Override
     public boolean equals(Object obj) {
         // TODO implementare - riutilizzare il codice della ES 3 o migliorarlo
-        return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof TimeSlot)) {
+            return false;
+        }
+        TimeSlot other = (TimeSlot) obj;
+        return start.equals(other.start) && stop.equals(other.stop);
     }
 
     /*
@@ -78,7 +95,11 @@ public class TimeSlot implements Comparable<TimeSlot> {
     @Override
     public int hashCode() {
         // TODO implementare - riutilizzare il codice della ES 3 o migliorarlo
-        return -1;
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((start == null) ? 0 : start.hashCode());
+        result = prime * result + ((stop == null) ? 0 : stop.hashCode());
+        return result;
     }
 
     /*
@@ -89,7 +110,23 @@ public class TimeSlot implements Comparable<TimeSlot> {
     @Override
     public int compareTo(TimeSlot o) {
         // TODO implementare - riutilizzare il codice della ES 3 o migliorarlo
-        return -1;
+        if (o == null) {
+            throw new NullPointerException("Tentativo di confrontare con null");
+        }
+        if (this.start.after(o.start)) {
+            return 1;
+        } else if (this.start.before(o.start)) {
+            return -1;
+        }
+        if (this.start.equals(o.start)) {
+            if (this.stop.after(o.stop)) {
+                return 1;
+            } else if (this.stop.before(o.stop)) {
+                return -1;
+            }
+        }
+        // se uguali
+        return 0;
     }
 
     /**
@@ -116,6 +153,21 @@ public class TimeSlot implements Comparable<TimeSlot> {
      */
     public int getMinutesOfOverlappingWith(TimeSlot o) {
         // TODO implementare - riutilizzare il codice della ES 3 o migliorarlo
+        if (o == null) {
+            throw new NullPointerException("Il time slot passato è nullo");
+        }
+        if (this.start.before(o.start) && (this.stop.before(o.start))) {
+            return -1;
+        }
+        GregorianCalendar lastStart = this.start.after(o.start) ? this.start : o.start;
+        GregorianCalendar firstStop = this.stop.before(o.stop) ? this.stop : o.stop;
+        if (lastStart.before(firstStop)) {
+            long overlappingMinutes = (firstStop.getTimeInMillis() - lastStart.getTimeInMillis()) / 60000;
+            if (overlappingMinutes > Integer.MAX_VALUE) {
+                throw new IllegalArgumentException("I minuti di sovrapposizione superano Integer.MAX_VALUE");
+            }
+            return (int) overlappingMinutes;
+        }
         return -1;
     }
 
@@ -133,6 +185,12 @@ public class TimeSlot implements Comparable<TimeSlot> {
      */
     public boolean overlapsWith(TimeSlot o) {
         // TODO implementare - riutilizzare il codice della ES 3 o migliorarlo
+        if (o == null) {
+            throw new NullPointerException("Il time slot passato è nullo");
+        }
+        if (this.getMinutesOfOverlappingWith(o) > MINUTES_OF_TOLERANCE_FOR_OVERLAPPING) {
+            return true;
+        }
         return false;
     }
 
@@ -148,7 +206,11 @@ public class TimeSlot implements Comparable<TimeSlot> {
     @Override
     public String toString() {
         // TODO implementare - riutilizzare il codice della ES 3 o migliorarlo
-        return null;
+        return "[" + getStart().get(Calendar.DAY_OF_MONTH) + "/" + getStart().get(Calendar.MONTH) + "/"
+                + getStart().get(Calendar.YEAR) + " " + getStart().get(Calendar.HOUR_OF_DAY) + "."
+                + getStart().get(Calendar.MINUTE) + " - " + getStop().get(Calendar.DAY_OF_MONTH) + "/"
+                + getStop().get(Calendar.MONTH) + "/" + getStop().get(Calendar.YEAR) + " "
+                + getStop().get(Calendar.HOUR_OF_DAY) + "." + getStop().get(Calendar.MINUTE) + "]";
     }
 
     // TODO aggiungere eventuali metodi privati a scopo di implementazione -
