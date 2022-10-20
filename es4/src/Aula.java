@@ -219,13 +219,28 @@ public class Aula implements Comparable<Aula> {
      * @throws NullPointerException se il set di facility richieste è nullo
      */
     public boolean satisfiesFacilities(Facility[] requestedFacilities) {
-        // TODO implementare
+        int requestedFacilitiesIndex = 0;
         if (requestedFacilities == null) {
             throw new NullPointerException("Il set di facility passato è nullo");
         }
-
+        if (requestedFacilities[0] == null) {
+            return true;
+        }
+        if (numFacilities > 0) {
+            for (int i = 0; i < numFacilities; i++) {
+                for (int j = 0; j < requestedFacilities.length; j++) {
+                    if (facilities[i].satisfies(requestedFacilities[j])) {
+                        requestedFacilitiesIndex++;
+                    }
+                }
+            }
+        }
+        if (requestedFacilitiesIndex == requestedFacilities.length) {
+            return true;
+        }
         return false;
     }
+
 
     /**
      * Prenota l'aula controllando eventuali sovrapposizioni.
@@ -240,7 +255,6 @@ public class Aula implements Comparable<Aula> {
      *                                  richieste è nulla.
      */
     public void addPrenotazione(TimeSlot ts, String docente, String motivo) {
-        // TODO implementare
         if (ts == null || docente == null || motivo == null) {
             throw new NullPointerException("Uno dei valori passati è nullo");
         }
@@ -260,6 +274,4 @@ public class Aula implements Comparable<Aula> {
         }
         prenotazioni[numPrenotazioni++] = new Prenotazione(this, ts, docente, motivo);
     }
-
-    // TODO inserire eventuali metodi privati per questioni di organizzazione
 }

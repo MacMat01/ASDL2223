@@ -1,13 +1,13 @@
 /**
- * 
+ *
  */
+
 /**
  * Una Quantitative Facility è una facility che contiene una informazione
  * quantitativa. Ad esempio la presenza di 50 posti a sedere oppure la presenza
  * di 20 thin clients.
- * 
- * @author Template: Luca Tesei, Implementation: Collective
  *
+ * @author Template: Luca Tesei, Implementation: Collective
  */
 public class QuantitativeFacility extends Facility {
 
@@ -15,21 +15,19 @@ public class QuantitativeFacility extends Facility {
 
     /**
      * Costruisce una facility quantitativa.
-     * 
-     * @param codice
-     *                        codice identificativo della facility
-     * @param descrizione
-     *                        descrizione testuale della facility
-     * @param quantity
-     *                        quantita' associata alla facility
-     * @throws NullPointerException
-     *                                  se una qualsiasi delle informazioni
-     *                                  {@code codice} e {@code descrizione} è
-     *                                  nulla.
+     *
+     * @param codice      codice identificativo della facility
+     * @param descrizione descrizione testuale della facility
+     * @param quantity    quantita' associata alla facility
+     * @throws NullPointerException se una qualsiasi delle informazioni
+     *                              {@code codice} e {@code descrizione} è
+     *                              nulla.
      */
-    public QuantitativeFacility(String codice, String descrizione,
-            int quantity) {
+    public QuantitativeFacility(String codice, String descrizione, int quantity) {
         super(codice, descrizione);
+        if (getCodice() == null || getDescrizione() == null) {
+            throw new NullPointerException("Il codice o la descrizione sono nulli");
+        }
         this.quantity = quantity;
     }
 
@@ -48,7 +46,15 @@ public class QuantitativeFacility extends Facility {
      */
     @Override
     public boolean satisfies(Facility o) {
-        // TODO implementare
+        if (o == null) {
+            throw new NullPointerException("la facility è nulla");
+        }
+        if (o instanceof QuantitativeFacility) {
+            QuantitativeFacility other = (QuantitativeFacility) o;
+            if (this.getCodice().equals(other.getCodice()) && this.quantity >= other.quantity) {
+                return true;
+            }
+        }
         return false;
     }
 

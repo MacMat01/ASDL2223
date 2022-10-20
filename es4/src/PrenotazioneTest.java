@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Luca Tesei
- *
  */
 class PrenotazioneTest {
 
@@ -35,13 +34,11 @@ class PrenotazioneTest {
         GregorianCalendar g1 = new GregorianCalendar(2019, 10, 4, 11, 00);
         GregorianCalendar g2 = new GregorianCalendar(2019, 10, 4, 13, 00);
         TimeSlot ts1 = new TimeSlot(g1, g2);
-        Prenotazione p1 = new Prenotazione(a, ts1, "Luca Tesei",
-                "Lezione ASDL");
+        Prenotazione p1 = new Prenotazione(a, ts1, "Luca Tesei", "Lezione ASDL");
         GregorianCalendar g3 = new GregorianCalendar(2019, 10, 4, 11, 00);
         GregorianCalendar g4 = new GregorianCalendar(2019, 10, 4, 13, 00);
         TimeSlot ts2 = new TimeSlot(g3, g4);
-        Prenotazione p2 = new Prenotazione(new Aula("LA1", "Polo Lodovici"),
-                ts2, "", "");
+        Prenotazione p2 = new Prenotazione(new Aula("LA1", "Polo Lodovici"), ts2, "", "");
         assertTrue(p1.equals(p2));
         assertTrue(p2.equals(p1));
         assertTrue(p1.hashCode() == p2.hashCode());
@@ -57,20 +54,13 @@ class PrenotazioneTest {
         GregorianCalendar g2 = new GregorianCalendar(2019, 10, 4, 13, 00);
         TimeSlot ts1 = new TimeSlot(g1, g2);
         // Testa se il controllo di null è corretto
-        assertThrows(NullPointerException.class,
-                () -> new Prenotazione(a, ts1, "Luca Tesei", null));
-        assertThrows(NullPointerException.class,
-                () -> new Prenotazione(a, ts1, null, "Lezione ASDL"));
-        assertThrows(NullPointerException.class,
-                () -> new Prenotazione(a, null, "Luca Tesei", "Lezione ASDL"));
-        assertThrows(NullPointerException.class, () -> new Prenotazione(null,
-                ts1, "Luca Tesei", "Lezione ASDL"));
-        assertThrows(NullPointerException.class, () -> new Prenotazione(null,
-                null, "Luca Tesei", "Lezione ASDL"));
-        assertThrows(NullPointerException.class,
-                () -> new Prenotazione(null, null, null, "Lezione ASDL"));
-        assertThrows(NullPointerException.class,
-                () -> new Prenotazione(null, null, null, null));
+        assertThrows(NullPointerException.class, () -> new Prenotazione(a, ts1, "Luca Tesei", null));
+        assertThrows(NullPointerException.class, () -> new Prenotazione(a, ts1, null, "Lezione ASDL"));
+        assertThrows(NullPointerException.class, () -> new Prenotazione(a, null, "Luca Tesei", "Lezione ASDL"));
+        assertThrows(NullPointerException.class, () -> new Prenotazione(null, ts1, "Luca Tesei", "Lezione ASDL"));
+        assertThrows(NullPointerException.class, () -> new Prenotazione(null, null, "Luca Tesei", "Lezione ASDL"));
+        assertThrows(NullPointerException.class, () -> new Prenotazione(null, null, null, "Lezione ASDL"));
+        assertThrows(NullPointerException.class, () -> new Prenotazione(null, null, null, null));
     }
 
     /**
@@ -81,9 +71,8 @@ class PrenotazioneTest {
         GregorianCalendar g1 = new GregorianCalendar(2019, 10, 4, 11, 00);
         GregorianCalendar g2 = new GregorianCalendar(2019, 10, 4, 13, 00);
         TimeSlot ts1 = new TimeSlot(g1, g2);
-        Prenotazione p1 = new Prenotazione(a, ts1, "Luca Tesei",
-                "Lezione ASDL");
-        assertEquals(new Aula("LA1","pippo"),p1.getAula());
+        Prenotazione p1 = new Prenotazione(a, ts1, "Luca Tesei", "Lezione ASDL");
+        assertEquals(new Aula("LA1", "pippo"), p1.getAula());
     }
 
     /**
@@ -95,8 +84,7 @@ class PrenotazioneTest {
         GregorianCalendar g1 = new GregorianCalendar(2019, 10, 4, 11, 00);
         GregorianCalendar g2 = new GregorianCalendar(2019, 10, 4, 13, 00);
         TimeSlot ts1 = new TimeSlot(g1, g2);
-        Prenotazione p1 = new Prenotazione(a, ts1, "Luca Tesei",
-                "Lezione ASDL");
+        Prenotazione p1 = new Prenotazione(a, ts1, "Luca Tesei", "Lezione ASDL");
         GregorianCalendar g3 = new GregorianCalendar(2019, 10, 4, 11, 00);
         GregorianCalendar g4 = new GregorianCalendar(2019, 10, 4, 13, 00);
         TimeSlot ts2 = new TimeSlot(g3, g4);
@@ -112,8 +100,7 @@ class PrenotazioneTest {
         GregorianCalendar g1 = new GregorianCalendar(2019, 10, 4, 11, 00);
         GregorianCalendar g2 = new GregorianCalendar(2019, 10, 4, 13, 00);
         TimeSlot ts1 = new TimeSlot(g1, g2);
-        Prenotazione p1 = new Prenotazione(a, ts1, "Luca Tesei",
-                "Lezione ASDL");
+        Prenotazione p1 = new Prenotazione(a, ts1, "Luca Tesei", "Lezione ASDL");
         assertEquals("Luca Tesei", p1.getDocente());
     }
 
@@ -126,8 +113,7 @@ class PrenotazioneTest {
         GregorianCalendar g1 = new GregorianCalendar(2019, 10, 4, 11, 00);
         GregorianCalendar g2 = new GregorianCalendar(2019, 10, 4, 13, 00);
         TimeSlot ts1 = new TimeSlot(g1, g2);
-        Prenotazione p1 = new Prenotazione(a, ts1, "Luca Tesei",
-                "Lezione ASDL");
+        Prenotazione p1 = new Prenotazione(a, ts1, "Luca Tesei", "Lezione ASDL");
         assertEquals("Lezione ASDL", p1.getMotivo());
     }
 
@@ -141,13 +127,11 @@ class PrenotazioneTest {
         GregorianCalendar g1 = new GregorianCalendar(2019, 10, 4, 11, 00);
         GregorianCalendar g2 = new GregorianCalendar(2019, 10, 4, 13, 00);
         TimeSlot ts1 = new TimeSlot(g1, g2);
-        Prenotazione p1 = new Prenotazione(a, ts1, "Luca Tesei",
-                "Lezione ASDL");
+        Prenotazione p1 = new Prenotazione(a, ts1, "Luca Tesei", "Lezione ASDL");
         GregorianCalendar g3 = new GregorianCalendar(2019, 10, 4, 11, 00);
         GregorianCalendar g4 = new GregorianCalendar(2019, 10, 4, 13, 00);
         TimeSlot ts2 = new TimeSlot(g3, g4);
-        Prenotazione p2 = new Prenotazione(new Aula("LA1", "Polo Lodovici"),
-                ts2, "", "");
+        Prenotazione p2 = new Prenotazione(new Aula("LA1", "Polo Lodovici"), ts2, "", "");
         assertTrue(p1.equals(p2));
         assertTrue(p2.equals(p1));
         GregorianCalendar g5 = new GregorianCalendar(2019, 10, 4, 14, 00);
@@ -158,8 +142,7 @@ class PrenotazioneTest {
         assertFalse(p2.equals(p3));
         assertFalse(p3.equals(p1));
         assertFalse(p3.equals(p2));
-        Prenotazione p4 = new Prenotazione(new Aula("AA1", "Polo Lodovici"),
-                ts1, " ", "");
+        Prenotazione p4 = new Prenotazione(new Aula("AA1", "Polo Lodovici"), ts1, " ", "");
         assertFalse(p1.equals(p4));
         assertFalse(p4.equals(p1));
         // Classe diversa
@@ -181,7 +164,7 @@ class PrenotazioneTest {
         GregorianCalendar g4 = new GregorianCalendar(2019, 10, 4, 13, 00);
         TimeSlot ts2 = new TimeSlot(g3, g4);
         Prenotazione p1 = new Prenotazione(a, ts1, "AA", "BB");
-        Prenotazione p2 = new Prenotazione(new Aula("M1","Pippo"), ts2, "CC", "DD");
+        Prenotazione p2 = new Prenotazione(new Aula("M1", "Pippo"), ts2, "CC", "DD");
         Prenotazione p3 = new Prenotazione(a, ts2, "CC", "DD");
         // p2 inizia prima di p1
         assertTrue(p1.compareTo(p2) > 0);

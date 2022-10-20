@@ -86,7 +86,6 @@ public class Prenotazione implements Comparable<Prenotazione> {
 
     @Override
     public int hashCode() {
-        // TODO implementare
         final int prime = 31;
         int result = 1;
         result = prime * result + ((aula == null) ? 0 : aula.hashCode());
@@ -100,7 +99,6 @@ public class Prenotazione implements Comparable<Prenotazione> {
      */
     @Override
     public boolean equals(Object obj) {
-        // TODO implementare
         if (this == obj) {
             return true;
         }
@@ -121,7 +119,6 @@ public class Prenotazione implements Comparable<Prenotazione> {
      */
     @Override
     public int compareTo(Prenotazione o) {
-        // TODO implementare
         if (o == null) {
             throw new NullPointerException("Tentativo di confrontare con un null");
         }

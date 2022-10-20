@@ -20,7 +20,6 @@ public abstract class Facility {
      *                              richieste è nulla.
      */
     public Facility(String codice, String descrizione) {
-        // TODO implementare
         if (codice == null || descrizione == null) {
             throw new NullPointerException("Il codice o la descrizione non sono stati passati");
         }
@@ -48,7 +47,6 @@ public abstract class Facility {
      */
     @Override
     public int hashCode() {
-        // TODO implementare
         final int prime = 31;
         int result = 1;
         return prime * result + (this.codice.hashCode());
@@ -59,7 +57,6 @@ public abstract class Facility {
      */
     @Override
     public boolean equals(Object obj) {
-        // TODO implementare
         if (this == obj) {
             return true;
         }
@@ -96,5 +93,4 @@ public abstract class Facility {
      * @throws NullPointerException se la facility passata è nulla.
      */
     public abstract boolean satisfies(Facility o);
-
 }
