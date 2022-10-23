@@ -4,8 +4,6 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-// TODO importare eventuali classi o interfacce che servono
-
 /**
  * Un oggetto della classe aula rappresenta una certa aula con le sue facilities
  * e le sue prenotazioni.
@@ -36,7 +34,6 @@ public class Aula implements Comparable<Aula> {
      *                              richieste è nulla
      */
     public Aula(String nome, String location) {
-        // TODO implementare
         if (nome == null || location == null) {
             throw new NullPointerException("Il nome o la location non esiste");
         }
@@ -57,7 +54,6 @@ public class Aula implements Comparable<Aula> {
      *                              richieste è nulla
      */
     public Aula(String nome, String location, Set<Facility> facilities) {
-        // TODO implementare
         if (nome == null || location == null || facilities == null) {
             throw new NullPointerException("Il nome, la location o le facilities non esiste");
         }
@@ -139,7 +135,6 @@ public class Aula implements Comparable<Aula> {
      * @throws NullPointerException se la facility passata è nulla
      */
     public boolean addFacility(Facility f) {
-        // TODO implementare
         if (f == null) {
             throw new NullPointerException("La facility passata è nulla");
         }
@@ -155,7 +150,6 @@ public class Aula implements Comparable<Aula> {
      * @throws NullPointerException se il time slot passato è nullo
      */
     public boolean isFree(TimeSlot ts) {
-        // TODO implementare
         /*
          * NOTA: sfruttare l'ordinamento tra le prenotazioni per rispondere in
          * maniera efficiente: poiché le prenotazioni sono in ordine crescente
@@ -165,6 +159,9 @@ public class Aula implements Comparable<Aula> {
          */
         if (ts == null) {
             throw new NullPointerException("Il timeslot passato è nullo");
+        }
+        if (prenotazioni.isEmpty()) {
+            return true;
         }
         for (Prenotazione p : prenotazioni) {
             if (p.getTimeSlot().overlapsWith(ts)) {
@@ -185,7 +182,6 @@ public class Aula implements Comparable<Aula> {
      * @throws NullPointerException se il set di facility richieste è nullo
      */
     public boolean satisfiesFacilities(Set<Facility> requestedFacilities) {
-        // TODO implementare
         int requestedFacilitiesIndex = 0;
         if (requestedFacilities == null) {
             throw new NullPointerException("Il set di facility è nullo");
@@ -218,7 +214,6 @@ public class Aula implements Comparable<Aula> {
      *                                  richieste è nulla.
      */
     public void addPrenotazione(TimeSlot ts, String docente, String motivo) {
-        // TODO implementare
         if (ts == null || docente == null || motivo == null) {
             throw new NullPointerException("Uno degli elementi passati è nullo");
         }
@@ -239,7 +234,6 @@ public class Aula implements Comparable<Aula> {
      * @throws NullPointerException se la prenotazione passata è null
      */
     public boolean removePrenotazione(Prenotazione p) {
-        // TODO implementare
         if (p == null) {
             throw new NullPointerException("La prenotazione passata non esiste");
         }
@@ -266,11 +260,12 @@ public class Aula implements Comparable<Aula> {
         if (timePoint == null) {
             throw new NullPointerException("Il punto nel tempo passato è nullo");
         }
+        SortedSet<Prenotazione> tmp = new TreeSet<Prenotazione>();
         for (Prenotazione p : prenotazioni) {
-            if (p.getTimeSlot().getStop().equals(timePoint)) {
-                return prenotazioni.removeAll(prenotazioni.headSet(p));
+            if (p.getTimeSlot().getStart().before(timePoint)) {
+                tmp.add(p);
             }
         }
-        throw new IllegalStateException("Oops! Qualcosa è andato storto.");
+        return prenotazioni.removeAll(tmp);
     }
 }
