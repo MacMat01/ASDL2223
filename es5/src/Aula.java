@@ -187,8 +187,15 @@ public class Aula implements Comparable<Aula> {
         if (requestedFacilities == null) {
             throw new NullPointerException("Il set di facility è nullo");
         }
-
-        return false;
+        if (requestedFacilities.isEmpty()) {
+            return true;
+        }
+        if (this.facilities.iterator().hasNext()) {
+            if (requestedFacilities.iterator().hasNext()) {
+                return requestedFacilities.iterator().next().satisfies(this.facilities.iterator().next());
+            }
+        }
+        throw new IllegalStateException();
     }
 
     /**
@@ -205,6 +212,7 @@ public class Aula implements Comparable<Aula> {
      */
     public void addPrenotazione(TimeSlot ts, String docente, String motivo) {
         // TODO implementare
+        if ()
     }
 
     /**
