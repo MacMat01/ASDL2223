@@ -9,9 +9,8 @@ import java.util.TreeSet;
 /**
  * Un oggetto della classe aula rappresenta una certa aula con le sue facilities
  * e le sue prenotazioni.
- * 
- * @author Template: Luca Tesei, Implementazione: Collettiva
  *
+ * @author Template: Luca Tesei, Implementazione: Collettiva
  */
 public class Aula implements Comparable<Aula> {
     // Identificativo unico di un'aula
@@ -30,18 +29,17 @@ public class Aula implements Comparable<Aula> {
     /**
      * Costruisce una certa aula con nome e location. Il set delle facilities è
      * vuoto. L'aula non ha inizialmente nessuna prenotazione.
-     * 
-     * @param nome
-     *                     il nome dell'aula
-     * @param location
-     *                     la location dell'aula
-     * 
-     * @throws NullPointerException
-     *                                  se una qualsiasi delle informazioni
-     *                                  richieste è nulla
+     *
+     * @param nome     il nome dell'aula
+     * @param location la location dell'aula
+     * @throws NullPointerException se una qualsiasi delle informazioni
+     *                              richieste è nulla
      */
     public Aula(String nome, String location) {
         // TODO implementare
+        if (nome == null || location == null) {
+            throw new NullPointerException("Il nome o la location non esiste");
+        }
         this.nome = nome;
         this.location = location;
         this.facilities = new HashSet<Facility>();
@@ -51,19 +49,18 @@ public class Aula implements Comparable<Aula> {
     /**
      * Costruisce una certa aula con nome, location e insieme delle facilities.
      * L'aula non ha inizialmente nessuna prenotazione.
-     * 
-     * @param nome
-     *                       il nome dell'aula
-     * @param location
-     *                       la location dell'aula
-     * @param facilities
-     *                       l'insieme delle facilities dell'aula
-     * @throws NullPointerException
-     *                                  se una qualsiasi delle informazioni
-     *                                  richieste è nulla
+     *
+     * @param nome       il nome dell'aula
+     * @param location   la location dell'aula
+     * @param facilities l'insieme delle facilities dell'aula
+     * @throws NullPointerException se una qualsiasi delle informazioni
+     *                              richieste è nulla
      */
     public Aula(String nome, String location, Set<Facility> facilities) {
         // TODO implementare
+        if (nome == null || location == null || facilities == null) {
+            throw new NullPointerException("Il nome, la location o le facilities non esiste");
+        }
         this.nome = nome;
         this.location = location;
         this.facilities = facilities;
@@ -75,22 +72,34 @@ public class Aula implements Comparable<Aula> {
      */
     @Override
     public int hashCode() {
-        // TODO implementare
-        return -1;
+        final int prime = 31;
+        int result = 1;
+        return prime * result + (this.nome.hashCode());
     }
 
     /* Due aule sono uguali se e solo se hanno lo stesso nome */
     @Override
     public boolean equals(Object obj) {
-        // TODO implementare
-        return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Aula)) {
+            return false;
+        }
+        Aula other = (Aula) obj;
+        if (!(this.nome == other.nome)) {
+            return false;
+        }
+        return true;
     }
 
     /* L'ordinamento naturale si basa sul nome dell'aula */
     @Override
     public int compareTo(Aula o) {
-        // TODO implementare
-        return -1;
+        return this.nome.compareTo(o.nome);
     }
 
     /**
@@ -123,29 +132,27 @@ public class Aula implements Comparable<Aula> {
 
     /**
      * Aggiunge una faciltity a questa aula.
-     * 
-     * @param f
-     *              la facility da aggiungere
+     *
+     * @param f la facility da aggiungere
      * @return true se la facility non era già presente e quindi è stata
-     *         aggiunta, false altrimenti
-     * @throws NullPointerException
-     *                                  se la facility passata è nulla
+     * aggiunta, false altrimenti
+     * @throws NullPointerException se la facility passata è nulla
      */
     public boolean addFacility(Facility f) {
         // TODO implementare
-        return false;
+        if (f == null) {
+            throw new NullPointerException("La facility passata è nulla");
+        }
+        return facilities.add(f);
     }
 
     /**
      * Determina se l'aula è libera in un certo time slot.
-     * 
-     * @param ts
-     *               il time slot da controllare
-     * 
+     *
+     * @param ts il time slot da controllare
      * @return true se l'aula risulta libera per tutto il periodo del time slot
-     *         specificato
-     * @throws NullPointerException
-     *                                  se il time slot passato è nullo
+     * specificato
+     * @throws NullPointerException se il time slot passato è nullo
      */
     public boolean isFree(TimeSlot ts) {
         // TODO implementare
@@ -156,39 +163,45 @@ public class Aula implements Comparable<Aula> {
          * specificato posso concludere che l'aula è libera nel time slot
          * desiderato e posso interrompere la ricerca
          */
-        return false;
+        if (ts == null) {
+            throw new NullPointerException("Il timeslot passato è nullo");
+        }
+        if (prenotazioni.iterator().hasNext()) {
+            return prenotazioni.iterator().next().getTimeSlot().overlapsWith(ts);
+        }
+        return true;
     }
 
     /**
      * Determina se questa aula soddisfa tutte le facilities richieste
      * rappresentate da un certo insieme dato.
-     * 
-     * @param requestedFacilities
-     *                                l'insieme di facilities richieste da
-     *                                soddisfare
+     *
+     * @param requestedFacilities l'insieme di facilities richieste da
+     *                            soddisfare
      * @return true se e solo se tutte le facilities di
-     *         {@code requestedFacilities} sono soddisfatte da questa aula.
-     * @throws NullPointerException
-     *                                  se il set di facility richieste è nullo
+     * {@code requestedFacilities} sono soddisfatte da questa aula.
+     * @throws NullPointerException se il set di facility richieste è nullo
      */
     public boolean satisfiesFacilities(Set<Facility> requestedFacilities) {
         // TODO implementare
+        if (requestedFacilities == null) {
+            throw new NullPointerException("Il set di facility è nullo");
+        }
+
         return false;
     }
 
     /**
      * Prenota l'aula controllando eventuali sovrapposizioni.
-     * 
+     *
      * @param ts
      * @param docente
      * @param motivo
-     * @throws IllegalArgumentException
-     *                                      se la prenotazione comporta una
-     *                                      sovrapposizione con un'altra
-     *                                      prenotazione nella stessa aula.
-     * @throws NullPointerException
-     *                                      se una qualsiasi delle informazioni
-     *                                      richieste è nulla.
+     * @throws IllegalArgumentException se la prenotazione comporta una
+     *                                  sovrapposizione con un'altra
+     *                                  prenotazione nella stessa aula.
+     * @throws NullPointerException     se una qualsiasi delle informazioni
+     *                                  richieste è nulla.
      */
     public void addPrenotazione(TimeSlot ts, String docente, String motivo) {
         // TODO implementare
@@ -196,13 +209,11 @@ public class Aula implements Comparable<Aula> {
 
     /**
      * Cancella una prenotazione di questa aula.
-     * 
-     * @param p
-     *              la prenotazione da cancellare
+     *
+     * @param p la prenotazione da cancellare
      * @return true se la prenotazione è stata cancellata, false se non era
-     *         presente.
-     * @throws NullPointerException
-     *                                  se la prenotazione passata è null
+     * presente.
+     * @throws NullPointerException se la prenotazione passata è null
      */
     public boolean removePrenotazione(Prenotazione p) {
         // TODO implementare
@@ -212,13 +223,11 @@ public class Aula implements Comparable<Aula> {
     /**
      * Rimuove tutte le prenotazioni di questa aula che iniziano prima (o
      * esattamente in) di un punto nel tempo specificato.
-     * 
-     * @param timePoint
-     *                      un certo punto nel tempo
+     *
+     * @param timePoint un certo punto nel tempo
      * @return true se almeno una prenotazione è stata cancellata, false
-     *         altrimenti.
-     * @throws NullPointerException
-     *                                  se il punto nel tempo passato è nullo.
+     * altrimenti.
+     * @throws NullPointerException se il punto nel tempo passato è nullo.
      */
     public boolean removePrenotazioniBefore(GregorianCalendar timePoint) {
         // TODO implementare
