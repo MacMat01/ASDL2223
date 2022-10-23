@@ -166,8 +166,10 @@ public class Aula implements Comparable<Aula> {
         if (ts == null) {
             throw new NullPointerException("Il timeslot passato è nullo");
         }
-        if (prenotazioni.iterator().hasNext()) {
-            return prenotazioni.iterator().next().getTimeSlot().overlapsWith(ts);
+        for (Prenotazione p : prenotazioni) {
+            if (p.getTimeSlot().overlapsWith(ts)) {
+                return false;
+            }
         }
         return true;
     }
@@ -190,12 +192,12 @@ public class Aula implements Comparable<Aula> {
         if (requestedFacilities.isEmpty()) {
             return true;
         }
-        if (this.facilities.iterator().hasNext()) {
-            if (requestedFacilities.iterator().hasNext()) {
-                return requestedFacilities.iterator().next().satisfies(this.facilities.iterator().next());
+        for (Facility f : this.facilities) {
+            for (Facility r : requestedFacilities) {
+                return r.satisfies(f);
             }
         }
-        throw new IllegalStateException();
+        throw new IllegalStateException("Oops! Qualcosa è andato storto.");
     }
 
     /**
@@ -212,7 +214,15 @@ public class Aula implements Comparable<Aula> {
      */
     public void addPrenotazione(TimeSlot ts, String docente, String motivo) {
         // TODO implementare
-        if ()
+        if (ts == null || docente == null || motivo == null) {
+            throw new NullPointerException("Uno degli elementi passati è nullo");
+        }
+        for (Prenotazione a : prenotazioni) {
+            if (a.getTimeSlot().overlapsWith(ts)) {
+                throw new IllegalArgumentException("La prenotazione si sovrappone con un'altra");
+            }
+        }
+        prenotazioni.add(new Prenotazione(this, ts, docente, motivo));
     }
 
     /**
@@ -225,7 +235,10 @@ public class Aula implements Comparable<Aula> {
      */
     public boolean removePrenotazione(Prenotazione p) {
         // TODO implementare
-        return false;
+        if (p == null) {
+            throw new NullPointerException("La prenotazione passata non esiste");
+        }
+        return prenotazioni.remove(p);
     }
 
     /**
