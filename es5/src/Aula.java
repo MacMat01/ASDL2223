@@ -258,6 +258,14 @@ public class Aula implements Comparable<Aula> {
          * di time slot se ho raggiunto una prenotazione con tempo di inizio
          * maggiore del tempo indicato posso smettere la procedura
          */
-        return false;
+        if (timePoint == null) {
+            throw new NullPointerException("Il punto nel tempo passato è nullo");
+        }
+        for (Prenotazione p : prenotazioni) {
+            if (p.getTimeSlot().getStop().equals(timePoint)) {
+                return prenotazioni.removeAll(prenotazioni.headSet(p));
+            }
+        }
+        throw new IllegalStateException("Oops! Qualcosa è andato storto.");
     }
 }
