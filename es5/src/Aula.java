@@ -186,6 +186,7 @@ public class Aula implements Comparable<Aula> {
      */
     public boolean satisfiesFacilities(Set<Facility> requestedFacilities) {
         // TODO implementare
+        int requestedFacilitiesIndex = 0;
         if (requestedFacilities == null) {
             throw new NullPointerException("Il set di facility è nullo");
         }
@@ -194,10 +195,14 @@ public class Aula implements Comparable<Aula> {
         }
         for (Facility f : this.facilities) {
             for (Facility r : requestedFacilities) {
-                return r.satisfies(f);
+                if (r.satisfies(f)) {
+                    requestedFacilitiesIndex++;
+                }
             }
         }
-        throw new IllegalStateException("Oops! Qualcosa è andato storto.");
+        if (requestedFacilities.size() == requestedFacilitiesIndex) {
+            return true;
+        } else return false;
     }
 
     /**
