@@ -26,7 +26,6 @@ public class GestoreAule {
      * @throws NullPointerException se l'aula passata è nulla
      */
     public boolean addAula(Aula a) {
-        // TODO implementare
         if (a == null) {
             throw new NullPointerException("L'aula passata è nulla");
         }

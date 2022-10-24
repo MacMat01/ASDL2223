@@ -164,8 +164,10 @@ public class Aula implements Comparable<Aula> {
             return true;
         }
         for (Prenotazione p : prenotazioni) {
-            if (p.getTimeSlot().overlapsWith(ts)) {
+            if (p.getTimeSlot().overlapsWith(ts) || p.getTimeSlot().getStart().before(ts)) {
                 return false;
+            } else if (p.getTimeSlot().getStart().after(ts)) {
+                break;
             }
         }
         return true;
@@ -250,7 +252,6 @@ public class Aula implements Comparable<Aula> {
      * @throws NullPointerException se il punto nel tempo passato è nullo.
      */
     public boolean removePrenotazioniBefore(GregorianCalendar timePoint) {
-        // TODO implementare
         /*
          * NOTA: sfruttare l'ordinamento tra le prenotazioni per rispondere in
          * maniera efficiente: poiché le prenotazioni sono in ordine crescente
@@ -262,8 +263,10 @@ public class Aula implements Comparable<Aula> {
         }
         SortedSet<Prenotazione> tmp = new TreeSet<Prenotazione>();
         for (Prenotazione p : prenotazioni) {
-            if (p.getTimeSlot().getStart().before(timePoint)) {
+            if (p.getTimeSlot().getStart().before(timePoint) || p.getTimeSlot().getStart().equals(timePoint)) {
                 tmp.add(p);
+            } else if (p.getTimeSlot().getStart().after(timePoint)) {
+                break;
             }
         }
         return prenotazioni.removeAll(tmp);
