@@ -1,13 +1,11 @@
 /**
  * Classe che implementa {@code ADTConsList<E>} con due campi immutabili.
- * 
- * @author Luca Tesei
  *
- * @param <E>
- *            il tipo degli elementi della lista.
+ * @param <E> il tipo degli elementi della lista.
+ * @author Luca Tesei
  */
 public final class ConsList<E> implements ADTConsList<E> {
-    
+
     private final E first;
 
     private final ADTConsList<E> rest;
@@ -15,9 +13,8 @@ public final class ConsList<E> implements ADTConsList<E> {
     /**
      * Costruisce una lista a partire dalla lista vuota inserendo in testa un
      * elemento.
-     * 
-     * @param first
-     *                 l'elemento da inserire nella lista.
+     *
+     * @param first l'elemento da inserire nella lista.
      */
     @SuppressWarnings("unchecked")
     public ConsList(E first) {
@@ -28,9 +25,9 @@ public final class ConsList<E> implements ADTConsList<E> {
     /**
      * Costruisce una lista a partire da una {@code ADTConsList<E>} e inserendo in testa un
      * nuovo elemento.
-     * 
+     *
      * @param first l'elemento in testa
-     * @param rest la lista di partenza
+     * @param rest  la lista di partenza
      */
     public ConsList(E first, ADTConsList<E> rest) {
         this.first = first;
