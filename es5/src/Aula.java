@@ -164,9 +164,9 @@ public class Aula implements Comparable<Aula> {
             return true;
         }
         for (Prenotazione p : prenotazioni) {
-            if (p.getTimeSlot().overlapsWith(ts) || p.getTimeSlot().getStart().before(ts)) {
+            if (p.getTimeSlot().overlapsWith(ts)) {
                 return false;
-            } else if (p.getTimeSlot().getStart().after(ts)) {
+            } else if (p.getTimeSlot().getStart().after(ts.getStop())) {
                 break;
             }
         }
@@ -184,23 +184,10 @@ public class Aula implements Comparable<Aula> {
      * @throws NullPointerException se il set di facility richieste è nullo
      */
     public boolean satisfiesFacilities(Set<Facility> requestedFacilities) {
-        int requestedFacilitiesIndex = 0;
         if (requestedFacilities == null) {
             throw new NullPointerException("Il set di facility è nullo");
         }
-        if (requestedFacilities.isEmpty()) {
-            return true;
-        }
-        for (Facility f : this.facilities) {
-            for (Facility r : requestedFacilities) {
-                if (r.satisfies(f)) {
-                    requestedFacilitiesIndex++;
-                }
-            }
-        }
-        if (requestedFacilities.size() == requestedFacilitiesIndex) {
-            return true;
-        } else return false;
+        return this.facilities.containsAll(requestedFacilities);
     }
 
     /**

@@ -55,7 +55,6 @@ public class GestoreAule {
      *                              passate è nulla
      */
     public Set<Aula> cercaAuleLibere(Set<Facility> requestedFacilities, TimeSlot ts) {
-        // TODO implementare
         if (requestedFacilities == null || ts == null) {
             throw new NullPointerException("Una delle informazioni è nulla");
         }
@@ -67,5 +66,4 @@ public class GestoreAule {
         }
         return freeClassrooms;
     }
-
 }
