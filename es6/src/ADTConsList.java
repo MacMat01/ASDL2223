@@ -173,14 +173,13 @@ public interface ADTConsList<E> {
      * elementi di {@code list}.
      */
     default ADTConsList<E> append(ADTConsList<E> list) {
-        // TODO implementare ricorsivamente
         // caso base
         if (this.isEmpty()) {
             return this;
         }
         // caso ricorsivo
         if (this.rest().isEmpty()) {
-            return this.rest().cons(list.first()).cons(this.first());
+            return list.rest().cons(list.first()).cons(this.first());
         } else {
             return this.rest().append(list).cons(this.first());
         }
@@ -201,7 +200,6 @@ public interface ADTConsList<E> {
             return this;
         }
         // caso ricorsivo
-        return null;
+        return this.rest().reverse().append(this);
     }
-
 }
