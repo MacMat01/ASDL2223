@@ -117,7 +117,7 @@ public interface ADTConsList<E> {
         }
         // caso ricorsivo
         if (this.first().equals(element)) {
-            return this.removeFirst(element).removeAll(element);
+            return this.rest().removeAll(element);
         } else return this.rest().removeAll(element).cons(this.first());
     }
 
@@ -175,15 +175,11 @@ public interface ADTConsList<E> {
     default ADTConsList<E> append(ADTConsList<E> list) {
         // caso base
         if (this.isEmpty()) {
-            return this;
+            return list;
         }
-        // caso ricorsivo
-        if (this.rest().isEmpty()) {
-            return list.rest().cons(list.first()).cons(this.first());
-        } else {
-            return this.rest().append(list).cons(this.first());
-        }
+        return this.rest().append(list).cons(this.first());
     }
+
 
     /**
      * Genera una lista che ha gli stessi elementi di questa lista, ma
