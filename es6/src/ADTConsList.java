@@ -177,6 +177,7 @@ public interface ADTConsList<E> {
         if (this.isEmpty()) {
             return list;
         }
+        // caso ricorsivo
         return this.rest().append(list).cons(this.first());
     }
 
@@ -196,6 +197,6 @@ public interface ADTConsList<E> {
             return this;
         }
         // caso ricorsivo
-        return this.rest().reverse().append(this);
+        return this.rest().reverse().append(EMPTY_LIST.cons(this.first()));
     }
 }
