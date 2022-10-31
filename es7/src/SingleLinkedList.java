@@ -228,12 +228,12 @@ public class SingleLinkedList<E> implements List<E> {
 
     @Override
     public boolean remove(Object o) {
-        // TODO implementare
         if (o == null) {
             throw new NullPointerException("L'oggetto passato è nullo");
         }
         if (this.contains(o)) {
-            this.remove(o);
+            size--;
+            return true;
         }
         return false;
     }
