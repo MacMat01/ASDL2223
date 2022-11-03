@@ -217,13 +217,13 @@ public class SingleLinkedList<E> implements List<E> {
         }
         if (head == null) {
             head = new Node<>(e, null);
-            size++;
-            return true;
+            tail = head;
         } else {
-            head.next = new Node<>(e, null);
-            size++;
-            return true;
+            tail.next = new Node<>(e, null);
+            tail = tail.next;
         }
+        size++;
+        return true;
     }
 
     @Override
@@ -231,34 +231,80 @@ public class SingleLinkedList<E> implements List<E> {
         if (o == null) {
             throw new NullPointerException("L'oggetto passato è nullo");
         }
-        if (this.contains(o)) {
-            size--;
-            return true;
+        Node<E> prev = null;
+        Node<E> current;
+        E element;
+        Itr iterator = new Itr();
+        while (iterator.hasNext()) {
+            element = iterator.next();
+            if (element.equals(o)) {
+                current = iterator.lastReturned;
+                if (prev == null) {
+                    head = head.next;
+                    if (head == null) {
+                        tail = null;
+                    }
+                    size--;
+                } else {
+                    prev.next = current.next;
+                    size--;
+                }
+                return true;
+            }
+            prev = iterator.lastReturned;
         }
         return false;
     }
 
     @Override
     public void clear() {
-        // TODO implementare
+        // cancellando la testa vengono cancellati dal garbage collector
+        // anche tutti gli altri oggetti perché non avranno più un riferimento
+        head = null;
+        tail = null;
+        size = 0;
     }
 
     @Override
     public E get(int index) {
-        // TODO implementare
-        return null;
+        int otherIndex = 0;
+        for (E element : this) {
+            if (otherIndex == index) {
+                return element;
+            } else {
+                otherIndex++;
+            }
+        }
+        throw new IndexOutOfBoundsException();
     }
 
     @Override
     public E set(int index, E element) {
         // TODO implementare
+        if (element == null) {
+            throw new NullPointerException("L'elemento passato è nullo");
+        }
+        if (index >= this.size || index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+        Node<E> previous;
+        Itr iterator = new Itr();
+        E otherElement;
+        while (iterator.hasNext()) {
+            otherElement = iterator.next();
+
+        }
         return null;
     }
 
     @Override
     public void add(int index, E element) {
         // TODO implementare
+        if (element == null) {
+            throw new NullPointerException("L'elemento passato è nullo");
+        }
 
+        throw new IndexOutOfBoundsException();
     }
 
     @Override

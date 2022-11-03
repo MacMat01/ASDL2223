@@ -81,10 +81,7 @@ public class Factor implements Comparable<Factor> {
             return false;
         }
         Factor other = (Factor) obj;
-        if (this.primeValue != other.primeValue || this.multiplicity != other.multiplicity) {
-            return false;
-        }
-        return true;
+        return this.primeValue == other.primeValue && this.multiplicity == other.multiplicity;
     }
 
     /*
@@ -101,14 +98,12 @@ public class Factor implements Comparable<Factor> {
             // maggiore
             return 1;
         }
-        if (this.primeValue == o.primeValue) {
-            if (this.multiplicity < o.multiplicity) {
-                // minore
-                return -1;
-            } else if (this.multiplicity > o.multiplicity) {
-                // Maggiore
-                return 1;
-            }
+        if (this.multiplicity < o.multiplicity) {
+            // minore
+            return -1;
+        } else if (this.multiplicity > o.multiplicity) {
+            // Maggiore
+            return 1;
         }
         // uguali
         return 0;

@@ -61,8 +61,8 @@ public class Factoriser {
         }
         int newLength = 0;
         // prendo tutte le caselle occupate di factors e incremento ogni volta newLength
-        for (int i = 0; i < this.factors.length; i++) {
-            if (this.factors[i] != null) {
+        for (Factor factor : this.factors) {
+            if (factor != null) {
                 newLength++;
             }
         }

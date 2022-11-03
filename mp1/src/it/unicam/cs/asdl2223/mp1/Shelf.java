@@ -128,7 +128,7 @@ public class Shelf {
                 this.items[k] = tmps[k];
             }
         }
-        // inserisco l'oggetto alla prima posizione libera
+        // inserisco l'oggetto alla prima posizione libera e incremento il numero di oggetti
         this.items[numberOfItems++] = i;
         return true;
     }
