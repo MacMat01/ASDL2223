@@ -286,12 +286,37 @@ public class SingleLinkedList<E> implements List<E> {
         if (index >= this.size || index < 0) {
             throw new IndexOutOfBoundsException();
         }
-        Node<E> previous;
-        Itr iterator = new Itr();
-        E otherElement;
-        while (iterator.hasNext()) {
-            otherElement = iterator.next();
+        int otherIndex = 0;
+    /*    for (E otherElement : this) {
+            if (otherIndex == index) {
+                E oldElement = otherElement;
+                otherElement = element;
+                return oldElement;
+            } else {
+                otherIndex++;
+            }
+    }
+      */
 
+        Node<E> prev = null;
+        Node<E> current;
+        Itr iterator = new Itr();
+        while (iterator.hasNext()) {
+            E otherElement = iterator.next();
+            if (otherIndex == index) {
+                current = iterator.lastReturned;
+                current = new Node<E>(element, null);
+                if (prev == null) {
+                    head = current;
+                    tail = head;
+                } else {
+                    prev.next = current;
+                }
+                return otherElement;
+            } else {
+                prev = iterator.lastReturned;
+                otherIndex++;
+            }
         }
         return null;
     }
