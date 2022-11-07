@@ -218,9 +218,11 @@ public class SingleLinkedList<E> implements List<E> {
         if (head == null) {
             head = new Node<>(e, null);
             tail = head;
+            numeroModifiche++;
         } else {
             tail.next = new Node<>(e, null);
             tail = tail.next;
+            numeroModifiche++;
         }
         size++;
         return true;
@@ -316,32 +318,123 @@ public class SingleLinkedList<E> implements List<E> {
         if (element == null) {
             throw new NullPointerException("L'elemento passato è nullo");
         }
-
+        if (index > this.size || index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (index == this.size) {
+            this.add(element);
+            return;
+        } else {
+            int otherIndex = 0;
+            Node<E> prev = null;
+            Node<E> current;
+            E otherElement;
+            Itr iterator = new Itr();
+            while (iterator.hasNext()) {
+                otherElement = iterator.next();
+                if (otherIndex == index) {
+                    current = iterator.lastReturned;
+                    current = new Node<E>(element, current);
+                    if (prev == null) {
+                        head = current;
+                        tail = head;
+                    } else {
+                        prev.next = current;
+                    }
+                    size++;
+                    return;
+                } else {
+                    prev = iterator.lastReturned;
+                    otherIndex++;
+                }
+            }
+        }
         throw new IndexOutOfBoundsException();
     }
 
     @Override
     public E remove(int index) {
-        // TODO implementare
+        // index deve essere compreso tra 0 e size-1
+        if (index >= this.size || index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+        int otherIndex = 0;
+        Node<E> prev = null;
+        Node<E> current;
+        E otherElement;
+        Itr iterator = new Itr();
+        while (iterator.hasNext()) {
+            otherElement = iterator.next();
+            if (otherIndex == index) {
+                current = iterator.lastReturned;
+                if (prev == null) {
+                    head = head.next;
+                    if (head == null) {
+                        tail = null;
+                    }
+                } else {
+                    prev.next = current.next;
+                }
+                size--;
+                return otherElement;
+            } else {
+                prev = iterator.lastReturned;
+                otherIndex++;
+            }
+        }
         return null;
     }
 
     @Override
     public int indexOf(Object o) {
-        // TODO implementare
+        if (o == null) {
+            throw new NullPointerException("L'oggetto passato è nullo");
+        }
+        /*
+         * scorro tutta la lista alla ricerca dell'oggetto desiderato
+         */
+        int index = 0;
+        for (E element : this) {
+            if (element.equals(o)) {
+                return index;
+            } else {
+                index++;
+            }
+        }
+        // se non è stato trovato ritorno -1
         return -1;
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        // TODO implementare
-        return -1;
+        if (o == null) {
+            throw new NullPointerException("L'oggetto passato è nullo");
+        }
+        /*
+         * scorro tutta la lista alla ricerca dell'oggetto desiderato
+         */
+        int index = 0;
+        int lastIndex = -1;
+        for (E element : this) {
+            if (element.equals(o)) {
+                lastIndex = index;
+            }
+            index++;
+        }
+        return lastIndex;
     }
 
     @Override
     public Object[] toArray() {
-        // TODO implementare
-        return null;
+        // creo un array di Object di dimensione size
+        Object[] array = new Object[this.size];
+        int index = 0;
+        // scorro tutta la lista e aggiungo gli elementi all'array
+        for (E element : this) {
+            array[index] = element;
+            index++;
+        }
+        return array;
     }
 
     @Override
