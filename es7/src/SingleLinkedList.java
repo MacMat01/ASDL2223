@@ -300,9 +300,10 @@ public class SingleLinkedList<E> implements List<E> {
 
         Node<E> prev = null;
         Node<E> current;
+        E otherElement;
         Itr iterator = new Itr();
         while (iterator.hasNext()) {
-            E otherElement = iterator.next();
+            otherElement = iterator.next();
             if (otherIndex == index) {
                 current = iterator.lastReturned;
                 current = new Node<E>(element, null);
