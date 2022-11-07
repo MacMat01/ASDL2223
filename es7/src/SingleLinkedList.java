@@ -244,11 +244,10 @@ public class SingleLinkedList<E> implements List<E> {
                     if (head == null) {
                         tail = null;
                     }
-                    size--;
                 } else {
                     prev.next = current.next;
-                    size--;
                 }
+                size--;
                 return true;
             }
             prev = iterator.lastReturned;
