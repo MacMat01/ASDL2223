@@ -215,11 +215,14 @@ public class SingleLinkedList<E> implements List<E> {
         if (e == null) {
             throw new NullPointerException("L'oggetto passato è nullo");
         }
+        // Se la lista è vuota creo un nuovo nodo e lo inserisco in testa
         if (head == null) {
             head = new Node<>(e, null);
             tail = head;
             numeroModifiche++;
-        } else {
+        }
+        // altrimenti aggiungo l'elemento in coda
+        else {
             tail.next = new Node<>(e, null);
             tail = tail.next;
             numeroModifiche++;
@@ -287,6 +290,10 @@ public class SingleLinkedList<E> implements List<E> {
         if (index >= this.size || index < 0) {
             throw new IndexOutOfBoundsException();
         }
+        /*
+         * scorro la lista fino all'elemento desiderato e lo sostituisco con
+         * quello passato come parametro
+         */
         int otherIndex = 0;
         Node<E> prev = null;
         Node<E> current;
@@ -314,7 +321,6 @@ public class SingleLinkedList<E> implements List<E> {
 
     @Override
     public void add(int index, E element) {
-        // TODO implementare
         if (element == null) {
             throw new NullPointerException("L'elemento passato è nullo");
         }
