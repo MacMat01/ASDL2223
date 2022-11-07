@@ -279,7 +279,6 @@ public class SingleLinkedList<E> implements List<E> {
 
     @Override
     public E set(int index, E element) {
-        // TODO implementare
         if (element == null) {
             throw new NullPointerException("L'elemento passato è nullo");
         }
@@ -287,17 +286,6 @@ public class SingleLinkedList<E> implements List<E> {
             throw new IndexOutOfBoundsException();
         }
         int otherIndex = 0;
-    /*    for (E otherElement : this) {
-            if (otherIndex == index) {
-                E oldElement = otherElement;
-                otherElement = element;
-                return oldElement;
-            } else {
-                otherIndex++;
-            }
-    }
-      */
-
         Node<E> prev = null;
         Node<E> current;
         E otherElement;
@@ -306,7 +294,7 @@ public class SingleLinkedList<E> implements List<E> {
             otherElement = iterator.next();
             if (otherIndex == index) {
                 current = iterator.lastReturned;
-                current = new Node<E>(element, null);
+                current = new Node<E>(element, current.next);
                 if (prev == null) {
                     head = current;
                     tail = head;
