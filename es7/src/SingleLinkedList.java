@@ -150,12 +150,10 @@ public class SingleLinkedList<E> implements List<E> {
     public boolean equals(Object obj) {
         if (obj == null) return false;
         if (this == obj) return true;
-        if (!(obj instanceof SingleLinkedList)) return false;
-        SingleLinkedList<?> other = (SingleLinkedList<?>) obj;
+        if (!(obj instanceof SingleLinkedList<?> other)) return false;
         // Controllo se entrambe liste vuote
         if (head == null) {
-            if (other.head != null) return false;
-            else return true;
+            return other.head == null;
         }
         // Liste non vuote, scorro gli elementi di entrambe
         Iterator<E> thisIterator = this.iterator();
@@ -303,7 +301,7 @@ public class SingleLinkedList<E> implements List<E> {
             otherElement = iterator.next();
             if (otherIndex == index) {
                 current = iterator.lastReturned;
-                current = new Node<E>(element, current.next);
+                current = new Node<>(element, current.next);
                 if (prev == null) {
                     head = current;
                     tail = head;
@@ -334,13 +332,12 @@ public class SingleLinkedList<E> implements List<E> {
             int otherIndex = 0;
             Node<E> prev = null;
             Node<E> current;
-            E otherElement;
             Itr iterator = new Itr();
             while (iterator.hasNext()) {
-                otherElement = iterator.next();
+                iterator.next();
                 if (otherIndex == index) {
                     current = iterator.lastReturned;
-                    current = new Node<E>(element, current);
+                    current = new Node<>(element, current);
                     if (prev == null) {
                         head = current;
                         tail = head;
