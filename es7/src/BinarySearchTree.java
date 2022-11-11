@@ -133,8 +133,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         if (label == null) throw new NullPointerException("Etichetta da cercare null");
         if (this.isEmpty()) return false;
         RecBST n = this.root.search(label);
-        if (n == null) return false;
-        else return true;
+        return n != null;
     }
 
     /**
