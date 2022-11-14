@@ -143,8 +143,43 @@ public class MaxHeap<E extends Comparable<E>> {
      * suoi sotto alberi sinistro e destro (se esistono) siano heap.
      */
     private void heapify(int i) {
-        // TODO implementare
+        /*
+         * Se il nodo in posizione i non ha figli, non c'è nulla da fare
+         */
+        if (this.heap.size() == 1) {
+            return;
+        }
 
+        int left = leftIndex(i);
+        int right = rightIndex(i);
+        int max = i;
+        /*
+         * Se il nodo in posizione i ha un figlio sinistro, confronta il nodo in
+         * posizione i con il figlio sinistro
+         */
+        if (left < this.heap.size() && this.heap.get(left).compareTo(this.heap.get(max)) > 0) {
+            max = left;
+        } else {
+            max = i;
+        }
+        /*
+         * Se il nodo in posizione i ha un figlio destro, confronta il nodo in
+         * posizione i con il figlio destro
+         */
+        if (right < this.heap.size() && this.heap.get(right).compareTo(this.heap.get(max)) > 0) {
+            max = right;
+        }
+        /*
+         * Se il nodo in posizione i è minore di uno dei suoi figli, scambia il
+         * nodo in posizione i con il figlio maggiore e ricorsivamente
+         * ricostituisce lo heap a partire dal figlio maggiore
+         */
+        if (max != i) {
+            E temp = this.heap.get(i);
+            this.heap.set(i, this.heap.get(max));
+            this.heap.set(max, temp);
+            heapify(max);
+        }
     }
 
     /**
