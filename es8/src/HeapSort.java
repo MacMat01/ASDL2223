@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 
 import java.util.List;
@@ -8,9 +8,8 @@ import java.util.List;
 
 /**
  * Classe che implementa un algoritmo di ordinamento basato su heap.
- * 
- * @author Template: Luca Tesei, Implementation: collettiva
  *
+ * @author Template: Luca Tesei, Implementation: collettiva
  */
 public class HeapSort<E extends Comparable<E>> implements SortingAlgorithm<E> {
 
@@ -21,6 +20,7 @@ public class HeapSort<E extends Comparable<E>> implements SortingAlgorithm<E> {
         // (arraylist) e alcune variabili locali di appoggio (implementazione
         // cosiddetta "in loco" o "in place", si veda
         // https://it.wikipedia.org/wiki/Algoritmo_in_loco)
+
         return null;
     }
 

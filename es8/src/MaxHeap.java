@@ -64,10 +64,25 @@ public class MaxHeap<E extends Comparable<E>> {
         if (el == null) {
             throw new NullPointerException("elemento nulla");
         }
-        for (int i = 0; i < this.heap.size(); i++) {
-            if (this.heap.get(i).compareTo(el) > 0) {
-                this.heap.add(i, el);
-                return;
+        /*
+         * Inserisco l'elemento in fondo all'heap
+         */
+        if (this.heap.isEmpty()) {
+            this.heap.add(el);
+            /*
+             * Se l'heap non è vuoto, devo ripristinare la proprietà di heap
+             */
+        } else {
+            this.heap.add(el);
+            int i = this.heap.size() - 1;
+            /*
+             * Scambio l'elemento con il suo padre finché non è maggiore di esso
+             */
+            while (i > 0 && this.heap.get(i).compareTo(this.heap.get((i - 1) / 2)) > 0) {
+                E tmp = this.heap.get(i);
+                this.heap.set(i, this.heap.get((i - 1) / 2));
+                this.heap.set((i - 1) / 2, tmp);
+                i = (i - 1) / 2;
             }
         }
     }
@@ -130,11 +145,24 @@ public class MaxHeap<E extends Comparable<E>> {
      * @return l'elemento massimo di questo heap oppure null se lo heap è vuoto
      */
     public E extractMax() {
+        /*
+         * Se lo heap è vuoto, restituisce null
+         */
         if (this.isEmpty()) {
             return null;
         }
+        /*
+         * Altrimenti prende il primo elemento e lo rimuove
+         */
         E max = this.heap.get(0);
-        this.heap.remove(0);
+        this.heap.set(0, this.heap.get(this.heap.size() - 1));
+        this.heap.remove(this.heap.size() - 1);
+        /*
+         * Se lo heap non è vuoto, ripristina la proprietà di heap
+         */
+        if (!this.isEmpty()) {
+            this.heapify(0);
+        }
         return max;
     }
 
@@ -149,36 +177,32 @@ public class MaxHeap<E extends Comparable<E>> {
         if (this.heap.size() == 1) {
             return;
         }
-
         int left = leftIndex(i);
         int right = rightIndex(i);
         int max = i;
         /*
-         * Se il nodo in posizione i ha un figlio sinistro, confronta il nodo in
-         * posizione i con il figlio sinistro
+         * Se il figlio sinistro esiste e è maggiore del padre, allora il massimo
+         * è il figlio sinistro
          */
         if (left < this.heap.size() && this.heap.get(left).compareTo(this.heap.get(max)) > 0) {
             max = left;
-        } else {
-            max = i;
         }
         /*
-         * Se il nodo in posizione i ha un figlio destro, confronta il nodo in
-         * posizione i con il figlio destro
+         * Se il figlio destro esiste e è maggiore del padre, allora il massimo
+         * è il figlio destro
          */
         if (right < this.heap.size() && this.heap.get(right).compareTo(this.heap.get(max)) > 0) {
             max = right;
         }
         /*
-         * Se il nodo in posizione i è minore di uno dei suoi figli, scambia il
-         * nodo in posizione i con il figlio maggiore e ricorsivamente
-         * ricostituisce lo heap a partire dal figlio maggiore
+         * Se il massimo non è il padre, allora scambio il padre con il massimo e
+         * ricorro
          */
         if (max != i) {
-            E temp = this.heap.get(i);
+            E tmp = this.heap.get(i);
             this.heap.set(i, this.heap.get(max));
-            this.heap.set(max, temp);
-            heapify(max);
+            this.heap.set(max, tmp);
+            this.heapify(max);
         }
     }
 
