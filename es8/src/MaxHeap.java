@@ -93,7 +93,6 @@ public class MaxHeap<E extends Comparable<E>> {
      * la radice dello heap.
      */
     private int leftIndex(int i) {
-        // se è pari
         return 2 * i;
     }
 
@@ -103,7 +102,6 @@ public class MaxHeap<E extends Comparable<E>> {
      * la radice dello heap.
      */
     private int rightIndex(int i) {
-        // se è dispari
         return 2 * i + 1;
     }
 
@@ -113,10 +111,6 @@ public class MaxHeap<E extends Comparable<E>> {
      * la radice dello heap.
      */
     private int parentIndex(int i) {
-        /*
-         * Se i è pari, il genitore è in posizione i/2, altrimenti è in posizione
-         * (i-1)/2
-         */
         return i / 2;
     }
 
@@ -132,6 +126,7 @@ public class MaxHeap<E extends Comparable<E>> {
         if (this.isEmpty()) {
             return null;
         }
+        heapify(0);
         /*
          * Altrimenti restituisce il primo elemento
          */
@@ -145,24 +140,22 @@ public class MaxHeap<E extends Comparable<E>> {
      * @return l'elemento massimo di questo heap oppure null se lo heap è vuoto
      */
     public E extractMax() {
-        /*
-         * Se lo heap è vuoto, restituisce null
-         */
         if (this.isEmpty()) {
             return null;
         }
         /*
-         * Altrimenti prende il primo elemento e lo rimuove
+         * Salvo l'elemento massimo
          */
-        E max = this.heap.get(0);
+        E max = getMax();
+        /*
+         * Sostituisco l'elemento massimo con l'ultimo elemento
+         */
         this.heap.set(0, this.heap.get(this.heap.size() - 1));
         this.heap.remove(this.heap.size() - 1);
         /*
-         * Se lo heap non è vuoto, ripristina la proprietà di heap
+         * Ripristino la proprietà di heap
          */
-        if (!this.isEmpty()) {
-            this.heapify(0);
-        }
+        heapify(0);
         return max;
     }
 
@@ -171,38 +164,22 @@ public class MaxHeap<E extends Comparable<E>> {
      * suoi sotto alberi sinistro e destro (se esistono) siano heap.
      */
     private void heapify(int i) {
-        /*
-         * Se il nodo in posizione i non ha figli, non c'è nulla da fare
-         */
-        if (this.heap.size() == 1) {
-            return;
-        }
         int left = leftIndex(i);
         int right = rightIndex(i);
-        int max = i;
-        /*
-         * Se il figlio sinistro esiste e è maggiore del padre, allora il massimo
-         * è il figlio sinistro
-         */
-        if (left < this.heap.size() && this.heap.get(left).compareTo(this.heap.get(max)) > 0) {
+        int max;
+        if (left < this.heap.size() && this.heap.get(left).compareTo(this.heap.get(i)) > 0) {
             max = left;
+        } else {
+            max = i;
         }
-        /*
-         * Se il figlio destro esiste e è maggiore del padre, allora il massimo
-         * è il figlio destro
-         */
-        if (right < this.heap.size() && this.heap.get(right).compareTo(this.heap.get(max)) > 0) {
+        if (right < this.heap.size() && this.heap.get(right).compareTo(this.heap.get(i)) > 0) {
             max = right;
         }
-        /*
-         * Se il massimo non è il padre, allora scambio il padre con il massimo e
-         * ricorro
-         */
         if (max != i) {
-            E tmp = this.heap.get(i);
+            E temp = this.heap.get(i);
             this.heap.set(i, this.heap.get(max));
-            this.heap.set(max, tmp);
-            this.heapify(max);
+            this.heap.set(max, temp);
+            heapify(max);
         }
     }
 
