@@ -74,16 +74,7 @@ public class MaxHeap<E extends Comparable<E>> {
              */
         } else {
             this.heap.add(el);
-            int i = this.heap.size() - 1;
-            /*
-             * Scambio l'elemento con il suo padre finché non è maggiore di esso
-             */
-            while (i > 0 && this.heap.get(i).compareTo(this.heap.get((i - 1) / 2)) > 0) {
-                E tmp = this.heap.get(i);
-                this.heap.set(i, this.heap.get((i - 1) / 2));
-                this.heap.set((i - 1) / 2, tmp);
-                i = (i - 1) / 2;
-            }
+            heapify(this.heap.size() - 1);
         }
     }
 
@@ -111,7 +102,7 @@ public class MaxHeap<E extends Comparable<E>> {
      * la radice dello heap.
      */
     private int parentIndex(int i) {
-        return (i / 2) - 1;
+        return (i - 1) / 2;
     }
 
     /**
@@ -123,7 +114,6 @@ public class MaxHeap<E extends Comparable<E>> {
         if (this.isEmpty()) {
             return null;
         }
-        heapify(this.heap.size() - 1);
         return this.heap.get(0);
     }
 
@@ -137,11 +127,27 @@ public class MaxHeap<E extends Comparable<E>> {
         if (this.isEmpty()) {
             return null;
         }
-        E max = getMax();
         this.heap.set(0, this.heap.get(this.heap.size() - 1));
         this.heap.remove(this.heap.size() - 1);
-        heapify_down(0);
-        return max;
+        for (int i = 0; i < this.heap.size(); i++) {
+            int left = leftIndex(i);
+            int right = rightIndex(i);
+            int max = i;
+            if (left < this.heap.size() && this.heap.get(left).compareTo(this.heap.get(i)) > 0) {
+                max = left;
+            }
+            if (right < this.heap.size() && this.heap.get(right).compareTo(this.heap.get(i)) > 0) {
+                if (this.heap.get(right).compareTo(this.heap.get(left)) > 0) {
+                    max = right;
+                }
+            }
+            if (max != i) {
+                E temp = this.heap.get(i);
+                this.heap.set(i, this.heap.get(max));
+                this.heap.set(max, temp);
+            }
+        }
+        return getMax();
     }
 
     /*
@@ -154,26 +160,6 @@ public class MaxHeap<E extends Comparable<E>> {
             this.heap.set(i, this.heap.get(parentIndex(i)));
             this.heap.set(parentIndex(i), tmp);
             heapify(parentIndex(i));
-        }
-    }
-
-    private void heapify_down(int i) {
-        int left = leftIndex(i);
-        int right = rightIndex(i);
-        int max;
-        if (left < this.heap.size() && this.heap.get(left).compareTo(this.heap.get(i)) > 0) {
-            max = left;
-        } else {
-            max = i;
-        }
-        if (right < this.heap.size() && this.heap.get(right).compareTo(this.heap.get(i)) > 0) {
-            max = right;
-        }
-        if (max != i) {
-            E temp = this.heap.get(i);
-            this.heap.set(i, this.heap.get(max));
-            this.heap.set(max, temp);
-            heapify_down(max);
         }
     }
 
