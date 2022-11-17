@@ -70,7 +70,7 @@ class MaxHeapTest {
         MaxHeap<Integer> h = new MaxHeap<Integer>(list);
         assertTrue(h.extractMax().equals(99));
         assertTrue(h.extractMax().equals(58));
-        //assertTrue(h.extractMax().equals(43));
+        assertTrue(h.extractMax().equals(43));
         assertTrue(h.extractMax().equals(28));
         assertTrue(h.extractMax().equals(12));
         assertTrue(h.extractMax().equals(0));

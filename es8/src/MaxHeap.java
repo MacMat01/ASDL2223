@@ -114,21 +114,6 @@ public class MaxHeap<E extends Comparable<E>> {
         if (this.isEmpty()) {
             return null;
         }
-        return this.heap.get(0);
-    }
-
-    /**
-     * Estrae l'elemento massimo dallo heap. Dopo la chiamata tale elemento non
-     * è più presente nello heap.
-     *
-     * @return l'elemento massimo di questo heap oppure null se lo heap è vuoto
-     */
-    public E extractMax() {
-        if (this.isEmpty()) {
-            return null;
-        }
-        this.heap.set(0, this.heap.get(this.heap.size() - 1));
-        this.heap.remove(this.heap.size() - 1);
         for (int i = 0; i < this.heap.size(); i++) {
             int left = leftIndex(i);
             int right = rightIndex(i);
@@ -147,6 +132,21 @@ public class MaxHeap<E extends Comparable<E>> {
                 this.heap.set(max, temp);
             }
         }
+        return this.heap.get(0);
+    }
+
+    /**
+     * Estrae l'elemento massimo dallo heap. Dopo la chiamata tale elemento non
+     * è più presente nello heap.
+     *
+     * @return l'elemento massimo di questo heap oppure null se lo heap è vuoto
+     */
+    public E extractMax() {
+        if (this.isEmpty()) {
+            return null;
+        }
+        this.heap.set(0, this.heap.get(this.heap.size() - 1));
+        this.heap.remove(this.heap.size() - 1);
         return getMax();
     }
 
