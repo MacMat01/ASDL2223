@@ -1,22 +1,18 @@
 /**
- * 
+ *
  */
 
 import java.util.List;
 
 /**
  * Implementazione dell'algoritmo Bubble Sort.
- * 
- * @author Luca Tesei
  *
+ * @author Luca Tesei
  */
-public class BubbleSort<E extends Comparable<E>>
-        implements SortingAlgorithm<E> {
+public class BubbleSort<E extends Comparable<E>> implements SortingAlgorithm<E> {
 
     public SortingAlgorithmResult<E> sort(List<E> l) {
-        if (l == null)
-            throw new NullPointerException(
-                    "Tentativo di ordinare una lista null");
+        if (l == null) throw new NullPointerException("Tentativo di ordinare una lista null");
         if (l.size() <= 1)
             // per ordinare la lista vuota o con un solo elemento non faccio niente
             return new SortingAlgorithmResult<E>(l, 0);

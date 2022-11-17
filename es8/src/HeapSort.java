@@ -4,7 +4,6 @@
 
 import java.util.List;
 
-// TODO completare import 
 
 /**
  * Classe che implementa un algoritmo di ordinamento basato su heap.
@@ -15,18 +14,29 @@ public class HeapSort<E extends Comparable<E>> implements SortingAlgorithm<E> {
 
     @Override
     public SortingAlgorithmResult<E> sort(List<E> l) {
-        // TODO implementare - Nota: usare una variante dei metodi della classe
-        // MaxHeap in modo da implementare l'algoritmo utilizzando solo un array
-        // (arraylist) e alcune variabili locali di appoggio (implementazione
-        // cosiddetta "in loco" o "in place", si veda
-        // https://it.wikipedia.org/wiki/Algoritmo_in_loco)
-
-        return null;
+        if (l == null) {
+            throw new NullPointerException("Tentativo di ordinare una lista null");
+        }
+        if (l.size() <= 1) {
+            // per ordinare la lista vuota o con un solo elemento non faccio niente
+            return new SortingAlgorithmResult<E>(l, 0);
+        }
+        int countCompare = 0;
+        for (int i = l.size() - 1; i >= 0; i--) {
+            for (int j = i; j >= 0; j--) {
+                if (l.get(j).compareTo(l.get(i)) > 0) {
+                    E temp = l.get(i);
+                    l.set(i, l.get(j));
+                    l.set(j, temp);
+                    countCompare++;
+                }
+            }
+        }
+        return new SortingAlgorithmResult<E>(l, countCompare);
     }
 
     @Override
     public String getName() {
         return "HeapSort";
     }
-
 }
