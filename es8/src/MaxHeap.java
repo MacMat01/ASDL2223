@@ -93,7 +93,7 @@ public class MaxHeap<E extends Comparable<E>> {
      * la radice dello heap.
      */
     private int leftIndex(int i) {
-        return 2 * i;
+        return (2 * i) + 1;
     }
 
     /*
@@ -102,7 +102,7 @@ public class MaxHeap<E extends Comparable<E>> {
      * la radice dello heap.
      */
     private int rightIndex(int i) {
-        return 2 * i + 1;
+        return (2 * i) + 2;
     }
 
     /*
@@ -111,7 +111,7 @@ public class MaxHeap<E extends Comparable<E>> {
      * la radice dello heap.
      */
     private int parentIndex(int i) {
-        return i / 2;
+        return (i / 2) - 1;
     }
 
     /**
@@ -120,16 +120,10 @@ public class MaxHeap<E extends Comparable<E>> {
      * @return l'elemento massimo dello heap oppure null se lo heap è vuoto
      */
     public E getMax() {
-        /*
-         * Se lo heap è vuoto, restituisce null
-         */
         if (this.isEmpty()) {
             return null;
         }
-        heapify(0);
-        /*
-         * Altrimenti restituisce il primo elemento
-         */
+        heapify(this.heap.size() - 1);
         return this.heap.get(0);
     }
 
@@ -143,19 +137,10 @@ public class MaxHeap<E extends Comparable<E>> {
         if (this.isEmpty()) {
             return null;
         }
-        /*
-         * Salvo l'elemento massimo
-         */
         E max = getMax();
-        /*
-         * Sostituisco l'elemento massimo con l'ultimo elemento
-         */
         this.heap.set(0, this.heap.get(this.heap.size() - 1));
         this.heap.remove(this.heap.size() - 1);
-        /*
-         * Ripristino la proprietà di heap
-         */
-        heapify(0);
+        heapify_down(0);
         return max;
     }
 
@@ -164,6 +149,15 @@ public class MaxHeap<E extends Comparable<E>> {
      * suoi sotto alberi sinistro e destro (se esistono) siano heap.
      */
     private void heapify(int i) {
+        if (i > 0 && this.heap.get(parentIndex(i)).compareTo(this.heap.get(i)) < 0) {
+            E tmp = this.heap.get(i);
+            this.heap.set(i, this.heap.get(parentIndex(i)));
+            this.heap.set(parentIndex(i), tmp);
+            heapify(parentIndex(i));
+        }
+    }
+
+    private void heapify_down(int i) {
         int left = leftIndex(i);
         int right = rightIndex(i);
         int max;
@@ -179,7 +173,7 @@ public class MaxHeap<E extends Comparable<E>> {
             E temp = this.heap.get(i);
             this.heap.set(i, this.heap.get(max));
             this.heap.set(max, temp);
-            heapify(max);
+            heapify_down(max);
         }
     }
 
