@@ -52,6 +52,11 @@ public class ASDL2223Deque<E> implements Deque<E> {
     // TODO implement: possibly insert other private fields that may be needed
     // for implementation
 
+    /*
+     * Current number of modifications to this deque
+     */
+    private int modCount;
+
     /**
      * Constructs an empty deque.
      */
@@ -60,6 +65,7 @@ public class ASDL2223Deque<E> implements Deque<E> {
         size = 0;
         first = null;
         last = null;
+        modCount = 0;
     }
 
     @Override
@@ -111,6 +117,7 @@ public class ASDL2223Deque<E> implements Deque<E> {
         }
         for (E e : c) {
             this.addLast(e);
+            modCount++;
         }
         return true;
     }
@@ -131,6 +138,7 @@ public class ASDL2223Deque<E> implements Deque<E> {
         size = 0;
         first = null;
         last = null;
+        modCount = 0;
     }
 
     @Override
@@ -148,6 +156,7 @@ public class ASDL2223Deque<E> implements Deque<E> {
             first.prev = node;
             first = node;
         }
+        modCount++;
         size++;
     }
 
@@ -165,6 +174,7 @@ public class ASDL2223Deque<E> implements Deque<E> {
             last.next = node;
         }
         last = node;
+        modCount++;
         size++;
     }
 
@@ -184,6 +194,7 @@ public class ASDL2223Deque<E> implements Deque<E> {
             first.prev = node;
             first = node;
         }
+        modCount++;
         size++;
         return true;
     }
@@ -203,6 +214,7 @@ public class ASDL2223Deque<E> implements Deque<E> {
             last.next = node;
         }
         last = node;
+        modCount++;
         size++;
         return true;
     }
@@ -217,6 +229,7 @@ public class ASDL2223Deque<E> implements Deque<E> {
         E e = first.item;
         first = first.next;
         first.prev = null;
+        modCount++;
         size--;
         return e;
     }
@@ -231,6 +244,7 @@ public class ASDL2223Deque<E> implements Deque<E> {
         E e = last.item;
         last = last.prev;
         last.next = null;
+        modCount++;
         size--;
         return e;
     }
@@ -390,6 +404,7 @@ public class ASDL2223Deque<E> implements Deque<E> {
                     node.prev.next = node.next;
                     node.next.prev = node.prev;
                 }
+                modCount++;
                 size--;
                 return true;
             }
@@ -401,13 +416,27 @@ public class ASDL2223Deque<E> implements Deque<E> {
     @Override
     public boolean contains(Object o) {
         // TODO implement
+        // return true if the element is in the deque
+        if (o == null) {
+            throw new NullPointerException("Null elements are not permitted.");
+        }
+        if (size == 0) {
+            return false;
+        }
+        Node<E> node = first;
+        while (node != null) {
+            if (node.item.equals(o)) {
+                return true;
+            }
+            node = node.next;
+        }
         return false;
     }
 
     @Override
     public int size() {
         // TODO implement
-        return -1;
+        return size;
     }
 
     /*
@@ -444,14 +473,31 @@ public class ASDL2223Deque<E> implements Deque<E> {
     private class Itr implements Iterator<E> {
         // TODO implement: insert private fields needed for the implementation
         // and for making the iterator fail-safe
+        private Node<E> node;
+
+        private Node<E> lastReturned;
+
+        private int expectedModCount;
+
 
         Itr() {
             // TODO implement
+            /*
+             * The iterator starts at the first element of the deque. If the
+             * deque is empty, the iterator starts at null.
+             */
+            node = first;
+            lastReturned = null;
+            expectedModCount = modCount;
         }
 
         public boolean hasNext() {
             // TODO implement
-            return false;
+            if (lastReturned == null) {
+                return node != null;
+            } else {
+                return lastReturned.next != null;
+            }
         }
 
         public E next() {
@@ -459,7 +505,37 @@ public class ASDL2223Deque<E> implements Deque<E> {
             // the Deque has been modified by a method of the main class the
             // first attempt to call next() must throw a
             // ConcurrentModificationException
-            return null;
+
+            /*
+             * If the deque has been modified by a method of the main class the
+             * first attempt to call next() must throw a
+             * ConcurrentModificationException
+             */
+            if (modCount != expectedModCount) {
+                throw new ConcurrentModificationException("The deque has been modified.");
+            }
+            /*
+             * If the iterator is at the end of the deque, throw a
+             * NoSuchElementException
+             */
+            if (!hasNext()) {
+                throw new NoSuchElementException("There are no more elements in the deque.");
+            }
+            /*
+             * If the iterator is at the beginning of the deque, return the
+             * first element and update the lastReturned field
+             */
+            if (lastReturned == null) {
+                lastReturned = node;
+            } else {
+                /*
+                 * If the iterator is not at the beginning of the deque, return the
+                 * next element and update the lastReturned field
+                 */
+                lastReturned = lastReturned.next;
+            }
+            node = node.next;
+            return lastReturned.item;
         }
     }
 
@@ -469,7 +545,7 @@ public class ASDL2223Deque<E> implements Deque<E> {
     }
 
     /*
-     * Class for implementing a descendign iterator for this deque. The iterator
+     * Class for implementing a descending iterator for this deque. The iterator
      * is fail-fast: it detects if during the iteration a modification to the
      * original deque was done and, if so, it launches a
      * <code>ConcurrentModificationException</code> as soon as a call to the
@@ -478,9 +554,21 @@ public class ASDL2223Deque<E> implements Deque<E> {
     private class DescItr implements Iterator<E> {
         // TODO implement: insert private fields needed for the implementation
         // and for making the iterator fail-safe
+        private Node<E> node;
+
+        private Node<E> lastReturned;
+
+        private int expectedModCount;
 
         DescItr() {
             // TODO implement
+            /*
+             * The iterator starts at the last element of the deque. If the
+             * deque is empty, the iterator starts at null.
+             */
+            node = last;
+            lastReturned = null;
+            expectedModCount = modCount;
         }
 
         public boolean hasNext() {
@@ -513,5 +601,4 @@ public class ASDL2223Deque<E> implements Deque<E> {
     protected Node<E> getLastNode() {
         return this.last;
     }
-
 }
