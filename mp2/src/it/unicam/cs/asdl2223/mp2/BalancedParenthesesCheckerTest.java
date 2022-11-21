@@ -17,10 +17,8 @@ class BalancedParenthesesCheckerTest {
     @Test
     final void testCheck2() {
         BalancedParenthesesChecker checker = new BalancedParenthesesChecker();
-        assertThrows(IllegalArgumentException.class,
-                () -> checker.check("( ( \n [ ( P )] \t ))"));
-        assertThrows(IllegalArgumentException.class,
-                () -> checker.check(" \tPippo\n"));
+        assertThrows(IllegalArgumentException.class, () -> checker.check("( ( \n [ ( P )] \t ))"));
+        assertThrows(IllegalArgumentException.class, () -> checker.check(" \tPippo\n"));
     }
 
     @Test
