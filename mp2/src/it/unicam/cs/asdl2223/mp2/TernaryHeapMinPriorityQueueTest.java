@@ -45,14 +45,14 @@ class TernaryHeapMinPriorityQueueTest {
         assertTrue(a.get(0) == j25);
         assertTrue(a.get(1) == j30);
         assertTrue(a.get(2) == j41);
-        controlloHandles(a,a.size());
+        controlloHandles(a, a.size());
         Job j17 = new Job("Job17", 17);
         h.insert(j17);
         assertTrue(a.get(0) == j17);
         assertTrue(a.get(1) == j30);
         assertTrue(a.get(2) == j41);
         assertTrue(a.get(3) == j25);
-        controlloHandles(a,a.size());
+        controlloHandles(a, a.size());
         Job j28 = new Job("Job28", 28);
         h.insert(j28);
         assertTrue(a.get(0) == j17);
@@ -60,7 +60,7 @@ class TernaryHeapMinPriorityQueueTest {
         assertTrue(a.get(2) == j41);
         assertTrue(a.get(3) == j25);
         assertTrue(a.get(4) == j30);
-        controlloHandles(a,a.size());
+        controlloHandles(a, a.size());
         Job j15 = new Job("Job15", 15);
         h.insert(j15);
         assertTrue(a.get(0) == j15);
@@ -69,7 +69,7 @@ class TernaryHeapMinPriorityQueueTest {
         assertTrue(a.get(3) == j25);
         assertTrue(a.get(4) == j30);
         assertTrue(a.get(5) == j28);
-        controlloHandles(a,a.size());
+        controlloHandles(a, a.size());
         Job j16 = new Job("Job16", 16);
         h.insert(j16);
         assertTrue(a.get(0) == j15);
@@ -79,7 +79,7 @@ class TernaryHeapMinPriorityQueueTest {
         assertTrue(a.get(4) == j30);
         assertTrue(a.get(5) == j28);
         assertTrue(a.get(6) == j17);
-        controlloHandles(a,a.size());
+        controlloHandles(a, a.size());
         Job j42 = new Job("Job42", 42);
         h.insert(j42);
         Job j43 = new Job("Job43", 43);
@@ -96,7 +96,7 @@ class TernaryHeapMinPriorityQueueTest {
         assertTrue(a.get(7) == j42);
         assertTrue(a.get(8) == j43);
         assertTrue(a.get(9) == j41);
-        controlloHandles(a,a.size());
+        controlloHandles(a, a.size());
         Job j26 = new Job("Job26", 26);
         h.insert(j26);
         Job j27 = new Job("Job27", 27);
@@ -116,7 +116,7 @@ class TernaryHeapMinPriorityQueueTest {
         assertTrue(a.get(10) == j26);
         assertTrue(a.get(11) == j27);
         assertTrue(a.get(12) == j25);
-        controlloHandles(a,a.size());
+        controlloHandles(a, a.size());
         Job j20 = new Job("Job20", 20);
         h.insert(j20);
         Job j21 = new Job("Job21", 21);
@@ -137,8 +137,8 @@ class TernaryHeapMinPriorityQueueTest {
         assertTrue(a.get(13) == j30);
         assertTrue(a.get(14) == j21);
         // controllo handles
-        controlloHandles(a,a.size());
-        
+        controlloHandles(a, a.size());
+
 
     }
 
@@ -209,7 +209,7 @@ class TernaryHeapMinPriorityQueueTest {
         assertTrue(a.get(11) == j27);
         assertTrue(a.get(12) == j25);
         assertTrue(a.get(13) == j30);
-        controlloHandles(a,h.size());
+        controlloHandles(a, h.size());
         min = h.extractMinimum();
         assertTrue(min == j15);
         assertTrue(a.get(0) == j16);
@@ -225,7 +225,7 @@ class TernaryHeapMinPriorityQueueTest {
         assertTrue(a.get(10) == j26);
         assertTrue(a.get(11) == j27);
         assertTrue(a.get(12) == j25);
-        controlloHandles(a,h.size());
+        controlloHandles(a, h.size());
         min = h.extractMinimum();
         assertTrue(min == j16);
         assertTrue(a.get(0) == j17);
@@ -240,7 +240,7 @@ class TernaryHeapMinPriorityQueueTest {
         assertTrue(a.get(9) == j41);
         assertTrue(a.get(10) == j26);
         assertTrue(a.get(11) == j27);
-        controlloHandles(a,h.size());
+        controlloHandles(a, h.size());
         min = h.extractMinimum();
         assertTrue(min == j17);
         assertTrue(a.get(0) == j18);
@@ -254,7 +254,7 @@ class TernaryHeapMinPriorityQueueTest {
         assertTrue(a.get(8) == j43);
         assertTrue(a.get(9) == j41);
         assertTrue(a.get(10) == j26);
-        controlloHandles(a,h.size());
+        controlloHandles(a, h.size());
         min = h.extractMinimum();
         assertTrue(min == j18);
         assertTrue(a.get(0) == j20);
@@ -267,7 +267,7 @@ class TernaryHeapMinPriorityQueueTest {
         assertTrue(a.get(7) == j42);
         assertTrue(a.get(8) == j43);
         assertTrue(a.get(9) == j41);
-        controlloHandles(a,h.size());
+        controlloHandles(a, h.size());
         min = h.extractMinimum();
         assertTrue(min == j20);
         assertTrue(a.get(0) == j21);
@@ -279,7 +279,7 @@ class TernaryHeapMinPriorityQueueTest {
         assertTrue(a.get(6) == j30);
         assertTrue(a.get(7) == j42);
         assertTrue(a.get(8) == j43);
-        controlloHandles(a,h.size());
+        controlloHandles(a, h.size());
         min = h.extractMinimum();
         assertTrue(min == j21);
         assertTrue(a.get(0) == j25);
@@ -290,7 +290,7 @@ class TernaryHeapMinPriorityQueueTest {
         assertTrue(a.get(5) == j28);
         assertTrue(a.get(6) == j30);
         assertTrue(a.get(7) == j42);
-        controlloHandles(a,h.size());
+        controlloHandles(a, h.size());
         min = h.extractMinimum();
         assertTrue(min == j25);
         assertTrue(a.get(0) == j26);
@@ -300,25 +300,25 @@ class TernaryHeapMinPriorityQueueTest {
         assertTrue(a.get(4) == j43);
         assertTrue(a.get(5) == j42);
         assertTrue(a.get(6) == j30);
-        controlloHandles(a,h.size());
+        controlloHandles(a, h.size());
         min = h.extractMinimum();
         assertTrue(min == j26);
-        controlloHandles(a,h.size());
+        controlloHandles(a, h.size());
         min = h.extractMinimum();
         assertTrue(min == j27);
-        controlloHandles(a,h.size());
+        controlloHandles(a, h.size());
         min = h.extractMinimum();
         assertTrue(min == j28);
-        controlloHandles(a,h.size());
+        controlloHandles(a, h.size());
         min = h.extractMinimum();
         assertTrue(min == j30);
-        controlloHandles(a,h.size());
+        controlloHandles(a, h.size());
         min = h.extractMinimum();
         assertTrue(min == j41);
-        controlloHandles(a,h.size());
+        controlloHandles(a, h.size());
         min = h.extractMinimum();
         assertTrue(min == j42);
-        controlloHandles(a,h.size());
+        controlloHandles(a, h.size());
         min = h.extractMinimum();
         assertTrue(min == j43);
         assertTrue(h.size() == 0);
@@ -360,15 +360,15 @@ class TernaryHeapMinPriorityQueueTest {
         h.insert(j21);
         assertThrows(IllegalArgumentException.class, () -> h.decreasePriority(j21, 23));
         h.decreasePriority(j43, 19);
-        assertTrue(j43.getPriority()== 19);
+        assertTrue(j43.getPriority() == 19);
         assertTrue(j43.getHandle() == 8);
         h.decreasePriority(j30, 14);
-        assertTrue(j30.getPriority()== 14);
+        assertTrue(j30.getPriority() == 14);
         assertTrue(j30.getHandle() == 1);
         assertTrue(j16.getHandle() == 4);
         assertTrue(j20.getHandle() == 13);
         h.decreasePriority(j20, 5);
-        assertTrue(j20.getPriority()== 5);
+        assertTrue(j20.getPriority() == 5);
         ArrayList<PriorityQueueElement> a = h.getTernaryHeap();
         assertTrue(a.get(0).getPriority() == 5);
         assertTrue(a.get(1).getPriority() == 10);
@@ -385,7 +385,7 @@ class TernaryHeapMinPriorityQueueTest {
         assertTrue(a.get(12).getPriority() == 25);
         assertTrue(a.get(13).getPriority() == 16);
         assertTrue(a.get(14).getPriority() == 21);
-        controlloHandles(a,h.size());
+        controlloHandles(a, h.size());
         PriorityQueueElement min = h.extractMinimum();
         assertTrue(min.getPriority() == 5);
         assertTrue(a.get(0).getPriority() == 10);
@@ -402,9 +402,9 @@ class TernaryHeapMinPriorityQueueTest {
         assertTrue(a.get(11).getPriority() == 27);
         assertTrue(a.get(12).getPriority() == 25);
         assertTrue(a.get(13).getPriority() == 21);
-        controlloHandles(a,h.size());
+        controlloHandles(a, h.size());
         h.decreasePriority(j27, 13);
-        assertTrue(j27.getPriority()== 13);
+        assertTrue(j27.getPriority() == 13);
         min = h.extractMinimum();
         assertTrue(min.getPriority() == 10);
         assertTrue(a.get(0).getPriority() == 13);
@@ -420,7 +420,7 @@ class TernaryHeapMinPriorityQueueTest {
         assertTrue(a.get(10).getPriority() == 26);
         assertTrue(a.get(11).getPriority() == 21);
         assertTrue(a.get(12).getPriority() == 25);
-        controlloHandles(a,h.size());
+        controlloHandles(a, h.size());
     }
 
     @Test
@@ -441,11 +441,11 @@ class TernaryHeapMinPriorityQueueTest {
         assertTrue(h.size() == 0);
         ArrayList<PriorityQueueElement> a = h.getTernaryHeap();
         assertTrue(a.size() == 0);
-        
+
     }
-    
+
     final void controlloHandles(ArrayList<PriorityQueueElement> a, int n) {
-        for (int i = 0; i<n; i++)
+        for (int i = 0; i < n; i++)
             assertTrue(a.get(i).getHandle() == i);
     }
 

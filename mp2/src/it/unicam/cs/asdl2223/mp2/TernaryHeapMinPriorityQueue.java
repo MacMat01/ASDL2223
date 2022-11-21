@@ -55,6 +55,21 @@ public class TernaryHeapMinPriorityQueue {
      */
     public void insert(PriorityQueueElement element) {
         // TODO implement
+        if (element == null) {
+            throw new NullPointerException();
+        }
+        /*
+         * Add the element to the end of the heap and then bubble it up to the
+         * correct position.
+         */
+        this.heap.add(element);
+        element.setHandle(this.heap.size() - 1);
+        int i = this.heap.size() - 1;
+        while (i > 0 && this.heap.get(i).getPriority() < this.heap.get((i - 1) / 3).getPriority()) {
+            this.heap.set(i, this.heap.get((i - 1) / 3));
+            this.heap.set((i - 1) / 3, element);
+            i = (i - 1) / 3;
+        }
     }
 
     /**
@@ -66,7 +81,10 @@ public class TernaryHeapMinPriorityQueue {
      */
     public PriorityQueueElement minimum() {
         // TODO implement
-        return null;
+        if (this.heap.isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        return this.heap.get(0);
     }
 
     /**
@@ -78,7 +96,19 @@ public class TernaryHeapMinPriorityQueue {
      */
     public PriorityQueueElement extractMinimum() {
         // TODO implement
-        return null;
+        if (this.heap.isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        /*
+         * Swap the first and the last element of the heap and then bubble the
+         * first element down to the correct position.
+         */
+        PriorityQueueElement min = this.heap.get(0);
+        this.heap.set(0, this.heap.get(this.heap.size() - 1));
+        this.heap.set(this.heap.size() - 1, min);
+        this.heap.get(0).setHandle(0);
+        this.heap.remove(this.heap.size() - 1);
+        return min;
     }
 
     /**
@@ -98,6 +128,17 @@ public class TernaryHeapMinPriorityQueue {
      */
     public void decreasePriority(PriorityQueueElement element, double newPriority) {
         // TODO implement
+        if (element.getHandle() == -1) {
+            throw new NoSuchElementException();
+        }
+        if (element.getPriority() <= newPriority) {
+            throw new IllegalArgumentException();
+        }
+        /*
+         * Update the priority of the element and then bubble it up to the
+         * correct position.
+         */
+        element.setPriority(newPriority);
     }
 
     /**
