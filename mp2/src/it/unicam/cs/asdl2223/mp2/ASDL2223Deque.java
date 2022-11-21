@@ -573,7 +573,11 @@ public class ASDL2223Deque<E> implements Deque<E> {
 
         public boolean hasNext() {
             // TODO implement
-            return false;
+            if (lastReturned == null) {
+                return node != null;
+            } else {
+                return lastReturned.prev != null;
+            }
         }
 
         public E next() {
@@ -581,7 +585,37 @@ public class ASDL2223Deque<E> implements Deque<E> {
             // the Deque has been modified by a method of the main class the
             // first attempt to call next() must throw a
             // ConcurrentModificationException
-            return null;
+
+            /*
+             * If the deque has been modified by a method of the main class the
+             * first attempt to call next() must throw a
+             * ConcurrentModificationException
+             */
+            if (modCount != expectedModCount) {
+                throw new ConcurrentModificationException("The deque has been modified.");
+            }
+            /*
+             * If the iterator is at the beginning of the deque, throw a
+             * NoSuchElementException
+             */
+            if (!hasNext()) {
+                throw new NoSuchElementException("There are no more elements in the deque.");
+            }
+            /*
+             * If the iterator is at the end of the deque, return the
+             * last element and update the lastReturned field
+             */
+            if (lastReturned == null) {
+                lastReturned = node;
+            } else {
+                /*
+                 * If the iterator is not at the end of the deque, return the
+                 * previous element and update the lastReturned field
+                 */
+                lastReturned = lastReturned.prev;
+            }
+            node = node.prev;
+            return lastReturned.item;
         }
 
     }
