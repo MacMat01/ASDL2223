@@ -11,10 +11,12 @@
       <module fileurl="file://$PROJECT_DIR$/es6/es6.iml" filepath="$PROJECT_DIR$/es6/es6.iml" />
       <module fileurl="file://$PROJECT_DIR$/es7/es7.iml" filepath="$PROJECT_DIR$/es7/es7.iml" />
       <module fileurl="file://$PROJECT_DIR$/es8/es8.iml" filepath="$PROJECT_DIR$/es8/es8.iml" />
+      <module fileurl="file://$PROJECT_DIR$/es9/es9.iml" filepath="$PROJECT_DIR$/es9/es9.iml" />
       <module fileurl="file://$PROJECT_DIR$/lezione1/lezione1.iml" filepath="$PROJECT_DIR$/lezione1/lezione1.iml" />
       <module fileurl="file://$PROJECT_DIR$/lezione3/lezione3.iml" filepath="$PROJECT_DIR$/lezione3/lezione3.iml" />
       <module fileurl="file://$PROJECT_DIR$/lezioni/lezioni.iml" filepath="$PROJECT_DIR$/lezioni/lezioni.iml" />
       <module fileurl="file://$PROJECT_DIR$/mp1/mp1.iml" filepath="$PROJECT_DIR$/mp1/mp1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mp2/mp2.iml" filepath="$PROJECT_DIR$/mp2/mp2.iml" />
     </modules>
   </component>
 </project>
