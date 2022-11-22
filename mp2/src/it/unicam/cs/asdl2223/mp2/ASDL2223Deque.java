@@ -78,6 +78,7 @@ public class ASDL2223Deque<E> implements Deque<E> {
     public Object[] toArray() {
         Object[] array = new Object[size];
         int i = 0;
+        // Iterate over the deque and add each element to the array
         for (E e : this) {
             array[i] = e;
             i++;
@@ -138,9 +139,18 @@ public class ASDL2223Deque<E> implements Deque<E> {
             throw new NullPointerException("Null elements are not permitted.");
         }
         Node<E> node = new Node<>(null, e, null);
+        /*
+         * If the deque is empty, the new node is both the first and the last
+         * element of the deque
+         */
         if (size == 0) {
             first = node;
             last = node;
+            /*
+             * If the deque is not empty, the new node is the first element of the
+             * deque and the previous first element is the next element of the new
+             * node
+             */
         } else {
             node.next = first;
             first.prev = node;
@@ -156,8 +166,17 @@ public class ASDL2223Deque<E> implements Deque<E> {
             throw new NullPointerException("Null elements are not permitted.");
         }
         Node<E> node = new Node<>(null, e, null);
+        /*
+         * If the deque is empty, the new node is both the first and the last
+         * element of the deque
+         */
         if (size == 0) {
             first = node;
+            /*
+             * If the deque is not empty, the new node is the last element of the
+             * deque and the previous last element is the previous element of the
+             * new node
+             */
         } else {
             node.prev = last;
             last.next = node;
@@ -174,9 +193,18 @@ public class ASDL2223Deque<E> implements Deque<E> {
             throw new NullPointerException("Null elements are not permitted.");
         }
         Node<E> node = new Node<>(null, e, null);
+        /*
+         * If the deque is empty, the new node is both the first and the last
+         * element of the deque
+         */
         if (size == 0) {
             first = node;
             last = node;
+            /*
+             * If the deque is not empty, the new node is the first element of the
+             * deque and the previous first element is the next element of the new
+             * node
+             */
         } else {
             node.next = first;
             first.prev = node;
@@ -194,8 +222,17 @@ public class ASDL2223Deque<E> implements Deque<E> {
             throw new NullPointerException("Null elements are not permitted.");
         }
         Node<E> node = new Node<>(null, e, null);
+        /*
+         * If the deque is empty, the new node is both the first and the last
+         * element of the deque
+         */
         if (size == 0) {
             first = node;
+            /*
+             * If the deque is not empty, the new node is the last element of the
+             * deque and the previous last element is the previous element of the
+             * new node
+             */
         } else {
             node.prev = last;
             last.next = node;
@@ -208,10 +245,13 @@ public class ASDL2223Deque<E> implements Deque<E> {
 
     @Override
     public E removeFirst() {
-        // return the first element of the deque
         if (size == 0) {
             throw new NoSuchElementException("The deque is empty.");
         }
+        /*
+         * If the deque has only one element, the first and the last element are
+         * both null
+         */
         if (size == 1) {
             E e = first.item;
             first = null;
@@ -220,6 +260,10 @@ public class ASDL2223Deque<E> implements Deque<E> {
             modCount++;
             return e;
         }
+        /*
+         * If the deque has more than one element, the first element is removed
+         * and the second element becomes the first element
+         */
         E e = first.item;
         first = first.next;
         modCount++;
@@ -229,10 +273,13 @@ public class ASDL2223Deque<E> implements Deque<E> {
 
     @Override
     public E removeLast() {
-        // return the last element of the deque
         if (size == 0) {
             throw new NoSuchElementException("The deque is empty.");
         }
+        /*
+         * If the deque has only one element, the first and the last element are
+         * both null
+         */
         if (size == 1) {
             E e = last.item;
             first = null;
@@ -241,6 +288,10 @@ public class ASDL2223Deque<E> implements Deque<E> {
             modCount++;
             return e;
         }
+        /*
+         * If the deque has more than one element, the last element is removed
+         * and the second last element becomes the last element
+         */
         E e = last.item;
         last = last.prev;
         last.next = null;
@@ -251,37 +302,37 @@ public class ASDL2223Deque<E> implements Deque<E> {
 
     @Override
     public E pollFirst() {
-        // return the first element of the deque, or null if the deque is empty
         if (size == 0) {
             return null;
         }
+        // return and remove the first element of the deque
         return removeFirst();
     }
 
     @Override
     public E pollLast() {
-        // return the last element of the deque, or null if the deque is empty
         if (size == 0) {
             return null;
         }
+        // return and remove the last element of the deque
         return removeLast();
     }
 
     @Override
     public E getFirst() {
-        // return the first element of the deque
         if (size == 0) {
             throw new NoSuchElementException("The deque is empty.");
         }
+        // return the first element of the deque
         return first.item;
     }
 
     @Override
     public E getLast() {
-        // return the last element of the deque
         if (size == 0) {
             throw new NoSuchElementException("The deque is empty.");
         }
+        // return the last element of the deque
         return last.item;
     }
 
@@ -315,11 +366,11 @@ public class ASDL2223Deque<E> implements Deque<E> {
 
     @Override
     public boolean add(E e) {
-        // return true if the element is added
         if (e == null) {
             throw new NullPointerException("Null elements are not permitted.");
         }
         this.addLast(e);
+        // return true if the element is added
         return true;
     }
 
