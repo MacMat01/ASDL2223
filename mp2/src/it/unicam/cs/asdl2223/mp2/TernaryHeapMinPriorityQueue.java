@@ -25,9 +25,6 @@ public class TernaryHeapMinPriorityQueue {
      */
     private ArrayList<PriorityQueueElement> heap;
 
-    // TODO implement: possibly insert other private fields that may be needed
-    // for implementation
-
     /**
      * Create an empty queue.
      */
@@ -54,7 +51,6 @@ public class TernaryHeapMinPriorityQueue {
      * @throws NullPointerException if the element passed is null
      */
     public void insert(PriorityQueueElement element) {
-        // TODO implement
         if (element == null) {
             throw new NullPointerException();
         }
@@ -84,7 +80,6 @@ public class TernaryHeapMinPriorityQueue {
      * @throws NoSuchElementException if this min-priority queue is empty
      */
     public PriorityQueueElement minimum() {
-        // TODO implement
         if (this.heap.isEmpty()) {
             throw new NoSuchElementException();
         }
@@ -99,7 +94,6 @@ public class TernaryHeapMinPriorityQueue {
      * @throws NoSuchElementException if this min-priority queue is empty
      */
     public PriorityQueueElement extractMinimum() {
-        // TODO implement
         if (this.heap.isEmpty()) {
             throw new NoSuchElementException();
         }
@@ -171,7 +165,6 @@ public class TernaryHeapMinPriorityQueue {
      *                                  priority of the element
      */
     public void decreasePriority(PriorityQueueElement element, double newPriority) {
-        // TODO implement
         if (element.getHandle() == -1) {
             throw new NoSuchElementException();
         }
@@ -209,8 +202,6 @@ public class TernaryHeapMinPriorityQueue {
     public void clear() {
         this.heap.clear();
     }
-
-    // TODO implement: possibly add private methods for implementation purposes
 
     /*
      * This method is only for JUnit testing purposes.
