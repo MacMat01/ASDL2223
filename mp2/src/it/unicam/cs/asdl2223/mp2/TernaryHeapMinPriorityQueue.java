@@ -72,14 +72,7 @@ public class TernaryHeapMinPriorityQueue {
             this.heap.add(element);
             element.setHandle(size() - 1);
             int i = size() - 1;
-            while (i > 0 && this.heap.get(i).getPriority() < this.heap.get((i - 1) / 3).getPriority()) {
-                PriorityQueueElement temp = this.heap.get(i);
-                this.heap.set(i, this.heap.get((i - 1) / 3));
-                this.heap.set((i - 1) / 3, temp);
-                this.heap.get(i).setHandle(i);
-                this.heap.get((i - 1) / 3).setHandle((i - 1) / 3);
-                i = (i - 1) / 3;
-            }
+            bubbleUp(i);
         }
     }
 
@@ -119,6 +112,46 @@ public class TernaryHeapMinPriorityQueue {
         this.heap.set(this.heap.size() - 1, min);
         this.heap.get(0).setHandle(0);
         this.heap.remove(this.heap.size() - 1);
+        int i = 0;
+        while (i < this.heap.size()) {
+            int minIndex = i;
+            /*
+             * If the first child is smaller than the parent, set the minIndex
+             * to the first child.
+             */
+            if (3 * i + 1 < this.heap.size() && this.heap.get(3 * i + 1).getPriority() < this.heap.get(minIndex).getPriority()) {
+                minIndex = 3 * i + 1;
+            }
+            /*
+             * If the second child is smaller than the parent, set the minIndex
+             * to the second child.
+             */
+            if (3 * i + 2 < this.heap.size() && this.heap.get(3 * i + 2).getPriority() < this.heap.get(minIndex).getPriority()) {
+                minIndex = 3 * i + 2;
+            }
+            /*
+             * If the third child is smaller than the parent, set the minIndex
+             * to the third child.
+             */
+            if (3 * i + 3 < this.heap.size() && this.heap.get(3 * i + 3).getPriority() < this.heap.get(minIndex).getPriority()) {
+                minIndex = 3 * i + 3;
+            }
+            /*
+             * If the minIndex is not the parent, swap the parent with the
+             * smallest child and then set the handle of the parent and the
+             * child.
+             */
+            if (minIndex != i) {
+                PriorityQueueElement temp = this.heap.get(i);
+                this.heap.set(i, this.heap.get(minIndex));
+                this.heap.set(minIndex, temp);
+                this.heap.get(i).setHandle(i);
+                this.heap.get(minIndex).setHandle(minIndex);
+                i = minIndex;
+            } else {
+                break;
+            }
+        }
         return min;
     }
 
@@ -150,6 +183,23 @@ public class TernaryHeapMinPriorityQueue {
          * correct position.
          */
         element.setPriority(newPriority);
+        int i = element.getHandle();
+        bubbleUp(i);
+    }
+
+    private void bubbleUp(int i) {
+        /*
+         * If the parent is smaller than the child, swap the parent and the
+         * child and then set the handle of the parent and the child.
+         */
+        while (i > 0 && this.heap.get(i).getPriority() < this.heap.get((i - 1) / 3).getPriority()) {
+            PriorityQueueElement temp = this.heap.get(i);
+            this.heap.set(i, this.heap.get((i - 1) / 3));
+            this.heap.set((i - 1) / 3, temp);
+            this.heap.get(i).setHandle(i);
+            this.heap.get((i - 1) / 3).setHandle((i - 1) / 3);
+            i = (i - 1) / 3;
+        }
     }
 
     /**
