@@ -59,16 +59,27 @@ public class TernaryHeapMinPriorityQueue {
             throw new NullPointerException();
         }
         /*
-         * Add the element to the end of the heap and then bubble it up to the
-         * correct position.
+         * If heap is empty, add the element and set the handle to 0.
          */
-        this.heap.add(element);
-        element.setHandle(this.heap.size() - 1);
-        int i = this.heap.size() - 1;
-        while (i > 0 && this.heap.get(i).getPriority() < this.heap.get((i - 1) / 3).getPriority()) {
-            this.heap.set(i, this.heap.get((i - 1) / 3));
-            this.heap.set((i - 1) / 3, element);
-            i = (i - 1) / 3;
+        if (size() == 0) {
+            this.heap.add(element);
+            element.setHandle(0);
+            /*
+             * If the heap is not empty, add the element to the end of the heap
+             * and then bubble it up to the correct position using the priority.
+             */
+        } else {
+            this.heap.add(element);
+            element.setHandle(size() - 1);
+            int i = size() - 1;
+            while (i > 0 && this.heap.get(i).getPriority() < this.heap.get((i - 1) / 3).getPriority()) {
+                PriorityQueueElement temp = this.heap.get(i);
+                this.heap.set(i, this.heap.get((i - 1) / 3));
+                this.heap.set((i - 1) / 3, temp);
+                this.heap.get(i).setHandle(i);
+                this.heap.get((i - 1) / 3).setHandle((i - 1) / 3);
+                i = (i - 1) / 3;
+            }
         }
     }
 
