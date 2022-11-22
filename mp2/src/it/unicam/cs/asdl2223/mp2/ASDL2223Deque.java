@@ -417,25 +417,40 @@ public class ASDL2223Deque<E> implements Deque<E> {
 
     @Override
     public boolean remove(Object o) {
-        // return true if the element is removed
         if (o == null) {
             throw new NullPointerException("Null elements are not permitted.");
         }
+        // if the deque is empty, return false
         if (size == 0) {
             return false;
         }
         Node<E> node = first;
         while (node != null) {
             if (node.item.equals(o)) {
+                // if the element is the first element of the deque
                 if (size == 1) {
                     first = null;
                     last = null;
+                    /*
+                     * if the element is the first element of the deque,
+                     * the second element becomes the first element
+                     */
                 } else if (node == first) {
                     first = first.next;
                     first.prev = null;
+                    /*
+                     * if the element is the last element of the deque, the
+                     * previous element becomes the last element
+                     */
                 } else if (node == last) {
                     last = last.prev;
                     last.next = null;
+                    /*
+                     * if the element is in the middle of the deque, the
+                     * previous element becomes the next element of the
+                     * previous element and the next element becomes the
+                     * previous element of the next element
+                     */
                 } else {
                     node.prev.next = node.next;
                     node.next.prev = node.prev;
@@ -446,6 +461,7 @@ public class ASDL2223Deque<E> implements Deque<E> {
             }
             node = node.next;
         }
+        // if the element is not found, return false
         return false;
     }
 
@@ -455,16 +471,22 @@ public class ASDL2223Deque<E> implements Deque<E> {
         if (o == null) {
             throw new NullPointerException("Null elements are not permitted.");
         }
+        // if the deque is empty, return false
         if (size == 0) {
             return false;
         }
         Node<E> node = first;
         while (node != null) {
+            /*
+             * if the element is found, return true, otherwise, continue
+             * searching
+             */
             if (node.item.equals(o)) {
                 return true;
             }
             node = node.next;
         }
+        // if the element is not found, return false
         return false;
     }
 
@@ -509,8 +531,11 @@ public class ASDL2223Deque<E> implements Deque<E> {
 
         private Node<E> lastReturned;
 
+        /*
+         * The number of modifications to the original deque that have been
+         * detected by this iterator.
+         */
         private int expectedModCount;
-
 
         Itr() {
             /*
@@ -523,8 +548,15 @@ public class ASDL2223Deque<E> implements Deque<E> {
         }
 
         public boolean hasNext() {
+            /*
+             * The iterator has a next element if the current node is not null.
+             */
             if (lastReturned == null) {
                 return node != null;
+                /*
+                 * If the last returned element was the last element of the
+                 * deque, the iterator does not have a next element.
+                 */
             } else {
                 return lastReturned.next != null;
             }
@@ -581,6 +613,10 @@ public class ASDL2223Deque<E> implements Deque<E> {
 
         private Node<E> lastReturned;
 
+        /*
+         * The number of modifications to the original deque that have been
+         * detected by this iterator.
+         */
         private int expectedModCount;
 
         DescItr() {
@@ -594,8 +630,15 @@ public class ASDL2223Deque<E> implements Deque<E> {
         }
 
         public boolean hasNext() {
+            /*
+             * The iterator has a next element if the current node is not null.
+             */
             if (lastReturned == null) {
                 return node != null;
+                /*
+                 * If the last returned element was the first element of the
+                 * deque, the iterator does not have a next element.
+                 */
             } else {
                 return lastReturned.prev != null;
             }
