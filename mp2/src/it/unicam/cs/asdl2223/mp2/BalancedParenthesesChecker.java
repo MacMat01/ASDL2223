@@ -43,31 +43,64 @@ public class BalancedParenthesesChecker {
      *                                  and newline '\n'
      */
     public boolean check(String s) {
+        // First of all the stack is cleared
         stack.clear();
+        // Check if s is null
         if (s.isEmpty()) {
             return true;
         }
+        /*
+         * Check if s contains only the characters '(', ')', '[', ']', '{', '}',
+         * white space ' ', tab '\t' and newline '\n'
+         */
         if (!s.matches("^[\\s\\t\\n\\(\\)\\[\\]\\{\\}]*$")) {
             throw new IllegalArgumentException();
         }
+        /*
+         * Check if s contains a balanced parentheses sequence
+         */
         for (int i = 0; i < s.length(); i++) {
+            /*
+             * If the character is a white space, a tab or a newline, it is
+             * ignored
+             */
             if (s.charAt(i) == '(' || s.charAt(i) == '[' || s.charAt(i) == '{') {
                 stack.addFirst(s.charAt(i));
+                /*
+                 * If the character is a closing parentheses, it is checked if
+                 * it is the closing parentheses of the last opening parentheses
+                 * in the stack
+                 */
             } else if (s.charAt(i) == ')' || s.charAt(i) == ']' || s.charAt(i) == '}') {
+                // If the stack is empty, the string is not balanced
                 if (stack.isEmpty()) {
                     return false;
                 }
                 if (s.charAt(i) == ')' && stack.getFirst() == '(') {
+                    /*
+                     * If the character is the closing parentheses of the last
+                     * opening parentheses in the stack, it is removed from the
+                     * stack
+                     */
                     stack.removeFirst();
                 } else if (s.charAt(i) == ']' && stack.getFirst() == '[') {
                     stack.removeFirst();
                 } else if (s.charAt(i) == '}' && stack.getFirst() == '{') {
                     stack.removeFirst();
                 } else {
+                    /*
+                     * If the character is not the closing parentheses of the
+                     * last opening parentheses in the stack, the string is not
+                     * balanced
+                     */
                     return false;
                 }
             }
         }
+        /*
+         * If the stack is empty, the string is balanced, otherwise it is not
+         * balanced
+         */
         return stack.isEmpty();
     }
 
