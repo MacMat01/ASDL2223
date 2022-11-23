@@ -1,0 +1,2 @@
+SeqId,BubbleSortNComp,BubbleSortTns,InsertionSortNComp,InsertionSortTns,MergeSortNComp,MergeSortTns,QuickSortNComp,QuickSortTns,QuickSortRandomNComp,QuickSortRandomTns,HeapSortNComp,HeapSortTns,
+seq_50_0,1225,948500,630,74400,209,266600,

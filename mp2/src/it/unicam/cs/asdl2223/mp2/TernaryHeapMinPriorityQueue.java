@@ -67,8 +67,7 @@ public class TernaryHeapMinPriorityQueue {
         } else {
             this.heap.add(element);
             element.setHandle(size() - 1);
-            int i = size() - 1;
-            bubbleUp(i);
+            bubbleUp(size() - 1);
         }
     }
 
@@ -83,6 +82,7 @@ public class TernaryHeapMinPriorityQueue {
         if (this.heap.isEmpty()) {
             throw new NoSuchElementException();
         }
+        // Return the first element of the heap, which is the minimum.
         return this.heap.get(0);
     }
 
@@ -146,6 +146,7 @@ public class TernaryHeapMinPriorityQueue {
                 break;
             }
         }
+        // Return the minimum element.
         return min;
     }
 
@@ -176,8 +177,7 @@ public class TernaryHeapMinPriorityQueue {
          * correct position.
          */
         element.setPriority(newPriority);
-        int i = element.getHandle();
-        bubbleUp(i);
+        bubbleUp(element.getHandle());
     }
 
     private void bubbleUp(int i) {
