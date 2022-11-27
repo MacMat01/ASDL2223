@@ -67,7 +67,7 @@ public class TernaryHeapMinPriorityQueue {
         } else {
             this.heap.add(element);
             element.setHandle(size() - 1);
-            bubbleUp(size() - 1);
+            heapUp(size() - 1);
         }
     }
 
@@ -177,10 +177,10 @@ public class TernaryHeapMinPriorityQueue {
          * correct position.
          */
         element.setPriority(newPriority);
-        bubbleUp(element.getHandle());
+        heapUp(element.getHandle());
     }
 
-    private void bubbleUp(int i) {
+    private void heapUp(int i) {
         /*
          * If the parent is smaller than the child, swap the parent and the
          * child and then set the handle of the parent and the child.
