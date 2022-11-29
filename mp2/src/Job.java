@@ -1,5 +1,3 @@
-package it.unicam.cs.asdl2223.mp2;
-
 /**
  * Semplice classe i cui oggetti rappresentano dei Job da eseguire su un
  * processore entro una certa scadenza, rappresentata da un double. Un double

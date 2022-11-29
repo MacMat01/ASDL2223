@@ -1,5 +1,3 @@
-package it.unicam.cs.asdl2223.mp2;
-
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 

@@ -1,7 +1,6 @@
 /**
  * 
  */
-package it.unicam.cs.asdl2223.mp2;
 
 /**
  * Interface to enable generic objects to be inserted into a "dynamic" priority

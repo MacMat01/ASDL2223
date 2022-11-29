@@ -1,5 +1,3 @@
-package it.unicam.cs.asdl2223.mp2;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;

@@ -1,5 +1,3 @@
-package it.unicam.cs.asdl2223.mp2;
-
 /**
  * An object of this class is an actor that uses an ASDL2223Deque<Character> as
  * a Stack in order to check that a sequence containing the following

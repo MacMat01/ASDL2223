@@ -1,5 +1,3 @@
-package it.unicam.cs.asdl2223.mp2;
-
 /**
  * Una semplice classe che fa lo scheduling di jobs utilizzando una coda di
  * min-priorità realizzata dalla classe TernaryHeapMinPriorityQueue. La priorità

@@ -1,7 +1,6 @@
 /**
  *
  */
-package it.unicam.cs.asdl2223.mp2;
 
 import java.util.Collection;
 import java.util.ConcurrentModificationException;
