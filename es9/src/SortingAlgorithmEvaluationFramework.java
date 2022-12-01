@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
@@ -12,20 +13,23 @@ import java.util.Random;
  * nanosecondi di ogni algoritmo su ogni sequenza sono scritti su un file .csv
  * (Comma Separated Values). In un altro file .csv sono riportate le sequenze
  * generate.
- * <p>
+ * 
  * Il main può essere chiamato con il nome della directory di destinazione dei
  * file come parametro di linea di comando. Se non è presente nessun parametro
  * allora si assume la directory corrente.
- *
+ * 
  * @author Luca Tesei
+ *
  */
 public class SortingAlgorithmEvaluationFramework {
 
     @SuppressWarnings("unchecked")
     public static void main(String[] args) {
         String dirName = null;
-        if (args.length > 0) dirName = args[0];
-        else dirName = ".";
+        if (args.length > 0)
+            dirName = args[0];
+        else
+            dirName = ".";
         // Variabili per il conteggio del tempo di esecuzione
         long startTimeNano = 0;
         long elapsedTimeNano = 0;
@@ -34,9 +38,11 @@ public class SortingAlgorithmEvaluationFramework {
         PrintStream sequences = null;
         try {
             o = new PrintStream(new File(dirName + "/" + "evalfram.csv"));
-            sequences = new PrintStream(new File(dirName + "/" + "sequences.csv"));
+            sequences = new PrintStream(
+                    new File(dirName + "/" + "sequences.csv"));
         } catch (FileNotFoundException e) {
-            System.out.println("Errore creazione file di ouput" + dirName + "/" + "xxxx.csv");
+            System.out.println("Errore creazione file di ouput" + dirName + "/"
+                    + "xxxx.csv");
             System.exit(1);
         }
         // Creo una lista di algoritmi generici di ordinamento
@@ -51,7 +57,8 @@ public class SortingAlgorithmEvaluationFramework {
         // Creo una lista di liste per contenere le copie delle liste da
         // ordinare, una per ogni algoritmo
         List<List<Integer>> lists = new ArrayList<List<Integer>>();
-        for (@SuppressWarnings("unused") SortingAlgorithm<Integer> a : algs)
+        for (@SuppressWarnings("unused")
+        SortingAlgorithm<Integer> a : algs)
             lists.add(new ArrayList<Integer>());
         // Inserisco la linea di intestazione dei dati nei file csv
         o.print("SeqId,");
@@ -79,7 +86,8 @@ public class SortingAlgorithmEvaluationFramework {
                 sequences.print("seq" + "_" + n + "_" + count + ",");
                 // Genero la sequenza
                 for (int j = 0; j < n; j++) {
-                    Integer x = new Integer(randomGenerator.nextInt(SortingAlgorithmEvaluationFrameworkParameters.MAX_GENERATED_INTEGER));
+                    Integer x = new Integer(randomGenerator.nextInt(
+                            SortingAlgorithmEvaluationFrameworkParameters.MAX_GENERATED_INTEGER));
                     // Aggiungo l'elemento a tutte le liste
                     for (List<Integer> l : lists)
                         l.add(x);
@@ -87,7 +95,8 @@ public class SortingAlgorithmEvaluationFramework {
                     sequences.print(x.intValue() + ",");
                 } // Sequenza generata
                 sequences.print("\n"); // Fine riga
-                System.out.println("Generata sequenza " + "seq" + "_" + n + "_" + count);
+                System.out.println(
+                        "Generata sequenza " + "seq" + "_" + n + "_" + count);
                 // Incremento il puntatore della sequenza
                 count++;
                 // Indice associato ad ogni algoritmo per fare get sulla list
@@ -98,12 +107,14 @@ public class SortingAlgorithmEvaluationFramework {
                 for (SortingAlgorithm<Integer> a : algs) {
                     // Clono la lista corrente per l'eventuale messaggio di
                     // errore
-                    ArrayList<Integer> cloned = ((ArrayList<Integer>) lists.get(idx));
+                    ArrayList<Integer> cloned = ((ArrayList<Integer>) lists
+                            .get(idx));
                     cloned = (ArrayList<Integer>) cloned.clone();
                     // Guardo il tempo corrente in nanosecondi
                     startTimeNano = System.nanoTime();
                     // Chiamo l'algoritmo di ordinamento
-                    SortingAlgorithmResult<Integer> result = a.sort(lists.get(idx));
+                    SortingAlgorithmResult<Integer> result = a
+                            .sort(lists.get(idx));
                     // Registro il tempo impiegato dall'algoritmo
                     elapsedTimeNano = System.nanoTime() - startTimeNano;
                     // Controllo se l'ordinamento è stato effettuato
@@ -112,8 +123,16 @@ public class SortingAlgorithmEvaluationFramework {
                         // Stampo un messaggio di errore e lancio una eccezione
                         o.close();
                         sequences.close();
-                        System.out.println("L'algoritmo " + a.getName() + " non ha ordinato correttamente la sequenza " + cloned.toString() + "\nSequenza ordinata non corretta risultante: " + result.toString());
-                        throw new SortingException("L'algoritmo " + a.getName() + " non ha ordinato correttamente la sequenza " + cloned.toString() + "\nSequenza ordinata non corretta risultante: " + result.toString());
+                        System.out.println("L'algoritmo " + a.getName()
+                                + " non ha ordinato correttamente la sequenza "
+                                + cloned.toString()
+                                + "\nSequenza ordinata non corretta risultante: "
+                                + result.toString());
+                        throw new SortingException("L'algoritmo " + a.getName()
+                                + " non ha ordinato correttamente la sequenza "
+                                + cloned.toString()
+                                + "\nSequenza ordinata non corretta risultante: "
+                                + result.toString());
                         // Il framework termina con errore
                     }
                     // Scrivo sul file di output
