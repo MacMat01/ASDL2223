@@ -1,9 +1,10 @@
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TernaryHeapMinPriorityQueueTest {
 

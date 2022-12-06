@@ -1,8 +1,4 @@
-import java.util.GregorianCalendar;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Un oggetto della classe aula rappresenta una certa aula con le sue facilities

@@ -2,11 +2,7 @@
  *
  */
 
-import java.util.Collection;
-import java.util.ConcurrentModificationException;
-import java.util.Deque;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 /**
  * Implementation of the Java SE Double-ended Queue (Deque) interface

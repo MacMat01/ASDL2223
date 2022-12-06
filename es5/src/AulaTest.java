@@ -2,17 +2,12 @@
  *
  */
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import java.util.*;
 
 import static java.time.Duration.ofMillis;
-
-import java.util.GregorianCalendar;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Classe di test per la classe Aula che utilizza le Collections.

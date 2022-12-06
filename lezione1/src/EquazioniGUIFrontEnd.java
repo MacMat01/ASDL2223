@@ -2,7 +2,7 @@
  * 
  */
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
  * Graphical User Interface (GUI) in Swing per permettere l'uso interattivo

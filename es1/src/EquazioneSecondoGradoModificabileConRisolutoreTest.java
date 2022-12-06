@@ -2,10 +2,10 @@
  *
  */
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Template: Luca Tesei, Implementation: Collettiva da Esercitazione a

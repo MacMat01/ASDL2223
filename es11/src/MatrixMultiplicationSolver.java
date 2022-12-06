@@ -49,7 +49,6 @@ public class MatrixMultiplicationSolver {
      * dinamica.
      */
     private void solve() {
-        // TODO implementare
         int n = p.size() - 1;
         /*
          * Inizializzo la diagonale principale della matrice dei costi minimi
@@ -123,8 +122,18 @@ public class MatrixMultiplicationSolver {
      * appositamente durante il processo di calcolo del costo minimo
      */
     private String traceBack(int i, int j) {
-        // TODO implementare ricorsivamente
-        return null;
+        /*
+         * Se la parentesizzazione contiene una sola matrice, restituisco
+         * "A_{i}".
+         */
+        if (i == j) {
+            return "A_{" + i + "}";
+            /*
+             * Se la parentesizzazione contiene due matrici, restituisco
+             * "(A_{i} x A_{j})".
+             */
+        } else {
+            return "(" + traceBack(i, b[i][j]) + " x " + traceBack(b[i][j] + 1, j) + ")";
+        }
     }
-
 }

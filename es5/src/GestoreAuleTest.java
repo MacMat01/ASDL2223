@@ -2,13 +2,13 @@
  *
  */
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Classe di test per GestoreAule
