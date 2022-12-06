@@ -1,7 +1,7 @@
 import java.util.List;
 
 /**
- * Un sover prende una certa sequenza di matrici da moltiplicare e calcola una
+ * Un solver prende una certa sequenza di matrici da moltiplicare e calcola una
  * parentesizzazione ottima, cioè che minimizza il numero di moltiplicazioni
  * scalari necessarie per moltiplicare tutte le matrici.
  *
@@ -50,6 +50,44 @@ public class MatrixMultiplicationSolver {
      */
     private void solve() {
         // TODO implementare
+        int n = p.size() - 1;
+        /*
+         * Inizializzo la diagonale principale della matrice dei costi minimi
+         * con 0, in quanto non è necessario moltiplicare una matrice per se stessa.
+         */
+        for (int i = 0; i < n; i++) {
+            m[i][i] = 0;
+        }
+        /*
+         * Calcolo i costi minimi per le parentesizzazioni di matrici di dimensioni
+         * crescenti, partendo da 2 (perché la diagonale principale è già stata
+         * inizializzata).
+         */
+        for (int l = 2; l <= n; l++) {
+            /*
+             * Per ogni parentesizzazione di matrici di dimensione l, calcolo il
+             * costo minimo e la scelta di k che corrisponde a tale costo.
+             */
+            for (int i = 0; i < n - l + 1; i++) {
+                /*
+                 * Calcolo il costo minimo per la parentesizzazione di matrici
+                 * che inizia in i e finisce in j.
+                 */
+                int j = i + l - 1;
+                m[i][j] = Integer.MAX_VALUE;
+                /*
+                 * Per ogni possibile scelta di k, calcolo il costo della
+                 * parentesizzazione e lo confronto con il costo minimo attuale.
+                 */
+                for (int k = i; k < j; k++) {
+                    int q = m[i][k] + m[k + 1][j] + p.get(i) * p.get(k + 1) * p.get(j + 1);
+                    if (q < m[i][j]) {
+                        m[i][j] = q;
+                        b[i][j] = k;
+                    }
+                }
+            }
+        }
     }
 
     /**
