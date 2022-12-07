@@ -218,7 +218,13 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
         if (edge == null) {
             throw new NullPointerException();
         }
-        if (!this.adjacentLists.containsKey(edge.getNode1()) || !this.adjacentLists.containsKey(edge.getNode2())) {
+        if (!this.adjacentLists.containsKey(edge.getNode1())) {
+            throw new IllegalArgumentException();
+        }
+        if (!this.adjacentLists.containsKey(edge.getNode2())) {
+            throw new IllegalArgumentException();
+        }
+        if (!edge.isDirected()) {
             throw new IllegalArgumentException();
         }
         /*
@@ -227,10 +233,6 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
         if (this.adjacentLists.get(edge.getNode1()).contains(edge)) {
             return false;
         }
-        /*
-         * Altrimenti, aggiunge l'arco all'insieme degli archi uscenti del nodo
-         * di partenza.
-         */
         this.adjacentLists.get(edge.getNode1()).add(edge);
         return true;
     }
