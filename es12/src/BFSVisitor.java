@@ -28,8 +28,6 @@ public class BFSVisitor<L> {
      *                                  al grafo dato
      */
     public void BFSVisit(Graph<L> g, GraphNode<L> source) {
-        //TODO implementare
-        // NOTA: chiamare il metodo visitNode quando un nodo passa da grigio a nero
         if (g == null || source == null) {
             throw new NullPointerException();
         }

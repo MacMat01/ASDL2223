@@ -24,10 +24,6 @@ public class DFSVisitor<L> {
      * @throws NullPointerException se il grafo passato è null
      */
     public void DFSVisit(Graph<L> g) {
-        //TODO implementare
-        // NOTA: inizializza il grafo e chiama la recDFS sui nodi in un ordine
-        // qualsiasi per calcolare la "foresta" DFS
-
         if (g == null) {
             throw new NullPointerException();
         }
@@ -36,8 +32,9 @@ public class DFSVisitor<L> {
          */
         for (GraphNode<L> n : g.getNodes()) {
             n.setColor(GraphNode.COLOR_WHITE);
-            n.setIntegerDistance(Integer.MAX_VALUE);
             n.setPrevious(null);
+            n.setEnteringTime(-1);
+            n.setExitingTime(-1);
         }
         /*
          * Visita in profondità
@@ -50,19 +47,16 @@ public class DFSVisitor<L> {
         }
     }
 
-    /*
+    /**
      * Esegue la DFS ricorsivamente sul nodo passato.
      *
      * @param g il grafo
-     *
      * @param u il nodo su cui parte la DFS
      */
     protected void recDFS(Graph<L> g, GraphNode<L> u) {
-        //TODO implementare ricorsivamente
-        // NOTA: chiamare il metodo visitNode alla "scoperta" di un nuovo nodo
-
         u.setColor(GraphNode.COLOR_GREY);
-        visitNode(u);
+        time++;
+        u.setEnteringTime(time);
         /*
          * Visita ricorsiva dei nodi adiacenti
          */
@@ -77,7 +71,8 @@ public class DFSVisitor<L> {
          */
         u.setColor(GraphNode.COLOR_BLACK);
         time++;
-        u.setIntegerDistance(time);
+        u.setExitingTime(time);
+        visitNode(u);
     }
 
     /**

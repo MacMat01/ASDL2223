@@ -55,7 +55,6 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
 
     @Override
     public int nodeCount() {
-        // TODO implementare
         if (this.adjacentLists.isEmpty()) {
             return 0;
         }
@@ -68,7 +67,6 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
 
     @Override
     public int edgeCount() {
-        // TODO implementare
         if (this.adjacentLists.isEmpty()) {
             return 0;
         }
@@ -92,13 +90,11 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
 
     @Override
     public Set<GraphNode<L>> getNodes() {
-        // TODO implementare
         return this.adjacentLists.keySet();
     }
 
     @Override
     public boolean addNode(GraphNode<L> node) {
-        // TODO implementare
         if (node == null) {
             throw new NullPointerException();
         }
@@ -117,7 +113,6 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
 
     @Override
     public boolean containsNode(GraphNode<L> node) {
-        // TODO implementare
         if (node == null) {
             throw new NullPointerException();
         }
@@ -126,7 +121,6 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
 
     @Override
     public GraphNode<L> getNodeOf(L label) {
-        // TODO implementare
         if (label == null) {
             throw new NullPointerException();
         }
@@ -155,7 +149,6 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
 
     @Override
     public Set<GraphNode<L>> getAdjacentNodesOf(GraphNode<L> node) {
-        // TODO implementare
         if (node == null) {
             throw new NullPointerException();
         }
@@ -175,7 +168,6 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
 
     @Override
     public Set<GraphNode<L>> getPredecessorNodesOf(GraphNode<L> node) {
-        // TODO implementare
         if (node == null) {
             throw new NullPointerException();
         }
@@ -200,7 +192,6 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
 
     @Override
     public Set<GraphEdge<L>> getEdges() {
-        // TODO implementare
         /*
          * Per ogni nodo del grafo, aggiunge tutti gli archi uscenti del nodo
          * nell'insieme da restituire.
@@ -214,7 +205,6 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
 
     @Override
     public boolean addEdge(GraphEdge<L> edge) {
-        // TODO implementare
         if (edge == null) {
             throw new NullPointerException();
         }
@@ -244,7 +234,6 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
 
     @Override
     public boolean containsEdge(GraphEdge<L> edge) {
-        // TODO implementare
         if (edge == null) {
             throw new NullPointerException();
         }
@@ -256,7 +245,6 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
 
     @Override
     public Set<GraphEdge<L>> getEdgesOf(GraphNode<L> node) {
-        // TODO implementare
         if (node == null) {
             throw new NullPointerException();
         }
@@ -268,7 +256,6 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
 
     @Override
     public Set<GraphEdge<L>> getIngoingEdgesOf(GraphNode<L> node) {
-        // TODO implementare
         if (node == null) {
             throw new NullPointerException();
         }

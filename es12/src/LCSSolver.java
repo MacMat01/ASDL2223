@@ -60,7 +60,6 @@ public class LCSSolver {
      * prima volta il problema verrà considerato risolto.
      */
     public void solve() {
-        // TODO implementare
         if (!this.isSolved) {
             // inizializzo la matrice
             for (int i = 0; i < this.x.length(); i++)
@@ -119,7 +118,6 @@ public class LCSSolver {
      * soluzione ottima, ma va usata la stessa matrice m
      */
     private String traceBack(int i, int j) {
-        // TODO implementare ricorsivamente
         if (i == 0 || j == 0) {
             return "";
         } else if (x.charAt(i - 1) == y.charAt(j - 1)) {
@@ -154,7 +152,6 @@ public class LCSSolver {
      * @return true se z è sottosequenza di w, false altrimenti
      */
     private static boolean isSubsequence(String z, String w) {
-        // TODO implementare ricorsivamente
         if (z.length() == 0) {
             return true;
         } else if (w.length() == 0) {
