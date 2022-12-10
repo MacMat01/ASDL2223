@@ -7,7 +7,6 @@
       <module fileurl="file://$PROJECT_DIR$/es10/es10.iml" filepath="$PROJECT_DIR$/es10/es10.iml" />
       <module fileurl="file://$PROJECT_DIR$/es11/es11.iml" filepath="$PROJECT_DIR$/es11/es11.iml" />
       <module fileurl="file://$PROJECT_DIR$/es12/es12.iml" filepath="$PROJECT_DIR$/es12/es12.iml" />
-      <module fileurl="file://$PROJECT_DIR$/es12oldsol/es12oldsol.iml" filepath="$PROJECT_DIR$/es12oldsol/es12oldsol.iml" />
       <module fileurl="file://$PROJECT_DIR$/es2/es2.iml" filepath="$PROJECT_DIR$/es2/es2.iml" />
       <module fileurl="file://$PROJECT_DIR$/es3/es3.iml" filepath="$PROJECT_DIR$/es3/es3.iml" />
       <module fileurl="file://$PROJECT_DIR$/es4/es4.iml" filepath="$PROJECT_DIR$/es4/es4.iml" />
@@ -21,6 +20,7 @@
       <module fileurl="file://$PROJECT_DIR$/lezioni/lezioni.iml" filepath="$PROJECT_DIR$/lezioni/lezioni.iml" />
       <module fileurl="file://$PROJECT_DIR$/mp1/mp1.iml" filepath="$PROJECT_DIR$/mp1/mp1.iml" />
       <module fileurl="file://$PROJECT_DIR$/mp2/mp2.iml" filepath="$PROJECT_DIR$/mp2/mp2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mp3/mp3.iml" filepath="$PROJECT_DIR$/mp3/mp3.iml" />
     </modules>
   </component>
 </project>
