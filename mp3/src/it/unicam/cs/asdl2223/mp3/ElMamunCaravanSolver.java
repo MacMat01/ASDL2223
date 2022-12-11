@@ -39,14 +39,14 @@ public class ElMamunCaravanSolver {
         if (expression == null) throw new NullPointerException("Creazione di solver con expression null");
         this.expression = expression;
         // TODO implementare
-        /*
-         * Inizializzare la tabella delle soluzioni ottimali e quella di traceback
-         * con dimensioni sufficienti per contenere tutte i sotto problemi
-         * dell'espressione.
-         */
-        this.table = new Integer[expression.size()][expression.size()];
-        this.tracebackTable = new Integer[expression.size()][expression.size()];
+
+        // Inizializzo il flag solved a false
         this.solved = false;
+
+        // Inizializzo la tabella table e tracebackTable con dimensione appropriata
+        int numOperands = expression.size() / 2 + 1;
+        this.table = new Integer[numOperands][numOperands + 1];
+        this.tracebackTable = new Integer[numOperands][numOperands + 1];
     }
 
     /**
