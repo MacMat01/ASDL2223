@@ -54,18 +54,25 @@ public class ElMamunCaravanSolver {
             if (c == '+' || c == '-' || c == '*' || c == '/') {
                 // Il corrente carattere è un operatore
                 // Lo aggiungo all'array operators e incremento l'indice
-                operators[operatorIndex++] = c;
+                operators[operatorIndex] = c;
+                operatorIndex++;
+
             } else if (c >= '0' && c <= '9') {
                 // Il corrente carattere è un operando
                 // Faccio il parsing del valore dell'operando dall'espressione e lo aggiungo all'array operandValues
                 // e incremento l'indice
                 int operandValue = Character.getNumericValue(c);
-                while (i + 1 < expression.size() && expression.get(i + 1).toString().charAt(i) >= '0' && expression.get(i + 1).toString().charAt(i) <= '9') {
-                    operandValue = operandValue * 10 + Character.getNumericValue(expression.get(++i).toString().charAt(i));
+                while (i + 1 < expression.size() && expression.get(i + 1).toString().charAt(0) >= '0' && expression.get(i + 1).toString().charAt(0) <= '9') {
+                    operandValue = operandValue * 10 + Character.getNumericValue(expression.get(++i).toString().charAt(0));
                 }
-                operandValues[operandIndex++] = operandValue;
+                operandValues[operandIndex] = operandValue;
+                operandIndex++;
             }
         }
+
+        // Inizializzo la tabella table e tracebackTable
+        this.table = new Integer[operandValues.length][operandValues.length];
+        this.tracebackTable = new Integer[operandValues.length][operandValues.length];
     }
 
     /**
@@ -93,10 +100,7 @@ public class ElMamunCaravanSolver {
             throw new NullPointerException("La funzione obiettivo è null");
         }
 
-        // Inizializzo la tabella table e tracebackTable con dimensione appropriata
         int numOperands = operandValues.length;
-        this.table = new Integer[numOperands][numOperands + 1];
-        this.tracebackTable = new Integer[numOperands][numOperands + 1];
 
         // Imposto il caso base per la tabella table
         // Il caso base corrisponde ad una espressione con un singolo operando
