@@ -70,50 +70,76 @@ public class ElMamunCaravanSolver {
         // TODO implementare
         if (function == null) throw new NullPointerException("Funzione obiettivo nulla");
         if (this.solved) return;
-        List<Integer> candidates = new ArrayList<>();
-        for (int i = 0; i < this.expression.size(); i++) {
-            for (int j = 0; j < this.expression.size(); j++) {
-                if (i == j && this.expression.get(i).getType() == ItemType.DIGIT) {
-                    this.table[i][j] = Integer.parseInt(this.expression.get(i).toString());
-                    this.tracebackTable[i][j] = i;
-                } else if (i < j && this.expression.get(i).getType() == ItemType.DIGIT && this.expression.get(j).getType() == ItemType.DIGIT) {
-                    candidates.add(this.table[i][i + k(i, j)]);
-                    candidates.add(Integer.parseInt(this.expression.get(i).toString()) + k(i, j) + 1);
-                    candidates.add(this.table[i + k(i, j) + 2][j]);
-                    this.table[i][j] = getBest(candidates);
+
+        // Inizializzo la tabella delle soluzioni ottimali
+        int numOperands = expression.size() / 2 + 1;
+        this.table = new Integer[numOperands][numOperands];
+        this.tracebackTable = new Integer[numOperands][numOperands];
+
+        // Il primo passo è semplicemente il valore del primo operando
+        for (int i = 0; i < numOperands; i++) {
+            table[i][i] = operandValue(i);
+        }
+
+        // Per ogni lunghezza di sotto-espressione iniziando dal secondo operando
+        for (int i = 1; i < numOperands; i++) {
+            // Calcolo il risultato massimo dell'espressione aritmetica
+            // quando parentesizzata in questo passaggio per ogni possibile coppia di operandi
+            for (int j = 0; j < numOperands - i; j++) {
+                int maxResultAtStage = Integer.MIN_VALUE;
+                int prevStageIndex = 0;
+
+                // Controllo il risultato massimo dell'espressione aritmetica
+                // quando parentesizzato in questo passaggio usando l'operando disponibile
+                for (int k = j; k < j + i; k++) {
+                    int resultAtStage = 0;
+
+                    // Calcolo il risultato dell'espressione aritmetica
+                    // quando parentesizzato in questo passaggio usando la coppia di operandi
+                    int leftOperand = table[j][k];
+                    int rightOperand = table[k + 1][j + i];
+                    char operator = this.expression.get(2 * k + 1).getValue().toString().charAt(0);
+
+                    if (operator == '+') {
+                        resultAtStage = leftOperand + rightOperand;
+                    } else if (operator == '-') {
+                        resultAtStage = leftOperand - rightOperand;
+                    } else if (operator == '*') {
+                        resultAtStage = leftOperand * rightOperand;
+                    } else if (operator == '/') {
+                        resultAtStage = leftOperand / rightOperand;
+                    }
+
+                    // Aggiorno il risultato massimo e l'indice del passaggio precedente
+                    // se il risultato calcolato è maggiore del precedente
+                    if (resultAtStage > maxResultAtStage) {
+                        maxResultAtStage = resultAtStage;
+                        prevStageIndex = k;
+                    }
+
+                    // Aggiorno la tabella delle soluzioni ottimali e quella di traceback
+                    table[j][j + i] = maxResultAtStage;
+                    tracebackTable[j][j + i] = prevStageIndex;
                 }
             }
+            this.solved = true;
         }
-    }
-
-
-    private int k(int i, int j) {
-        // TODO implementare
-        int k = 0;
-        if (k + i + 2 <= j) {
-            return k;
-        }
-        throw new IllegalStateException("k non rispetta i vincoli");
     }
 
 
     /**
-     * Returns the optimal value of the expression of this solver, according to
-     * the logic of the objective function used in the last call to the solve
-     * method.
+     * Returns the value of the operand at a given position in the expression.
      *
-     * @param candidates The list of candidate values
-     * @return the optimal value of the expression of this solver
-     * @throws NullPointerException if candidates is null
-     * @see #solve(ObjectiveFunction)
+     * @param i the position of the operand in the expression
+     * @return the value of the operand at the given position
+     * @throws IllegalArgumentException if the position is not a valid position
+     *                                  for an operand in the expression
      */
-    private Integer getBest(List<Integer> candidates) {
-        // TODO implementare
-        if (candidates == null) throw new NullPointerException("Lista di candidati nulla");
-        if (candidates.isEmpty()) return null;
-        Integer best = candidates.get(0);
-
-        return best;
+    private Integer operandValue(int i) {
+        // TODO implementare (macmat)
+        if (i < 0 || i >= expression.size() / 2 + 1)
+            throw new IllegalArgumentException("Posizione non valida per un operando");
+        return Integer.parseInt(expression.get(2 * i).toString());
     }
 
     /**
@@ -126,8 +152,13 @@ public class ElMamunCaravanSolver {
      */
     public int getOptimalSolution() {
         // TODO implementare
-        if (!this.solved) throw new IllegalStateException("Il problema non è stato risolto");
-        return this.table[0][this.expression.size() - 1];
+        if (!this.solved) {
+            throw new IllegalStateException("Il problema non è stato risolto");
+        }
+
+        // Restituisco il valore ottimale per l'espressione
+        int numOperands = operandValue(expression.size() / 2 + 1);
+        return table[0][numOperands - 1];
     }
 
     /**
@@ -147,8 +178,67 @@ public class ElMamunCaravanSolver {
      */
     public String getOptimalParenthesization() {
         // TODO implementare
-        if (!this.solved) throw new IllegalStateException("Il problema non è stato risolto");
-        return this.traceback(0, this.expression.size() - 1);
+        if (!this.solved) {
+            throw new IllegalStateException("Il problema non è stato risolto");
+        }
+        int numOperands = operandValue(expression.size() / 2 + 1);
+
+        // Creo un oggetto StringBuilder per costruire la stringa di parentesi
+        StringBuilder parenthesization = new StringBuilder();
+
+        // Se l'espressione contiene solo un operando, ritorno quell'operando come una stringa
+        if (numOperands == 1) {
+            return String.valueOf(operandValue(0));
+        }
+
+        // Uso un metodo ricorsivo di comodo per costruire la stringa di parentesi
+        // iniziando dall'ultima posizione della tabella di traceback
+        // passando l'indice del passaggio precedente
+        buildParenthesization(0, numOperands - 1, parenthesization);
+
+        // Restituisco la stringa di parentesi
+        return parenthesization.toString();
+    }
+
+    /**
+     * Metodo di comodo per costruire la stringa di parentesi
+     *
+     * @param i                indice dell'operando di sinistra
+     * @param j                indice dell'operando di destra
+     * @param parenthesization stringa di parentesi
+     */
+    private void buildParenthesization(int i, int j, StringBuilder parenthesization) {
+        // TODO implementare (macmat)
+
+        // Se l'operando di sinistra e quello di destra sono uguali, allora
+        // l'espressione è composta da un solo operando
+        if (i == j) {
+            parenthesization.append(operandValue(i));
+            return;
+        } else {
+            // Altrimenti, aggiungo la parentesi di apertura
+            parenthesization.append("(");
+        }
+
+        // Prendo l'indice del passaggio precedente dalla tabella di traceback
+        int prevStageIndex = tracebackTable[i][j];
+
+        // Divido l'espressione in due parti e chiamo ricorsivamente il metodo
+        int leftStart = i;
+        int leftEnd = tracebackTable[i][j];
+        int rightStart = leftEnd + 1;
+        int righEnd = j;
+
+        // Chiamo ricorsivamente il mentodo per costruire la stringa di parentesi
+        // per la parte di sinistra e per quella di destra
+        buildParenthesization(leftStart, leftEnd, parenthesization);
+        buildParenthesization(rightStart, righEnd, parenthesization);
+
+        // Appendo l'operatore corrispondente alla stringa di parentesi
+        parenthesization.append(expression.get(2 * prevStageIndex + 1).getValue());
+
+        // Appendo la parentesi di chiusura
+        parenthesization.append(")");
     }
 
     /**
