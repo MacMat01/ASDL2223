@@ -26,8 +26,9 @@ public class ElMamunCaravanSolver {
     // flag indicating that the problem has been solved at least once
     private boolean solved;
 
-    // variabile usata per il metodo getBest
-    private int k = 0;
+    private int operandValues[];
+
+    private char operators[];
 
     /**
      * Create a solver for a specific expression.
@@ -43,10 +44,28 @@ public class ElMamunCaravanSolver {
         // Inizializzo il flag solved a false
         this.solved = false;
 
-        // Inizializzo la tabella table e tracebackTable con dimensione appropriata
-        int numOperands = expression.size() / 2 + 1;
-        this.table = new Integer[numOperands][numOperands + 1];
-        this.tracebackTable = new Integer[numOperands][numOperands + 1];
+        // Inizializzo operandValues e operators facendo il parsing dell'espressione
+        this.operandValues = new int[expression.size() / 2 + 1];
+        this.operators = new char[expression.size() / 2];
+        int operandIndex = 0;
+        int operatorIndex = 0;
+        for (int i = 0; i < expression.size(); i++) {
+            char c = expression.get(i).toString().charAt(0);
+            if (c == '+' || c == '-' || c == '*' || c == '/') {
+                // Il corrente carattere è un operatore
+                // Lo aggiungo all'array operators e incremento l'indice
+                operators[operatorIndex++] = c;
+            } else if (c >= '0' && c <= '9') {
+                // Il corrente carattere è un operando
+                // Faccio il parsing del valore dell'operando dall'espressione e lo aggiungo all'array operandValues
+                // e incremento l'indice
+                int operandValue = Character.getNumericValue(c);
+                while (i + 1 < expression.size() && expression.get(i + 1).toString().charAt(i) >= '0' && expression.get(i + 1).toString().charAt(i) <= '9') {
+                    operandValue = operandValue * 10 + Character.getNumericValue(expression.get(++i).toString().charAt(i));
+                }
+                operandValues[operandIndex++] = operandValue;
+            }
+        }
     }
 
     /**
@@ -68,78 +87,62 @@ public class ElMamunCaravanSolver {
      */
     public void solve(ObjectiveFunction function) {
         // TODO implementare
-        if (function == null) throw new NullPointerException("Funzione obiettivo nulla");
-        if (this.solved) return;
 
-        // Inizializzo la tabella delle soluzioni ottimali
-        int numOperands = expression.size() / 2 + 1;
-        this.table = new Integer[numOperands][numOperands];
-        this.tracebackTable = new Integer[numOperands][numOperands];
-
-        // Il primo passo è semplicemente il valore del primo operando
-        for (int i = 0; i < numOperands; i++) {
-            table[i][i] = operandValue(i);
+        // Controllo che la funzione obiettivo non sia null
+        if (function == null) {
+            throw new NullPointerException("La funzione obiettivo è null");
         }
 
-        // Per ogni lunghezza di sotto-espressione iniziando dal secondo operando
-        for (int i = 1; i < numOperands; i++) {
-            // Calcolo il risultato massimo dell'espressione aritmetica
-            // quando parentesizzata in questo passaggio per ogni possibile coppia di operandi
-            for (int j = 0; j < numOperands - i; j++) {
-                int maxResultAtStage = Integer.MIN_VALUE;
-                int prevStageIndex = 0;
+        // Inizializzo la tabella table e tracebackTable con dimensione appropriata
+        int numOperands = operandValues.length;
+        this.table = new Integer[numOperands][numOperands + 1];
+        this.tracebackTable = new Integer[numOperands][numOperands + 1];
 
-                // Controllo il risultato massimo dell'espressione aritmetica
-                // quando parentesizzato in questo passaggio usando l'operando disponibile
-                for (int k = j; k < j + i; k++) {
-                    int resultAtStage = 0;
+        // Imposto il caso base per la tabella table
+        // Il caso base corrisponde ad una espressione con un singolo operando
+        for (int i = 0; i < numOperands; i++) {
+            table[i][i + 1] = operandValues[i];
+        }
 
-                    // Calcolo il risultato dell'espressione aritmetica
-                    // quando parentesizzato in questo passaggio usando la coppia di operandi
-                    int leftOperand = table[j][k];
-                    int rightOperand = table[k + 1][j + i];
-                    char operator = this.expression.get(2 * k + 1).getValue().toString().charAt(0);
+        // Itero per ogni sotto problema
+        for (int subProblemSize = 2; subProblemSize <= numOperands; subProblemSize++) {
+            for (int i = 0; i <= numOperands - subProblemSize; i++) {
+                int j = i + subProblemSize;
 
-                    if (operator == '+') {
-                        resultAtStage = leftOperand + rightOperand;
-                    } else if (operator == '-') {
-                        resultAtStage = leftOperand - rightOperand;
-                    } else if (operator == '*') {
-                        resultAtStage = leftOperand * rightOperand;
-                    } else if (operator == '/') {
-                        resultAtStage = leftOperand / rightOperand;
+                // Creo una lista di candidati per il sotto problema corrente
+                List<Integer> candidates1 = new ArrayList<>();
+                candidates1.add(table[i][i]);
+                candidates1.add(table[i + 1][j]);
+
+                // Inizializzo il valore ottimo del sotto problema corrente
+                table[i][j] = function.getBest(candidates1);
+                tracebackTable[i][j] = i;
+
+                // Itero per ogni possibile posizione di divisione del sotto problema corrente
+                for (int k = i + 1; k < j; k++) {
+                    // Creo una lista di candidati per il sotto problema corrente
+                    List<Integer> candidates2 = new ArrayList<>();
+                    candidates2.add(table[i][k]);
+                    candidates2.add(table[k][j]);
+
+                    // Computa il valore della scelta corrente
+                    int currentValue = function.getBest(candidates2);
+
+                    // Creo una lista di candidati per il sotto problema corrente
+                    List<Integer> candidates3 = new ArrayList<>();
+                    candidates3.add(currentValue);
+                    candidates3.add(table[i][j]);
+
+                    // Aggiorno il valore ottimo e la scelta ottima del sotto problema corrente
+                    // Se il valore corrente è migliore del valore ottimo del sotto problema corrente
+                    if (function.getBest(candidates3) == currentValue) {
+                        table[i][j] = currentValue;
+                        tracebackTable[i][j] = k;
                     }
-
-                    // Aggiorno il risultato massimo e l'indice del passaggio precedente
-                    // se il risultato calcolato è maggiore del precedente
-                    if (resultAtStage > maxResultAtStage) {
-                        maxResultAtStage = resultAtStage;
-                        prevStageIndex = k;
-                    }
-
-                    // Aggiorno la tabella delle soluzioni ottimali e quella di traceback
-                    table[j][j + i] = maxResultAtStage;
-                    tracebackTable[j][j + i] = prevStageIndex;
                 }
             }
-            this.solved = true;
         }
-    }
-
-
-    /**
-     * Returns the value of the operand at a given position in the expression.
-     *
-     * @param i the position of the operand in the expression
-     * @return the value of the operand at the given position
-     * @throws IllegalArgumentException if the position is not a valid position
-     *                                  for an operand in the expression
-     */
-    private Integer operandValue(int i) {
-        // TODO implementare (macmat)
-        if (i < 0 || i >= expression.size() / 2 + 1)
-            throw new IllegalArgumentException("Posizione non valida per un operando");
-        return Integer.parseInt(expression.get(2 * i).toString());
+        this.solved = true;
     }
 
     /**
@@ -157,7 +160,7 @@ public class ElMamunCaravanSolver {
         }
 
         // Restituisco il valore ottimale per l'espressione
-        int numOperands = operandValue(expression.size() / 2 + 1);
+        int numOperands = this.operandValues.length;
         return table[0][numOperands - 1];
     }
 
@@ -181,14 +184,14 @@ public class ElMamunCaravanSolver {
         if (!this.solved) {
             throw new IllegalStateException("Il problema non è stato risolto");
         }
-        int numOperands = operandValue(expression.size() / 2 + 1);
+        int numOperands = this.operandValues.length;
 
         // Creo un oggetto StringBuilder per costruire la stringa di parentesi
         StringBuilder parenthesization = new StringBuilder();
 
         // Se l'espressione contiene solo un operando, ritorno quell'operando come una stringa
         if (numOperands == 1) {
-            return String.valueOf(operandValue(0));
+            return String.valueOf(this.operandValues[0]);
         }
 
         // Uso un metodo ricorsivo di comodo per costruire la stringa di parentesi
@@ -213,7 +216,7 @@ public class ElMamunCaravanSolver {
         // Se l'operando di sinistra e quello di destra sono uguali, allora
         // l'espressione è composta da un solo operando
         if (i == j) {
-            parenthesization.append(operandValue(i));
+            parenthesization.append(this.operandValues[i]);
             return;
         } else {
             // Altrimenti, aggiungo la parentesi di apertura
