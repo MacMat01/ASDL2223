@@ -188,22 +188,10 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
         // recupero l'indice del nodo da cancellare
         int index = this.nodesIndex.get(node);
 
-        // rimuovo tutti gli archi collegati al nodo da cancellare
-        for (int i = 0; i < this.nodesIndex.size(); i++) {
-            if (this.matrix.get(index).get(i) != null) {
-                this.matrix.get(index).set(i, null);
-                this.edgeCount--;
-            }
-            if (this.matrix.get(i).get(index) != null) {
-                this.matrix.get(i).set(index, null);
-                this.edgeCount--;
-            }
-        }
-
         // rimuovo il nodo dalla mappa
         this.nodesIndex.remove(node);
 
-        // aggiorno gli indici dei nodi successivi
+        // decremento gli indici dei nodi successivi
         updateNodesIndex(index);
     }
 
