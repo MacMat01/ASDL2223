@@ -644,16 +644,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
         removeEdge(new GraphEdge<>(node1, node2, false));
     }
 
-    /*
-     * Metodo di comodo per eliminare i controlli duplicati sui label
-     */
-    private void checkLabel(L label1, L label2) {
-        // se uno dei label è null lancio NullPointerException
-        if (label1 == null || label2 == null) {
-            throw new NullPointerException("Uno dei label è nullo");
-        }
-    }
-
     @Override
     public void removeEdge(L label1, L label2) {
         // TODO implementare
