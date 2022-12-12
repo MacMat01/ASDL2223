@@ -860,7 +860,7 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
         // recupero l'indice del nodo nella matrice di adiacenza
         int index = this.nodesIndex.get(node);
 
-        // scorro la riga della matrice di adiacenza corrispondente al nodo
+        // scorro la riga della matrice di adiacenza
         for (int i = 0; i < this.nodeCount(); i++) {
             // se l'arco esiste aggiungo il nodo adiacente al set
             if (this.matrix.get(index).get(i) != null) {
