@@ -4,13 +4,16 @@ package it.unicam.cs.asdl2223.mp3;
 
 //ATTENZIONE: è vietato includere import a pacchetti che non siano della Java SE
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Classe singoletto che implementa l'algoritmo di Prim per trovare un Minimum
  * Spanning Tree di un grafo non orientato, pesato e con pesi non negativi.
  * <p>
  * L'algoritmo richiede l'uso di una coda di min priorità tra i nodi che può
  * essere realizzata con una semplice ArrayList (non c'è bisogno di ottimizzare
- * le operazioni di inserimento, di estrazione del minimo, o di decremento della
+ * le operazioni d'inserimento, di estrazione del minimo, o di decremento della
  * priorità).
  * <p>
  * Si possono usare i colori dei nodi per registrare la scoperta e la visita
@@ -30,6 +33,13 @@ public class PrimMSP<L> {
      * insieme dei nodi già visitati
      */
 
+    // Lista dei nodi del grafo
+    private List<GraphNode<L>> coda;
+
+    // Lista dei nodi visitati
+    private List<GraphNode<L>> visitati;
+
+
     /**
      * Crea un nuovo algoritmo e inizializza la coda di priorità con una coda
      * vuota.
@@ -37,7 +47,9 @@ public class PrimMSP<L> {
     public PrimMSP() {
         // TODO implementare
 
-
+        // Inizializza la coda di priorità con una coda vuota
+        this.coda = new ArrayList<GraphNode<L>>();
+        this.visitati = new ArrayList<GraphNode<L>>();
     }
 
     /**
@@ -48,16 +60,26 @@ public class PrimMSP<L> {
      * copertura minimo calcolato, la cui radice è il nodo sorgente passato.
      *
      * @param g un grafo non orientato, pesato, con pesi non negativi
-     * @param s il nodo del grafo g sorgente, cioè da cui parte il calcolo
+     * @param s Il nodo del grafo g sorgente, cioè da cui parte il calcolo
      *          dell'albero di copertura minimo. Tale nodo sarà la radice
      *          dell'albero di copertura trovato
-     * @throw NullPointerException se il grafo g o il nodo sorgente s sono nulli
-     * @throw IllegalArgumentException se il nodo sorgente s non esiste in g
-     * @throw IllegalArgumentException se il grafo g è orientato, non pesato o
-     * con pesi negativi
+     * @throws NullPointerException     se il grafo g o il nodo sorgente s sono nulli
+     * @throws IllegalArgumentException se il nodo sorgente s non esiste in g
+     * @throws IllegalArgumentException se il grafo g è orientato, non pesato o
+     *                                  con pesi negativi
      */
     public void computeMSP(Graph<L> g, GraphNode<L> s) {
         // TODO implementare
+
+        // controllo che il grafo o il nodo sorgente non siano null
+        if (g == null || s == null) {
+            throw new NullPointerException("Grafo o nodo sorgente nulli");
+        }
+
+        // controllo se il grafo è orientato
+        if (g.isDirected()) {
+            throw new IllegalArgumentException("Grafo non valido");
+        }
     }
 
 }

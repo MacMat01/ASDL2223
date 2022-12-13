@@ -839,5 +839,4 @@ public abstract class Graph<L> {
         if (!this.isDirected()) return this.getEdgesOf(n).size();
         else return this.getEdgesOf(n).size() + this.getIngoingEdgesOf(n).size();
     }
-
 }
