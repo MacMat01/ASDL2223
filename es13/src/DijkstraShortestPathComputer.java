@@ -7,14 +7,11 @@ import java.util.List;
  * minimi da una sorgente singola. L'algoritmo usa una coda con priorità
  * inefficiente (implementata con una List) che per estrarre il minimo impiega
  * O(n).
- * 
- * @author Template: Luca Tesei, Implementazione: collettiva
  *
- * @param <L>
- *                le etichette dei nodi del grafo
+ * @param <L> le etichette dei nodi del grafo
+ * @author Template: Luca Tesei, Implementazione: collettiva
  */
-public class DijkstraShortestPathComputer<L>
-        implements SingleSourceShortestPathComputer<L> {
+public class DijkstraShortestPathComputer<L> implements SingleSourceShortestPathComputer<L> {
     // ultima sorgente su cui sono stati calcolati i cammini minimi
     private GraphNode<L> lastSource;
 
@@ -36,25 +33,16 @@ public class DijkstraShortestPathComputer<L>
     /**
      * Crea un calcolatore di cammini minimi a sorgente singola per un grafo
      * diretto e pesato privo di pesi negativi.
-     * 
-     * @param graph
-     *                  il grafo su cui opera il calcolatore di cammini minimi
-     * @throws NullPointerException
-     *                                      se il grafo passato è nullo
-     * 
-     * @throws IllegalArgumentException
-     *                                      se il grafo passato è vuoto
-     * 
-     * @throws IllegalArgumentException
-     *                                      se il grafo passato non è orientato
-     * 
-     * @throws IllegalArgumentException
-     *                                      se il grafo passato non è pesato,
-     *                                      cioè esiste almeno un arco il cui
-     *                                      peso è {@code Double.NaN}
-     * @throws IllegalArgumentException
-     *                                      se il grafo passato contiene almeno
-     *                                      un peso negativo
+     *
+     * @param graph il grafo su cui opera il calcolatore di cammini minimi
+     * @throws NullPointerException     se il grafo passato è nullo
+     * @throws IllegalArgumentException se il grafo passato è vuoto
+     * @throws IllegalArgumentException se il grafo passato non è orientato
+     * @throws IllegalArgumentException se il grafo passato non è pesato,
+     *                                  cioè esiste almeno un arco il cui
+     *                                  peso è {@code Double.NaN}
+     * @throws IllegalArgumentException se il grafo passato contiene almeno
+     *                                  un peso negativo
      */
     public DijkstraShortestPathComputer(Graph<L> graph) {
         this.grafo = graph;
@@ -74,8 +62,7 @@ public class DijkstraShortestPathComputer<L>
     @Override
     public GraphNode<L> getLastSource() {
         if (!this.isComputed)
-            throw new IllegalStateException("Richiesta last source, ma non "
-                    + "sono mai stati calcolati i cammini minimi");
+            throw new IllegalStateException("Richiesta last source, ma non " + "sono mai stati calcolati i cammini minimi");
         return this.lastSource;
     }
 
