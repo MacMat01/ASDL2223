@@ -81,7 +81,7 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public int edgeCount() {
-        // TODO implementare
+        // TODO implementare (macmat)
 
         // L'indice edgeCount viene aggiornato ogni volta che viene aggiunto un arco
         return this.edgeCount;
@@ -860,11 +860,16 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
         // recupero l'indice del nodo nella matrice di adiacenza
         int index = this.nodesIndex.get(node);
 
-        // scorro la riga della matrice di adiacenza
-        for (int i = 0; i < this.nodeCount(); i++) {
-            // se l'arco esiste aggiungo il nodo adiacente al set
-            if (this.matrix.get(index).get(i) != null) {
-                adjacentNodes.add(this.matrix.get(index).get(i).getNode2());
+        // scorro la riga dell'indice del nodo nella matrice di adiacenza
+        for (GraphEdge<L> edge : this.matrix.get(index)) {
+            // se l'arco esiste e il nodo è quello di destinazione lo aggiungo al set
+            if (edge != null && edge.getNode2().equals(node)) {
+                adjacentNodes.add(edge.getNode1());
+            }
+
+            // se l'arco esiste e il nodo è quello di partenza lo aggiungo al set
+            if (edge != null && edge.getNode1().equals(node)) {
+                adjacentNodes.add(edge.getNode2());
             }
         }
 
