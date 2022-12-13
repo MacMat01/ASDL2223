@@ -6,26 +6,22 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Classe di test per la classe PrimMSP.
- * 
- * @author Luca Tesei
  *
+ * @author Luca Tesei
  */
 class PrimMSPTest {
 
     @Test
     final void testExceptions() {
         PrimMSP<String> alg = new PrimMSP<String>();
-        assertThrows(NullPointerException.class,
-                () -> alg.computeMSP(null, null));
+        assertThrows(NullPointerException.class, () -> alg.computeMSP(null, null));
         Graph<String> gr = new AdjacencyMatrixUndirectedGraph<String>();
         GraphNode<String> a = new GraphNode<String>("a");
         gr.addNode(a);
-        assertThrows(NullPointerException.class,
-                () -> alg.computeMSP(gr, null));
+        assertThrows(NullPointerException.class, () -> alg.computeMSP(gr, null));
         assertThrows(NullPointerException.class, () -> alg.computeMSP(null, a));
         GraphNode<String> b = new GraphNode<String>("b");
-        assertThrows(IllegalArgumentException.class,
-                () -> alg.computeMSP(gr, b));
+        assertThrows(IllegalArgumentException.class, () -> alg.computeMSP(gr, b));
         gr.addNode(b);
         GraphNode<String> c = new GraphNode<String>("c");
         gr.addNode(c);
@@ -55,8 +51,7 @@ class PrimMSPTest {
         gr.addEdge(new GraphEdge<String>(g, i, false, 6));
         gr.addEdge(new GraphEdge<String>(g, h, false, 1));
         gr.addEdge(new GraphEdge<String>(h, i, false, 7));
-        assertThrows(IllegalArgumentException.class,
-                () -> alg.computeMSP(gr, b));
+        assertThrows(IllegalArgumentException.class, () -> alg.computeMSP(gr, b));
         gr.clear();
         gr.addNode(a);
         gr.addNode(b);
@@ -81,8 +76,7 @@ class PrimMSPTest {
         gr.addEdge(new GraphEdge<String>(g, i, false, -6));
         gr.addEdge(new GraphEdge<String>(g, h, false, 1));
         gr.addEdge(new GraphEdge<String>(h, i, false, 7));
-        assertThrows(IllegalArgumentException.class,
-                () -> alg.computeMSP(gr, b));
+        assertThrows(IllegalArgumentException.class, () -> alg.computeMSP(gr, b));
     }
 
     @Test
