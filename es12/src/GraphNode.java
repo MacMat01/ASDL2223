@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 
 /**
@@ -8,7 +8,7 @@
  * {@code L}. L'etichetta non puà essere null. Le classi {@code GraphEdge<L>} e
  * {@code Graph<L>} definiscono le operazioni tipiche sugli archi e sul grafo,
  * rispettivamente.
- * 
+ * <p>
  * Le operazioni presenti sono quelle che sono usate dagli algoritmi su grafi
  * più comuni: attribuzione e modifica di un colore, di una distanza, di un
  * puntatore a un nodo predecessore e di tempi di ingresso/uscita durante una
@@ -16,12 +16,9 @@
  * non definiscono l'identità del nodo, che è data esclusivamente
  * dall'etichetta. In altre parole, due nodi sono uguali se e solo se hanno
  * etichetta uguale.
- * 
- * @author Luca Tesei
- * 
- * @param <L>
- *                etichette dei nodi
  *
+ * @param <L> etichette dei nodi
+ * @author Luca Tesei
  */
 public class GraphNode<L> {
 
@@ -57,23 +54,19 @@ public class GraphNode<L> {
     /**
      * Costruisce un nodo assegnando tutti i valori associati ai valori di
      * default.
-     * 
-     * @param label
-     *                  l'etichetta da associare al nodo
-     * 
-     * @throws NullPointerException
-     *                                  se l'etichetta è null.
+     *
+     * @param label l'etichetta da associare al nodo
+     * @throws NullPointerException se l'etichetta è null.
      */
     public GraphNode(L label) {
-        if (label == null)
-            throw new NullPointerException("Etichetta nel nodo nulla");
+        if (label == null) throw new NullPointerException("Etichetta nel nodo nulla");
         this.label = label;
     }
 
     /**
      * Restituisce l'etichetta associata al nodo che lo identifica univocamente
      * nel grafo.
-     * 
+     *
      * @return the label
      */
     public L getLabel() {
@@ -82,7 +75,7 @@ public class GraphNode<L> {
 
     /**
      * Restituisce il colore corrente del nodo.
-     * 
+     *
      * @return the color
      */
     public int getColor() {
@@ -90,11 +83,9 @@ public class GraphNode<L> {
     }
 
     /**
-     * 
      * Assegna al nodo un certo colore.
-     * 
-     * @param color
-     *                  the color to set
+     *
+     * @param color the color to set
      */
     public void setColor(int color) {
         this.color = color;
@@ -102,7 +93,7 @@ public class GraphNode<L> {
 
     /**
      * Restituisce il valore corrente di una distanza intera associata al nodo.
-     * 
+     *
      * @return the distance
      */
     public int getIntegerDistance() {
@@ -111,9 +102,8 @@ public class GraphNode<L> {
 
     /**
      * Assegna al nodo un valore di una distanza intera ad esso associata.
-     * 
-     * @param distance
-     *                     the distance to set
+     *
+     * @param distance the distance to set
      */
     public void setIntegerDistance(int distance) {
         this.integerDistance = distance;
@@ -121,7 +111,7 @@ public class GraphNode<L> {
 
     /**
      * Restituisce il valore corrente di una distanza associata al nodo.
-     * 
+     *
      * @return the distance
      */
     public double getFloatingPointDistance() {
@@ -130,9 +120,8 @@ public class GraphNode<L> {
 
     /**
      * Assegna al nodo un valore di una distanza ad esso associata.
-     * 
-     * @param distance
-     *                     the distance to set
+     *
+     * @param distance the distance to set
      */
     public void setFloatingPointDistance(double distance) {
         this.floatingPointDistance = distance;
@@ -142,7 +131,7 @@ public class GraphNode<L> {
      * Restituisce il nodo del grafo che correntemente è assegnato come
      * predecessore di questo nodo. Ad esempio può essere usato da un algoritmo
      * che costruisce un albero di copertura.
-     * 
+     *
      * @return the previous
      */
     public GraphNode<L> getPrevious() {
@@ -150,11 +139,9 @@ public class GraphNode<L> {
     }
 
     /**
-     * 
      * Assegna a questo nodo un nodo predecessore.
-     * 
-     * @param previous
-     *                     the previous to set
+     *
+     * @param previous the previous to set
      */
     public void setPrevious(GraphNode<L> previous) {
         this.previous = previous;
@@ -163,9 +150,9 @@ public class GraphNode<L> {
     /**
      * Restituisce il tempo di ingresso in questo nodo durante una visita in
      * profondità.
-     * 
+     *
      * @return il tempo di ingresso in questo nodo durante una visita in
-     *         profondità
+     * profondità
      */
     public int getEnteringTime() {
         return this.enteringTime;
@@ -174,9 +161,8 @@ public class GraphNode<L> {
     /**
      * Assegna un tempo di ingresso in questo nodo durante una visita in
      * profondità.
-     * 
-     * @param time
-     *                 il tempo di ingresso da assegnare
+     *
+     * @param time il tempo di ingresso da assegnare
      */
     public void setEnteringTime(int time) {
         this.enteringTime = time;
@@ -185,9 +171,9 @@ public class GraphNode<L> {
     /**
      * Restituisce il tempo di uscita da questo nodo durante una visita in
      * profondità.
-     * 
+     *
      * @return il tempo di uscita da questo nodo durante una visita in
-     *         profondità
+     * profondità
      */
     public int getExitingTime() {
         return this.exitingTime;
@@ -196,9 +182,8 @@ public class GraphNode<L> {
     /**
      * Assegna un tempo di uscita da questo nodo durante una visita in
      * profondità.
-     * 
-     * @param time
-     *                 il tempo di uscita da assegnare
+     *
+     * @param time il tempo di uscita da assegnare
      */
     public void setExitingTime(int time) {
         this.exitingTime = time;
@@ -206,7 +191,7 @@ public class GraphNode<L> {
 
     /*
      * Basato sull'hashCode dell'etichetta.
-     * 
+     *
      * @see java.lang.Object#hashCode()
      */
     @Override
@@ -216,20 +201,16 @@ public class GraphNode<L> {
 
     /*
      * Basato sull'etichetta, che non può essere null.
-     * 
+     *
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (!(obj instanceof GraphNode))
-            return false;
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (!(obj instanceof GraphNode)) return false;
         GraphNode<?> other = (GraphNode<?>) obj;
-        if (this.label.equals(other.label))
-            return true;
+        if (this.label.equals(other.label)) return true;
         return false;
     }
 
@@ -237,5 +218,5 @@ public class GraphNode<L> {
     public String toString() {
         return "Nodo[ " + label.toString() + " ]";
     }
-    
+
 }

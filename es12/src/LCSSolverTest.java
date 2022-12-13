@@ -2,26 +2,23 @@
  * Miniprogetto 3 di Algoritmi e Strutture Dati, Laboratorio Anno Accademico 2019/2020
  */
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Classe di unit test per il risolutore del problema di una più
  * lunga sottosequenza comune di due stringhe date.
- * 
- * @author Luca Tesei
  *
+ * @author Luca Tesei
  */
 class LCSSolverTest {
 
 
     @Test
     final void testLCSSolver() {
-        assertThrows(NullPointerException.class,
-                () -> new LCSSolver("pippo", null));
-        assertThrows(NullPointerException.class,
-                () -> new LCSSolver(null, "pluto"));
+        assertThrows(NullPointerException.class, () -> new LCSSolver("pippo", null));
+        assertThrows(NullPointerException.class, () -> new LCSSolver(null, "pluto"));
     }
 
     @Test
@@ -31,7 +28,7 @@ class LCSSolverTest {
         s1.solve();
         assertTrue(s1.isSolved());
     }
-    
+
     @Test
     final void testGetLengthOfSolution1() {
         LCSSolver s1 = new LCSSolver("ABCBDAB", "");
@@ -57,7 +54,7 @@ class LCSSolverTest {
         s3.solve();
         assertTrue(s3.getOneSolution().equals("BCBA"));
     }
-    
+
     @Test
     final void testGetLengthOfSolution2() {
         LCSSolver s1 = new LCSSolver("abcabcaa", "acbacba");
@@ -65,7 +62,7 @@ class LCSSolverTest {
         assertTrue(s1.getLengthOfSolution() == 5);
         LCSSolver s2 = new LCSSolver("XMJYAUZ", "MZJAWXU");
         s2.solve();
-        assertTrue(s2.getLengthOfSolution() == 4); 
+        assertTrue(s2.getLengthOfSolution() == 4);
         LCSSolver s3 = new LCSSolver("XYZ", "ABCDS");
         s3.solve();
         assertTrue(s3.getLengthOfSolution() == 0);
@@ -87,8 +84,7 @@ class LCSSolverTest {
     @Test
     final void testIsCommonSubsequence() {
         LCSSolver s1 = new LCSSolver("ABCBDAB", "BDCABA");
-        assertThrows(NullPointerException.class,
-                () -> s1.isCommonSubsequence(null));
+        assertThrows(NullPointerException.class, () -> s1.isCommonSubsequence(null));
         assertTrue(s1.isCommonSubsequence(""));
         assertTrue(s1.isCommonSubsequence("A"));
         assertFalse(s1.isCommonSubsequence("Z"));
