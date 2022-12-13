@@ -230,19 +230,19 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
         removeNode(node);
     }
 
-    /*
-     * Gli indici dei nodi il cui valore sia maggiore dell'indice del nodo da
-     * cancellare devono essere decrementati di uno dopo la cancellazione del
-     * nodo
-     */
-    @Override
-    public void removeNode(int i) {
-        // TODO implementare
-
+    // Metodo di comodo per eliminare le linee duplicate
+    private void indexCheck(int i) {
         // se l'indice è fuori dall'intervallo lancio IndexOutOfBoundsException
         if (i < 0 || i > this.nodeCount() - 1) {
             throw new IndexOutOfBoundsException("L'indice è negativo o maggiore della dimensione della matrice");
         }
+    }
+
+    // Metodo di comodo per eliminare le linee duplicate
+    private GraphNode<L> searchNode(int i) {
+
+        // controllo che l'indice sia valido
+        indexCheck(i);
 
         // creo un nuovo nodo
         GraphNode<L> node = null;
@@ -254,6 +254,21 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
                 break;
             }
         }
+
+        return node;
+    }
+
+    /*
+     * Gli indici dei nodi il cui valore sia maggiore dell'indice del nodo da
+     * cancellare devono essere decrementati di uno dopo la cancellazione del
+     * nodo
+     */
+    @Override
+    public void removeNode(int i) {
+        // TODO implementare
+
+        // richiamo il metodo di comodo per cercare il nodo
+        GraphNode<L> node = searchNode(i);
 
         // se l'indice passato non corrisponde a nessun nodo lancio IllegalArgumentException
         if (node == null) {
@@ -316,21 +331,8 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
     public GraphNode<L> getNode(int i) {
         // TODO implementare
 
-        // se l'indice è fuori dall'intervallo lancio IndexOutOfBoundsException
-        if (i < 0 || i > this.nodeCount() - 1) {
-            throw new IndexOutOfBoundsException("L'indice è negativo o maggiore della dimensione della matrice");
-        }
-
-        // creo un nuovo nodo
-        GraphNode<L> node = null;
-
-        // cerco il nodo con l'indice i
-        for (GraphNode<L> n : this.nodesIndex.keySet()) {
-            if (this.nodesIndex.get(n) == i) {
-                node = n;
-                break;
-            }
-        }
+        // richiamo il metodo di comodo per controllare l'indice
+        GraphNode<L> node = searchNode(i);
 
         // se l'indice passato non corrisponde a nessun nodo lancio IllegalArgumentException
         if (node == null) {
@@ -523,37 +525,64 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
         return addEdge(edge);
     }
 
+    // Se i o j sono fuori dai limiti dell'intervallo lancio IndexOutOfBoundsException
+    private void checkIndex(int i, int j) {
+        // TODO implementare (macmat)
+
+        if (i < 0 || i > this.nodeCount() - 1 || j < 0 || j > this.nodeCount() - 1) {
+            throw new IndexOutOfBoundsException("i o j sono fuori dai limiti dell'intervallo");
+        }
+    }
+
+    // Cerco i nodi utilizzando gli indici
+    private Set<GraphNode<L>> searchNodes(int i, int j) {
+        // TODO implementare (macmat)
+
+        // creo un set di nodi
+        Set<GraphNode<L>> nodes = new HashSet<>();
+
+        // cerco i nodi
+        for (GraphNode<L> node : this.nodesIndex.keySet()) {
+            if (this.nodesIndex.get(node) == i) {
+                nodes.add(node);
+            }
+
+            if (this.nodesIndex.get(node) == j) {
+                nodes.add(node);
+            }
+
+            // se ho trovato entrambi i nodi esco dal ciclo
+            if (nodes.size() == 2) {
+                break;
+            }
+        }
+        return nodes;
+    }
+
+    // Se almeno uno degli indici non corrisponde a nessun nodo lancio IndexOutOfBoundsException
+    private void checkNodes(GraphNode<L> node1, GraphNode<L> node2) {
+        // TODO implementare (macmat)
+
+        if (node1 == null || node2 == null) {
+            throw new IndexOutOfBoundsException("Almeno uno degli indici non corrisponde a nessun nodo");
+        }
+    }
+
     @Override
     public boolean addEdge(int i, int j) {
         // TODO implementare
 
-        // se i o j sono fuori dai limiti dell'intervallo lancio IndexOutOfBoundsException
-        if (i < 0 || i > this.nodeCount() - 1 || j < 0 || j > this.nodeCount() - 1) {
-            throw new IndexOutOfBoundsException("i o j sono fuori dai limiti dell'intervallo");
-        }
+        // controllo gli indici richiamando il metodo di comodo
+        checkIndex(i, j);
+
+        // richiamo il metodo di comodo per cercare i nodi
+        Set<GraphNode<L>> nodes = searchNodes(i, j);
 
         // creo i nodi
-        GraphNode<L> node1 = null;
-        GraphNode<L> node2 = null;
+        GraphNode<L> node1 = nodes.iterator().next();
+        GraphNode<L> node2 = nodes.iterator().next();
 
-        for (GraphNode<L> node : this.nodesIndex.keySet()) {
-            if (this.nodesIndex.get(node) == i) {
-                node1 = node;
-            }
-            if (this.nodesIndex.get(node) == j) {
-                node2 = node;
-            }
-
-            // se ho trovato entrambi i nodi esco dal ciclo
-            if (node1 != null && node2 != null) {
-                break;
-            }
-        }
-
-        // se almeno uno degli indici non corrisponde a nessun nodo lancio IndexOutOfBoundsException
-        if (node1 == null || node2 == null) {
-            throw new IndexOutOfBoundsException("Almeno uno degli indici non corrisponde a nessun nodo");
-        }
+        checkNodes(node1, node2);
 
         // creo un nuovo arco
         GraphEdge<L> edge = new GraphEdge<>(node1, node2, false);
@@ -566,38 +595,22 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
     public boolean addWeightedEdge(int i, int j, double weight) {
         // TODO implementare
 
-        // se i o j sono fuori dai limiti dell'intervallo lancio IndexOutOfBoundsException
-        if (i < 0 || i > this.nodeCount() - 1 || j < 0 || j > this.nodeCount() - 1) {
-            throw new IndexOutOfBoundsException("i o j sono fuori dai limiti dell'intervallo");
-        }
+        // controllo gli indici richiamando il metodo di comodo
+        checkIndex(i, j);
 
         // se il peso è negativo lancio IllegalArgumentException
         if (weight < 0) {
             throw new IllegalArgumentException("Il peso non può è negativo");
         }
 
+        // richiamo il metodo di comodo per cercare i nodi
+        Set<GraphNode<L>> nodes = searchNodes(i, j);
+
         // creo i nodi
-        GraphNode<L> node1 = null;
-        GraphNode<L> node2 = null;
+        GraphNode<L> node1 = nodes.iterator().next();
+        GraphNode<L> node2 = nodes.iterator().next();
 
-        for (GraphNode<L> node : this.nodesIndex.keySet()) {
-            if (this.nodesIndex.get(node) == i) {
-                node1 = node;
-            }
-            if (this.nodesIndex.get(node) == j) {
-                node2 = node;
-            }
-
-            // se ho trovato entrambi i nodi esco dal ciclo
-            if (node1 != null && node2 != null) {
-                break;
-            }
-        }
-
-        // se almeno uno degli indici non corrisponde a nessun nodo lancio IndexOutOfBoundsException
-        if (node1 == null || node2 == null) {
-            throw new IndexOutOfBoundsException("Almeno uno degli indici non corrisponde a nessun nodo");
-        }
+        checkNodes(node1, node2);
 
         // creo un nuovo arco
         GraphEdge<L> edge = new GraphEdge<>(node1, node2, false, weight);
@@ -644,14 +657,21 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
         removeEdge(new GraphEdge<>(node1, node2, false));
     }
 
+    // Se i label sono nulli lancio NullPointerException
+    private void checkLabels(L label1, L label2) {
+        // TODO implementare (macmat)
+
+        if (label1 == null || label2 == null) {
+            throw new NullPointerException("Uno dei label è nullo");
+        }
+    }
+
     @Override
     public void removeEdge(L label1, L label2) {
         // TODO implementare
 
-        // se uno dei label è null lancio NullPointerException
-        if (label1 == null || label2 == null) {
-            throw new NullPointerException("Uno dei label è nullo");
-        }
+        // Controllo che i label non siano nulli richiamando il metodo di comodo
+        checkLabels(label1, label2);
 
         // creo i nodi
         GraphNode<L> node1 = null;
@@ -684,10 +704,8 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
     public void removeEdge(int i, int j) {
         // TODO implementare
 
-        // se i o j sono fuori dai limiti dell'intervallo lancio IndexOutOfBoundsException
-        if (i < 0 || i > this.nodeCount() - 1 || j < 0 || j > this.nodeCount() - 1) {
-            throw new IndexOutOfBoundsException("i o j sono fuori dai limiti dell'intervallo");
-        }
+        // controllo gli indici richiamando il metodo di comodo
+        checkIndex(i, j);
 
         // creo i nodi
         GraphNode<L> node1 = null;
@@ -772,10 +790,8 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
     public GraphEdge<L> getEdge(L label1, L label2) {
         // TODO implementare
 
-        // se uno dei label è null lancio NullPointerException
-        if (label1 == null || label2 == null) {
-            throw new NullPointerException("Uno dei label è nullo");
-        }
+        // Controllo che i label non siano nulli richiamando il metodo di comodo
+        checkLabels(label1, label2);
 
         // creo i nodi
         GraphNode<L> node1 = null;
@@ -905,14 +921,22 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
         return getAdjacentNodesOf(node);
     }
 
+    // Uguale a checkIndex ma con un indice
+    private void checkIndex(int index) {
+        // TODO implementare (macmat)
+
+        // se l'indice è fuori dai limiti dell'intervallo lancio IndexOutOfBoundsException
+        if (index < 0 || index > this.nodeCount() - 1) {
+            throw new IndexOutOfBoundsException("L'indice è fuori dai limiti dell'intervallo");
+        }
+    }
+
     @Override
     public Set<GraphNode<L>> getAdjacentNodesOf(int i) {
         // TODO implementare
 
-        // se i è fuori dai limiti dell'intervallo lancio IndexOutOfBoundsException
-        if (i < 0 || i > this.nodeCount() - 1) {
-            throw new IndexOutOfBoundsException("i è fuori dai limiti dell'intervallo");
-        }
+        // Controllo che l'indice non sia fuori dai limiti dell'intervallo richiamando il metodo di comodo
+        checkIndex(i);
 
         // creo il nodo
         GraphNode<L> node = null;
