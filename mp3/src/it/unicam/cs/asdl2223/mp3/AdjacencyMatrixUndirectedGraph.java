@@ -573,7 +573,7 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
         // se il peso è negativo lancio IllegalArgumentException
         if (weight < 0) {
-            throw new IllegalArgumentException("Il peso è negativo");
+            throw new IllegalArgumentException("Il peso non può è negativo");
         }
 
         // creo i nodi
