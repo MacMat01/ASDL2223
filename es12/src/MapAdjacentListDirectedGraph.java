@@ -1,11 +1,11 @@
 /**
- *
+ * 
  */
 
-import java.util.HashSet;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.HashSet;
 
 /**
  * Implementazione della classe astratta {@code Graph<L>} che realizza un grafo
@@ -16,7 +16,7 @@ import java.util.Set;
  * tabella hash) e se un arco è presente (pseudocostante, con tabella hash). Lo
  * spazio occupato per la rappresentazione risultà tuttavia più grande di quello
  * che servirebbe con la rappresentazione standard.
- * <p>
+ * 
  * Le liste di adiacenza sono rappresentate con una mappa (implementata con
  * tabelle hash) che associa ad ogni nodo del grafo i nodi adiacenti. In questo
  * modo il dominio delle chiavi della mappa è il set dei nodi, su cui è
@@ -29,12 +29,14 @@ import java.util.Set;
  * controllare se un arco è presenta basta richiamare il metodo contains in
  * questo set. I test di presenza si basano sui metodi equals ridefiniti per
  * nodi e archi nelle classi GraphNode<L> e GraphEdge<L>.
- * <p>
+ * 
  * Questa classe non supporta le operazioni di rimozione di nodi e archi e le
  * operazioni indicizzate di ricerca di nodi e archi.
+ * 
+ * @author Luca Tesei
  *
- * @param <L> etichette dei nodi del grafo
- * @author Template: Luca Tesei, Implementazione: collettiva
+ * @param <L>
+ *                etichette dei nodi del grafo
  */
 public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
 
@@ -55,26 +57,17 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
 
     @Override
     public int nodeCount() {
-        if (this.adjacentLists.isEmpty()) {
-            return 0;
-        }
-        int count = 0;
-        for (GraphNode<L> node : adjacentLists.keySet()) {
-            count++;
-        }
-        return count;
+        return this.adjacentLists.size();
     }
 
     @Override
     public int edgeCount() {
-        if (this.adjacentLists.isEmpty()) {
-            return 0;
-        }
-        int count = 0;
-        for (GraphNode<L> node : adjacentLists.keySet()) {
-            count += adjacentLists.get(node).size();
-        }
-        return count;
+        int result = 0;
+        // Prendo tutti i nodi e conto il numero di archi per ognuno
+        Set<GraphNode<L>> nodes = this.adjacentLists.keySet();
+        for (GraphNode<L> n : nodes)
+            result += this.adjacentLists.get(n).size();
+        return result;
     }
 
     @Override
@@ -95,186 +88,175 @@ public class MapAdjacentListDirectedGraph<L> extends Graph<L> {
 
     @Override
     public boolean addNode(GraphNode<L> node) {
-        if (node == null) {
-            throw new NullPointerException();
-        }
-        if (this.adjacentLists.containsKey(node)) {
+        if (node == null)
+            throw new NullPointerException(
+                    "Tentativo di aggiungere un nodo null");
+        if (this.adjacentLists.containsKey(node))
+            // il nodo è già presente
             return false;
-        }
+        // inserisco il nodo associando un insieme vuoto di archi uscenti
         this.adjacentLists.put(node, new HashSet<GraphEdge<L>>());
         return true;
     }
 
     @Override
     public boolean removeNode(GraphNode<L> node) {
-        if (node == null) throw new NullPointerException("Tentativo di rimuovere un nodo null");
-        throw new UnsupportedOperationException("Rimozione dei nodi non supportata");
+        if (node == null)
+            throw new NullPointerException(
+                    "Tentativo di rimuovere un nodo null");
+        throw new UnsupportedOperationException(
+                "Rimozione dei nodi non supportata");
     }
 
     @Override
     public boolean containsNode(GraphNode<L> node) {
-        if (node == null) {
-            throw new NullPointerException();
-        }
+        if (node == null)
+            throw new NullPointerException("Tentativo di cercare un nodo null");
         return this.adjacentLists.containsKey(node);
     }
 
     @Override
     public GraphNode<L> getNodeOf(L label) {
-        if (label == null) {
-            throw new NullPointerException();
-        }
-        /*
-         * Per ogni nodo del grafo controlla se l'etichetta del nodo corrisponde
-         * a quella cercata. Se si, restituisce il nodo corrente.
-         */
-        for (GraphNode<L> node : this.adjacentLists.keySet()) {
-            if (node.getLabel().equals(label)) {
-                return node;
-            }
-        }
+        if (label == null)
+            throw new NullPointerException(
+                    "Tentativo di cercare un nodo con etichetta null");
+        Set<GraphNode<L>> nodes = this.adjacentLists.keySet();
+        for (GraphNode<L> n : nodes)
+            if (n.getLabel().equals(label))
+                return n;
+        // non esiste nessun nodo con etichetta uguale a label
         return null;
     }
 
     @Override
     public int getNodeIndexOf(L label) {
-        if (label == null) throw new NullPointerException("Tentativo di ricercare un nodo con etichetta null");
-        throw new UnsupportedOperationException("Ricerca dei nodi con indice non supportata");
+        if (label == null)
+            throw new NullPointerException(
+                    "Tentativo di ricercare un nodo con etichetta null");
+        throw new UnsupportedOperationException(
+                "Ricerca dei nodi con indice non supportata");
     }
 
     @Override
     public GraphNode<L> getNodeAtIndex(int i) {
-        throw new UnsupportedOperationException("Ricerca dei nodi con indice non supportata");
+        throw new UnsupportedOperationException(
+                "Ricerca dei nodi con indice non supportata");
     }
 
     @Override
     public Set<GraphNode<L>> getAdjacentNodesOf(GraphNode<L> node) {
-        if (node == null) {
-            throw new NullPointerException();
-        }
-        if (!this.adjacentLists.containsKey(node)) {
-            throw new IllegalArgumentException();
-        }
-        /*
-         * Per ogni arco uscente dal nodo, aggiunge il nodo di destinazione
-         * nell'insieme da restituire.
-         */
-        Set<GraphNode<L>> adjacentNodes = new HashSet<GraphNode<L>>();
-        for (GraphEdge<L> edge : this.adjacentLists.get(node)) {
-            adjacentNodes.add(edge.getNode2());
-        }
-        return adjacentNodes;
+        if (node == null)
+            throw new NullPointerException(
+                    "Tentativo di ottenere i nodi adiacenti di un nodo null");
+        if (!this.containsNode(node))
+            throw new IllegalArgumentException(
+                    "Tentativo di ottenere i nodi adiacenti di un nodo non esistente");
+        // Trovo gli archi adiacenti uscenti
+        Set<GraphEdge<L>> edges = this.adjacentLists.get(node);
+        // Inizializzo il risultato
+        Set<GraphNode<L>> result = new HashSet<GraphNode<L>>();
+        // Aggiungo al risultato i nodi collegati dagli archi adiacenti
+        for (GraphEdge<L> e : edges)
+            result.add(e.getNode2());
+        return result;
     }
 
     @Override
     public Set<GraphNode<L>> getPredecessorNodesOf(GraphNode<L> node) {
-        if (node == null) {
-            throw new NullPointerException();
-        }
-        if (!this.adjacentLists.containsKey(node)) {
-            throw new IllegalArgumentException();
-        }
-        /*
-         * Per ogni nodo del grafo controlla se il nodo corrente è presente
-         * nell'insieme degli archi uscenti del nodo corrente. Se si, aggiunge
-         * il nodo corrente all'insieme dei nodi predecessori.
-         */
-        Set<GraphNode<L>> predecessorNodes = new HashSet<GraphNode<L>>();
-        for (GraphNode<L> n : this.adjacentLists.keySet()) {
-            for (GraphEdge<L> edge : this.adjacentLists.get(n)) {
-                if (edge.getNode2().equals(node)) {
-                    predecessorNodes.add(n);
-                }
-            }
-        }
-        return predecessorNodes;
+        if (node == null)
+            throw new NullPointerException(
+                    "Tentativo di ottenere i nodi predecessori di un nodo null");
+        // controllo se il nodo esiste
+        if (!this.adjacentLists.containsKey(node))
+            throw new IllegalArgumentException(
+                    "Richiesta dei predecessori di un nodo non esistente");
+        // creo l'insieme risultato
+        Set<GraphNode<L>> result = new HashSet<GraphNode<L>>();
+        // cerco tutti gli archi che entrano in node e inserisco i nodi sorgente
+        // nel risultato
+        Set<GraphEdge<L>> inEdges = this.getIngoingEdgesOf(node);
+        for (GraphEdge<L> e : inEdges)
+            result.add(e.getNode1());
+        return result;
     }
 
     @Override
     public Set<GraphEdge<L>> getEdges() {
-        /*
-         * Per ogni nodo del grafo, aggiunge tutti gli archi uscenti del nodo
-         * nell'insieme da restituire.
-         */
-        Set<GraphEdge<L>> edges = new HashSet<GraphEdge<L>>();
-        for (GraphNode<L> node : this.adjacentLists.keySet()) {
-            edges.addAll(this.adjacentLists.get(node));
-        }
-        return edges;
+        // Scorro tutti i nodi e aggiungo nell'insieme risultato i relativi
+        // archi
+        Set<GraphEdge<L>> result = new HashSet<GraphEdge<L>>();
+        Set<GraphNode<L>> nodes = this.adjacentLists.keySet();
+        for (GraphNode<L> n : nodes)
+            result.addAll(this.adjacentLists.get(n));
+        return result;
     }
 
     @Override
     public boolean addEdge(GraphEdge<L> edge) {
-        if (edge == null) {
-            throw new NullPointerException();
-        }
-        if (!this.adjacentLists.containsKey(edge.getNode1())) {
-            throw new IllegalArgumentException();
-        }
-        if (!this.adjacentLists.containsKey(edge.getNode2())) {
-            throw new IllegalArgumentException();
-        }
-        if (!edge.isDirected()) {
-            throw new IllegalArgumentException();
-        }
-        /*
-         * Se l'arco è già presente, restituisce false.
-         */
-        if (this.adjacentLists.get(edge.getNode1()).contains(edge)) {
-            return false;
-        }
-        this.adjacentLists.get(edge.getNode1()).add(edge);
-        return true;
+        if (edge == null)
+            throw new NullPointerException("Tentativo di inserire arco nullo");
+        if (!edge.isDirected())
+            throw new IllegalArgumentException(
+                    "Inserimento di un arco non orientato in un grafo orientato");
+        // Controllo se i nodi esistono
+        if (!this.adjacentLists.containsKey(edge.getNode1())
+                || !this.adjacentLists.containsKey(edge.getNode2()))
+            throw new IllegalArgumentException(
+                    "Inserimento di un arco con almeno uno dei due nodi collegati non esistente");
+        // Inserisco l'arco nella lista di adiacenza del nodo sorgente
+        return this.adjacentLists.get(edge.getNode1()).add(edge);
     }
 
     @Override
     public boolean removeEdge(GraphEdge<L> edge) {
-        throw new UnsupportedOperationException("Rimozione degli archi non supportata");
+        throw new UnsupportedOperationException(
+                "Rimozione degli archi non supportata");
     }
 
     @Override
     public boolean containsEdge(GraphEdge<L> edge) {
-        if (edge == null) {
-            throw new NullPointerException();
-        }
-        if (!this.adjacentLists.containsKey(edge.getNode1()) || !this.adjacentLists.containsKey(edge.getNode2())) {
-            throw new IllegalArgumentException();
-        }
+        if (edge == null)
+            throw new NullPointerException(
+                    "Tentativo di cercare un arco nullo");
+        // Controllo se i nodi esistono
+        if (!this.adjacentLists.containsKey(edge.getNode1())
+                || !this.adjacentLists.containsKey(edge.getNode2()))
+            throw new IllegalArgumentException(
+                    "Ricerca di un arco con almeno uno dei due nodi collegati non esistente");
+        // Cerco l'arco nella lista di adiacenza del nodo sorgente
         return this.adjacentLists.get(edge.getNode1()).contains(edge);
     }
 
     @Override
     public Set<GraphEdge<L>> getEdgesOf(GraphNode<L> node) {
-        if (node == null) {
-            throw new NullPointerException();
-        }
-        if (!this.adjacentLists.containsKey(node)) {
-            throw new IllegalArgumentException();
-        }
-        return this.adjacentLists.get(node);
+        if (node == null)
+            throw new NullPointerException(
+                    "Tentativo di ottenere gli archi uscenti da un nodo null");
+        Set<GraphEdge<L>> edges = this.adjacentLists.get(node);
+        if (edges == null)
+            throw new IllegalArgumentException(
+                    "Richiesta degli archi uscenti di un nodo non esistente");
+        return edges;
     }
 
     @Override
     public Set<GraphEdge<L>> getIngoingEdgesOf(GraphNode<L> node) {
-        if (node == null) {
-            throw new NullPointerException();
-        }
-        if (!this.adjacentLists.containsKey(node)) {
-            throw new IllegalArgumentException();
-        }
-        /*
-         * Per ogni nodo del grafo controlla se il nodo corrente è presente
-         * nell'insieme degli archi uscenti del nodo corrente. Se si, aggiunge
-         * l'arco corrente all'insieme degli archi entranti del nodo.
-         */
-        Set<GraphEdge<L>> ingoingEdges = new HashSet<GraphEdge<L>>();
-        for (GraphNode<L> n : this.adjacentLists.keySet()) {
-            for (GraphEdge<L> edge : this.adjacentLists.get(n)) {
-                if (edge.getNode2().equals(node)) {
-                    ingoingEdges.add(edge);
-                }
-            }
-        }
-        return ingoingEdges;
+        if (node == null)
+            throw new NullPointerException(
+                    "Tentativo di ottenere gli archi entranti in un nodo null");
+        // controllo se il nodo esiste
+        if (!this.adjacentLists.containsKey(node))
+            throw new IllegalArgumentException(
+                    "Richiesta degli archi entranti di un nodo non esistente");
+        // creo l'insieme risultato
+        Set<GraphEdge<L>> result = new HashSet<GraphEdge<L>>();
+        // cerco fra tutti gli archi quelli che entrano in node e li inserisco
+        // nel risultato
+        Set<GraphEdge<L>> allEdges = this.getEdges();
+        for (GraphEdge<L> e : allEdges)
+            if (e.getNode2().equals(node))
+                result.add(e);
+        return result;
     }
+
 }

@@ -1,9 +1,10 @@
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class MapAdjacentListDirectedGraphTest {
 
@@ -128,7 +129,8 @@ class MapAdjacentListDirectedGraphTest {
     @Test
     final void testGetAdjacentNodesOf() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
-        assertThrows(NullPointerException.class, () -> g.getAdjacentNodesOf(null));
+        assertThrows(NullPointerException.class,
+                () -> g.getAdjacentNodesOf(null));
         GraphNode<String> ns = new GraphNode<String>("s");
         g.addNode(ns);
         Set<GraphNode<String>> adjNodes = new HashSet<GraphNode<String>>();
@@ -136,7 +138,8 @@ class MapAdjacentListDirectedGraphTest {
         GraphNode<String> nsTest = new GraphNode<String>("s");
         GraphNode<String> nu = new GraphNode<String>("u");
         GraphNode<String> nuTest = new GraphNode<String>("u");
-        assertThrows(IllegalArgumentException.class, () -> g.getAdjacentNodesOf(nu));
+        assertThrows(IllegalArgumentException.class,
+                () -> g.getAdjacentNodesOf(nu));
         g.addNode(nu);
         GraphEdge<String> esu = new GraphEdge<String>(ns, nu, true, 10.1);
         g.addEdge(esu);
@@ -153,7 +156,8 @@ class MapAdjacentListDirectedGraphTest {
     @Test
     final void testGetPredecessorNodesOf() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
-        assertThrows(NullPointerException.class, () -> g.getPredecessorNodesOf(null));
+        assertThrows(NullPointerException.class,
+                () -> g.getPredecessorNodesOf(null));
         GraphNode<String> ns = new GraphNode<String>("s");
         g.addNode(ns);
         Set<GraphNode<String>> predNodes = new HashSet<GraphNode<String>>();
@@ -161,7 +165,8 @@ class MapAdjacentListDirectedGraphTest {
         GraphNode<String> nsTest = new GraphNode<String>("s");
         GraphNode<String> nu = new GraphNode<String>("u");
         GraphNode<String> nuTest = new GraphNode<String>("u");
-        assertThrows(IllegalArgumentException.class, () -> g.getPredecessorNodesOf(nu));
+        assertThrows(IllegalArgumentException.class,
+                () -> g.getPredecessorNodesOf(nu));
         g.addNode(nu);
         GraphEdge<String> esu = new GraphEdge<String>(ns, nu, true);
         g.addEdge(esu);
@@ -239,14 +244,18 @@ class MapAdjacentListDirectedGraphTest {
     @Test
     final void testAddEdge() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
-        assertThrows(NullPointerException.class, () -> g.addEdge(null));
+        assertThrows(NullPointerException.class,
+                () -> g.addEdge(null));
         GraphNode<String> ns = new GraphNode<String>("s");
         g.addNode(ns);
         GraphNode<String> nu = new GraphNode<String>("u");
-        assertThrows(IllegalArgumentException.class, () -> g.addEdge(new GraphEdge<String>(ns, nu, true)));
-        assertThrows(IllegalArgumentException.class, () -> g.addEdge(new GraphEdge<String>(nu, ns, true)));
+        assertThrows(IllegalArgumentException.class,
+                () -> g.addEdge(new GraphEdge<String>(ns, nu, true)));
+        assertThrows(IllegalArgumentException.class,
+                () -> g.addEdge(new GraphEdge<String>(nu, ns, true)));
         g.addNode(nu);
-        assertThrows(IllegalArgumentException.class, () -> g.addEdge(new GraphEdge<String>(ns, nu, false)));
+        assertThrows(IllegalArgumentException.class,
+                () -> g.addEdge(new GraphEdge<String>(ns, nu, false)));
         GraphEdge<String> esu = new GraphEdge<String>(ns, nu, true);
         g.addEdge(esu);
         assertTrue(g.containsEdge(new GraphEdge<String>(ns, nu, true)));
@@ -255,12 +264,15 @@ class MapAdjacentListDirectedGraphTest {
     @Test
     final void testContainsEdge() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
-        assertThrows(NullPointerException.class, () -> g.containsEdge(null));
+        assertThrows(NullPointerException.class,
+                () -> g.containsEdge(null));
         GraphNode<String> ns = new GraphNode<String>("s");
         g.addNode(ns);
         GraphNode<String> nu = new GraphNode<String>("u");
-        assertThrows(IllegalArgumentException.class, () -> g.containsEdge(new GraphEdge<String>(ns, nu, true)));
-        assertThrows(IllegalArgumentException.class, () -> g.containsEdge(new GraphEdge<String>(nu, ns, true)));
+        assertThrows(IllegalArgumentException.class,
+                () -> g.containsEdge(new GraphEdge<String>(ns, nu, true)));
+        assertThrows(IllegalArgumentException.class,
+                () -> g.containsEdge(new GraphEdge<String>(nu, ns, true)));
         g.addNode(nu);
         GraphEdge<String> esu = new GraphEdge<String>(ns, nu, true);
         assertFalse(g.containsEdge(new GraphEdge<String>(ns, nu, true)));
@@ -274,9 +286,11 @@ class MapAdjacentListDirectedGraphTest {
         GraphNode<String> ns = new GraphNode<String>("s");
         g.addNode(ns);
         Set<GraphEdge<String>> edgesTest = new HashSet<GraphEdge<String>>();
-        assertThrows(NullPointerException.class, () -> g.getEdgesOf(null));
+        assertThrows(NullPointerException.class,
+                () -> g.getEdgesOf(null));
         GraphNode<String> nu = new GraphNode<String>("u");
-        assertThrows(IllegalArgumentException.class, () -> g.getEdgesOf(nu));
+        assertThrows(IllegalArgumentException.class,
+                () -> g.getEdgesOf(nu));
         g.addNode(nu);
         GraphEdge<String> esu = new GraphEdge<String>(ns, nu, true);
         g.addEdge(esu);
@@ -318,9 +332,11 @@ class MapAdjacentListDirectedGraphTest {
         GraphNode<String> ns = new GraphNode<String>("s");
         g.addNode(ns);
         Set<GraphEdge<String>> edgesTest = new HashSet<GraphEdge<String>>();
-        assertThrows(NullPointerException.class, () -> g.getIngoingEdgesOf(null));
+        assertThrows(NullPointerException.class,
+                () -> g.getIngoingEdgesOf(null));
         GraphNode<String> nu = new GraphNode<String>("u");
-        assertThrows(IllegalArgumentException.class, () -> g.getIngoingEdgesOf(nu));
+        assertThrows(IllegalArgumentException.class,
+                () -> g.getIngoingEdgesOf(nu));
         g.addNode(nu);
         GraphEdge<String> esu = new GraphEdge<String>(ns, nu, true);
         g.addEdge(esu);
@@ -405,9 +421,11 @@ class MapAdjacentListDirectedGraphTest {
         GraphNode<String> ns = new GraphNode<String>("s");
         g.addNode(ns);
         assertTrue(g.getDegreeOf(ns) == 0);
-        assertThrows(NullPointerException.class, () -> g.getDegreeOf(null));
+        assertThrows(NullPointerException.class,
+                () -> g.getDegreeOf(null));
         GraphNode<String> nu = new GraphNode<String>("u");
-        assertThrows(IllegalArgumentException.class, () -> g.getDegreeOf(nu));
+        assertThrows(IllegalArgumentException.class,
+                () -> g.getDegreeOf(nu));
         g.addNode(nu);
         GraphEdge<String> esu = new GraphEdge<String>(ns, nu, true);
         g.addEdge(esu);
@@ -433,12 +451,12 @@ class MapAdjacentListDirectedGraphTest {
         g.addNode(nz);
         GraphEdge<String> ezy = new GraphEdge<String>(nz, ny, true, 7.107);
         g.addEdge(ezy);
-        assertTrue(g.getDegreeOf(ns) == 3);
-        assertTrue(g.getDegreeOf(nu) == 4);
-        assertTrue(g.getDegreeOf(nx) == 4);
-        assertTrue(g.getDegreeOf(ny) == 3);
-        assertTrue(g.getDegreeOf(nz) == 1);
-        assertTrue(g.getDegreeOf(nw) == 1);
+        assertTrue(g.getDegreeOf(ns)==3);
+        assertTrue(g.getDegreeOf(nu)==4);
+        assertTrue(g.getDegreeOf(nx)==4);
+        assertTrue(g.getDegreeOf(ny)==3);
+        assertTrue(g.getDegreeOf(nz)==1);
+        assertTrue(g.getDegreeOf(nw)==1);
     }
 
 }

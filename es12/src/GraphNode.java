@@ -237,5 +237,5 @@ public class GraphNode<L> {
     public String toString() {
         return "Nodo[ " + label.toString() + " ]";
     }
-
+    
 }
