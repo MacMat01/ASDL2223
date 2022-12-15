@@ -1,11 +1,11 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
  * Classe di test JUnit 5 per il risolutore "singoletto" di equazioni di secondo
  * grado.
- * 
- * @author Luca Tesei
  *
+ * @author Luca Tesei
  */
 class RisolutoreEquazioniSecondoGradoTest {
     /*
@@ -33,10 +33,8 @@ class RisolutoreEquazioniSecondoGradoTest {
         // per confrontare due numeri a virgola mobile è meglio usare una soglia
         // piccola EPSILON e controllare che la loro differenza in valore
         // assoluto è minore della soglia fissata, come segue
-        Assertions.assertTrue(Math.abs(s2.getS1() - 1) < EPSILON
-                || Math.abs(s2.getS1() - 2) < EPSILON);
-        Assertions.assertTrue(Math.abs(s2.getS2() - 1) < EPSILON
-                || Math.abs(s2.getS2() - 2) < EPSILON);
+        Assertions.assertTrue(Math.abs(s2.getS1() - 1) < EPSILON || Math.abs(s2.getS1() - 2) < EPSILON);
+        Assertions.assertTrue(Math.abs(s2.getS2() - 1) < EPSILON || Math.abs(s2.getS2() - 2) < EPSILON);
         Assertions.assertFalse(Math.abs(s2.getS1() - s2.getS2()) < EPSILON);
         // equazione con due soluzioni reali coincidenti
         EquazioneSecondoGrado e3 = new EquazioneSecondoGrado(1, -2, 1);
@@ -50,10 +48,8 @@ class RisolutoreEquazioniSecondoGradoTest {
         SoluzioneEquazioneSecondoGrado s4 = r.solve(e4);
         Assertions.assertFalse(s4.isEmptySolution());
         Assertions.assertFalse(s4.isOneSolution());
-        Assertions.assertTrue(Math.abs(s4.getS1() - 4.7912878474779195) < EPSILON
-                || Math.abs(s4.getS1() - 0.20871215252208009) < EPSILON);
-        Assertions.assertTrue(Math.abs(s4.getS2() - 4.7912878474779195) < EPSILON
-                || Math.abs(s4.getS2() - 0.20871215252208009) < EPSILON);
+        Assertions.assertTrue(Math.abs(s4.getS1() - 4.7912878474779195) < EPSILON || Math.abs(s4.getS1() - 0.20871215252208009) < EPSILON);
+        Assertions.assertTrue(Math.abs(s4.getS2() - 4.7912878474779195) < EPSILON || Math.abs(s4.getS2() - 0.20871215252208009) < EPSILON);
 
     }
 
