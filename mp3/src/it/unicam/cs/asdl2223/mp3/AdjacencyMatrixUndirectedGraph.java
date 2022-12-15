@@ -861,7 +861,7 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
         for (GraphEdge<L> edge : getEdgesOf(node)) {
             // se l'arco non è null aggiungo il nodo adiacente al set
             if (edge != null) {
-                adjacentNodes.add(node);
+                adjacentNodes.add(edge.getNode1().equals(node) ? edge.getNode2() : edge.getNode1());
             }
         }
 
@@ -869,7 +869,7 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
         for (ArrayList<GraphEdge<L>> edges : this.matrix) {
             // se l'arco non è null aggiungo il nodo adiacente al set
             if (edges.get(this.nodesIndex.get(node)) != null) {
-                adjacentNodes.add(node);
+                adjacentNodes.add(edges.get(this.nodesIndex.get(node)).getNode1().equals(node) ? edges.get(this.nodesIndex.get(node)).getNode2() : edges.get(this.nodesIndex.get(node)).getNode1());
             }
         }
 
