@@ -187,6 +187,7 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
         // cancello il nodo dalla mappa
         this.nodesIndex.remove(node);
+        matrix.remove(matrix.get(index));
 
         // cancello la colonna corrispondente al nodo
         for (int i = 0; i < this.nodesIndex.size() - 1; i++) {
@@ -391,6 +392,18 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
         return this.nodesIndex.keySet();
     }
 
+    private boolean edgeAdder(GraphEdge<L> edge) {
+        if (this.matrix.get(this.nodesIndex.get(edge.getNode1())).get(this.nodesIndex.get(edge.getNode2())) != null) {
+            return false;
+        }
+        if (this.matrix.get(this.nodesIndex.get(edge.getNode2())).get(this.nodesIndex.get(edge.getNode1())) != null) {
+            return false;
+        }
+
+        matrix.get(this.nodesIndex.get(edge.getNode1())).set(this.nodesIndex.get(edge.getNode2()), edge);
+        return true;
+    }
+
     @Override
     public boolean addEdge(GraphEdge<L> edge) {
         // TODO implementare
@@ -430,7 +443,7 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
         // creo un nuovo arco
         GraphEdge<L> edge = new GraphEdge<>(node1, node2, false);
-        return addEdge(edge);
+        return edgeAdder(edge);
     }
 
     @Override
@@ -454,7 +467,7 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
         // creo un nuovo arco
         GraphEdge<L> edge = new GraphEdge<>(node1, node2, false, weight);
-        return addEdge(edge);
+        return edgeAdder(edge);
     }
 
     @Override
@@ -477,11 +490,9 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
         // creo un nuovo arco
         GraphEdge<L> edge = new GraphEdge<>(node1, node2, false);
-        int i = nodesIndex.get(node1); // i
-        int j = nodesIndex.get(node2); // j
 
         // ritorno il risultato di addEdge
-        return addEdge(edge);
+        return edgeAdder(edge);
     }
 
     @Override
@@ -511,7 +522,7 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
         GraphEdge<L> edge = new GraphEdge<>(node1, node2, false, weight);
 
         // ritorno il risultato di addEdge
-        return addEdge(edge);
+        return edgeAdder(edge);
     }
 
     // Se i o j sono fuori dai limiti dell'intervallo lancio IndexOutOfBoundsException
@@ -754,6 +765,14 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
         // se uno dei nodi non esiste in questo grafo lancio IllegalArgumentException
         if (!this.nodesIndex.containsKey(node1) || !this.nodesIndex.containsKey(node2)) {
             throw new IllegalArgumentException("Uno dei nodi non esiste in questo grafo");
+        }
+
+        if (this.matrix.get(nodesIndex.get(node1)).get(nodesIndex.get(node2)) != null) {
+            return this.matrix.get(nodesIndex.get(node1)).get(nodesIndex.get(node2));
+        }
+
+        if (this.matrix.get(nodesIndex.get(node2)).get(nodesIndex.get(node1)) != null) {
+            return this.matrix.get(nodesIndex.get(node2)).get(nodesIndex.get(node1));
         }
 
         // cerco l'arco corrispondente ai due nodi
