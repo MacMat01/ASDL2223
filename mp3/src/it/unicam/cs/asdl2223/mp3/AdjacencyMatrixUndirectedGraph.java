@@ -519,17 +519,22 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
             throw new NullPointerException("Uno dei label è nullo");
         }
 
-        // costruisco i nodi
-        GraphNode<L> node1 = new GraphNode<>(label1);
-        GraphNode<L> node2 = new GraphNode<>(label2);
-
         // se uno dei label non esiste in questo grafo lancio IllegalArgumentException
         if (getNode(label1) == null || getNode(label2) == null) {
             throw new IllegalArgumentException("Uno dei label non esiste in questo grafo");
         }
 
+        // creo i nodi
+        GraphNode<L> node1 = getNode(label1);
+        GraphNode<L> node2 = getNode(label2);
+
         // creo un nuovo arco
         GraphEdge<L> edge = new GraphEdge<>(node1, node2, false);
+        int i = nodesIndex.get(node1); // i
+        int j = nodesIndex.get(node2); // j
+
+        // inserisco l'arco nella matrice nella posizione i, j
+        this.matrix.get(i).set(j, edge);
 
         // ritorno il risultato di addEdge
         return addEdge(edge);
@@ -827,34 +832,22 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
     public GraphEdge<L> getEdge(L label1, L label2) {
         // TODO implementare
 
-        // Controllo che i label non siano nulli richiamando il metodo di comodo
-        checkLabels(label1, label2);
-
-        // creo i nodi
-        GraphNode<L> node1 = null;
-        GraphNode<L> node2 = null;
-
-        for (GraphNode<L> node : this.nodesIndex.keySet()) {
-            if (node.getLabel().equals(label1)) {
-                node1 = node;
-            }
-            if (node.getLabel().equals(label2)) {
-                node2 = node;
-            }
-
-            // se ho trovato entrambi i nodi esco dal ciclo
-            if (node1 != null && node2 != null) {
-                break;
-            }
+        // controllo che il label siano nulli
+        if (label1 == null || label2 == null) {
+            throw new NullPointerException("Label not existing");
         }
 
-        // se uno dei nodi non esiste in questo grafo lancio IllegalArgumentException
-        if (node1 == null || node2 == null) {
-            throw new IllegalArgumentException("Uno dei nodi non esiste in questo grafo");
+        // se uno dei label non esiste in questo grafo lancio IllegalArgumentException
+        if (getNode(label1) == null || getNode(label2) == null) {
+            throw new IllegalArgumentException("Uno dei label non esiste in questo grafo");
         }
 
-        // ritorno l'arco
-        return getEdge(node1, node2);
+        // creo gli indici dei due nodi
+        GraphEdge<L> edge = this.matrix.get(nodesIndex.get(getNode(label1))).get(nodesIndex.get(getNode(label2)));
+
+        // se l'arco è presente nel grafo viene restituito
+        // altrimenti se l'arco non esiste in questo grafo ritorna null
+        return edge;
     }
 
     @Override
