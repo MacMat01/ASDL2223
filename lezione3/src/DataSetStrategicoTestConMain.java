@@ -1,4 +1,4 @@
-import java.awt.Rectangle;
+import java.awt.*;
 
 /**
  * Testa la classe DataSetStrategico che utilizza l'interfaccia strategica

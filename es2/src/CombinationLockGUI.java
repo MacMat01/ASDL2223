@@ -1,5 +1,5 @@
-import java.awt.Color;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * GUI per usare una combination lock che ha come combinazione tre lettere

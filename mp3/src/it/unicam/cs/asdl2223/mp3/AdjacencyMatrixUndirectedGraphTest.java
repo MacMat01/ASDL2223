@@ -1,11 +1,11 @@
 package it.unicam.cs.asdl2223.mp3;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Classe di test per la classe AdjacencyMatrixUndirectedGraph.

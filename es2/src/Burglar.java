@@ -1,5 +1,3 @@
-import java.util.Random;
-
 /**
  * Uno scassinatore è un oggetto che prende una certa cassaforte e trova la
  * combinazione utilizzando la "forza bruta".

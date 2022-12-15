@@ -1,8 +1,9 @@
 package it.unicam.cs.asdl2223.mp3;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Classe di test per la classe PrimMSP.
