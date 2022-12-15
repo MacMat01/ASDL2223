@@ -5,8 +5,6 @@ package it.unicam.cs.asdl2223.mp3;
 
 import java.util.*;
 
-// TODO completare gli import necessari
-
 // ATTENZIONE: è vietato includere import a pacchetti che non siano della Java SE
 
 /**
@@ -70,22 +68,16 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public int nodeCount() {
-        // TODO implementare
-
         return this.nodesIndex.size();
     }
 
     @Override
     public int edgeCount() {
-        // TODO implementare
-
         return getEdges().size();
     }
 
     @Override
     public void clear() {
-        // TODO implementare
-
         // Svuoto la matrice di adiacenza
         this.matrix.clear();
 
@@ -95,8 +87,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public boolean isDirected() {
-        // TODO implementare
-
         // un grafo non orientato non ha archi orientati
         return false;
     }
@@ -107,8 +97,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
      */
     @Override
     public boolean addNode(GraphNode<L> node) {
-        // TODO implementare
-
         // se il nodo è null lancio NullPointerException
         if (node == null) {
             throw new NullPointerException("Il nodo non può essere null");
@@ -130,8 +118,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     // Inizializzo la matrice con il giusto numero di righe e colonne
     private void initMatrix() {
-        // TODO implementare (macmat)
-
         // aggiungo una nuova riga alla matrice
         this.matrix.add(new ArrayList<>());
 
@@ -149,8 +135,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
      */
     @Override
     public boolean addNode(L label) {
-        // TODO implementare
-
         // se il label è null lancio NullPointerException
         if (label == null) {
             throw new NullPointerException("Il label non può essere null");
@@ -170,8 +154,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
      */
     @Override
     public void removeNode(GraphNode<L> node) {
-        // TODO implementare
-
         // se il nodo è null o non è presente lancio un'eccezione
         if (node == null) {
             throw new NullPointerException("Il nodo è nullo");
@@ -209,8 +191,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
      */
     @Override
     public void removeNode(L label) {
-        // TODO implementare
-
         // se il label è null lancio un'eccezione
         if (label == null) {
             throw new NullPointerException("Il label è nullo");
@@ -263,8 +243,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
      */
     @Override
     public void removeNode(int i) {
-        // TODO implementare
-
         // richiamo il metodo di comodo per cercare il nodo
         GraphNode<L> node = searchNode(i);
 
@@ -279,8 +257,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public GraphNode<L> getNode(GraphNode<L> node) {
-        // TODO implementare
-
         // se il nodo è null lancio NullPointerException
         if (node == null) {
             throw new NullPointerException("Il nodo è nullo");
@@ -311,8 +287,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public GraphNode<L> getNode(L label) {
-        // TODO implementare
-
         // se il label è null lancio NullPointerException
         if (label == null) {
             throw new NullPointerException("Il label è nullo");
@@ -331,8 +305,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public GraphNode<L> getNode(int i) {
-        // TODO implementare
-
         // richiamo il metodo di comodo per controllare l'indice
         GraphNode<L> node = searchNode(i);
 
@@ -347,8 +319,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public int getNodeIndexOf(GraphNode<L> node) {
-        // TODO implementare
-
         // se il nodo è null lancio NullPointerException
         if (node == null) {
             throw new NullPointerException("Il nodo è nullo");
@@ -365,8 +335,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public int getNodeIndexOf(L label) {
-        // TODO implementare
-
         // se il label è null lancio NullPointerException
         if (label == null) {
             throw new NullPointerException("Il label è nullo");
@@ -386,8 +354,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public Set<GraphNode<L>> getNodes() {
-        // TODO implementare
-
         // ritorno il set dei nodi
         return this.nodesIndex.keySet();
     }
@@ -406,8 +372,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public boolean addEdge(GraphEdge<L> edge) {
-        // TODO implementare
-
         // se l'arco è null o l'arco già esiste ritorno false
         if (edge == null) {
             throw new NullPointerException("L'arco è nullo");
@@ -429,8 +393,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public boolean addEdge(GraphNode<L> node1, GraphNode<L> node2) {
-        // TODO implementare
-
         // se uno dei nodi è null lancio NullPointerException
         if (node1 == null || node2 == null) {
             throw new NullPointerException("Uno dei nodi è nullo");
@@ -448,8 +410,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public boolean addWeightedEdge(GraphNode<L> node1, GraphNode<L> node2, double weight) {
-        // TODO implementare
-
         // se uno dei nodi è null lancio NullPointerException
         if (node1 == null || node2 == null) {
             throw new NullPointerException("Uno dei nodi è nullo");
@@ -472,8 +432,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public boolean addEdge(L label1, L label2) {
-        // TODO implementare
-
         // se uno dei label è null lancio NullPointerException
         if (label1 == null || label2 == null) {
             throw new NullPointerException("Uno dei label è nullo");
@@ -497,8 +455,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public boolean addWeightedEdge(L label1, L label2, double weight) {
-        // TODO implementare
-
         // se uno dei label è null lancio NullPointerException
         if (label1 == null || label2 == null) {
             throw new NullPointerException("Uno dei label è nullo");
@@ -527,8 +483,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     // Se i o j sono fuori dai limiti dell'intervallo lancio IndexOutOfBoundsException
     private void checkIndex(int i, int j) {
-        // TODO implementare (macmat)
-
         if (i < 0 || i > this.nodeCount() - 1 || j < 0 || j > this.nodeCount() - 1) {
             throw new IndexOutOfBoundsException("i o j sono fuori dai limiti dell'intervallo");
         }
@@ -536,8 +490,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     // Cerco i nodi utilizzando gli indici
     private Set<GraphNode<L>> searchNodes(int i, int j) {
-        // TODO implementare (macmat)
-
         // creo un set di nodi
         Set<GraphNode<L>> nodes = new HashSet<>();
 
@@ -561,8 +513,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     // Se almeno uno degli indici non corrisponde a nessun nodo lancio IndexOutOfBoundsException
     private void checkNodes(GraphNode<L> node1, GraphNode<L> node2) {
-        // TODO implementare (macmat)
-
         if (node1 == null || node2 == null) {
             throw new IndexOutOfBoundsException("Almeno uno degli indici non corrisponde a nessun nodo");
         }
@@ -570,8 +520,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public boolean addEdge(int i, int j) {
-        // TODO implementare
-
         // controllo gli indici richiamando il metodo di comodo
         checkIndex(i, j);
 
@@ -593,8 +541,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public boolean addWeightedEdge(int i, int j, double weight) {
-        // TODO implementare
-
         // controllo gli indici richiamando il metodo di comodo
         checkIndex(i, j);
 
@@ -642,8 +588,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public void removeEdge(GraphNode<L> node1, GraphNode<L> node2) {
-        // TODO implementare
-
         // se uno dei nodi è null lancio NullPointerException
         if (node1 == null || node2 == null) {
             throw new NullPointerException("Uno dei nodi è nullo");
@@ -655,8 +599,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     // Se i label sono nulli lancio NullPointerException
     private void checkLabels(L label1, L label2) {
-        // TODO implementare (macmat)
-
         if (label1 == null || label2 == null) {
             throw new NullPointerException("Uno dei label è nullo");
         }
@@ -664,8 +606,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public void removeEdge(L label1, L label2) {
-        // TODO implementare
-
         // Controllo che i label non siano nulli richiamando il metodo di comodo
         checkLabels(label1, label2);
 
@@ -698,8 +638,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public void removeEdge(int i, int j) {
-        // TODO implementare
-
         // controllo gli indici richiamando il metodo di comodo
         checkIndex(i, j);
 
@@ -732,8 +670,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public GraphEdge<L> getEdge(GraphEdge<L> edge) {
-        // TODO implementare
-
         // se l'arco è null lancio NullPointerException
         if (edge == null) {
             throw new NullPointerException("L'arco è nullo");
@@ -755,8 +691,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public GraphEdge<L> getEdge(GraphNode<L> node1, GraphNode<L> node2) {
-        // TODO implementare
-
         // se uno dei nodi è null lancio NullPointerException
         if (node1 == null || node2 == null) {
             throw new NullPointerException("Uno dei nodi è nullo");
@@ -781,8 +715,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public GraphEdge<L> getEdge(L label1, L label2) {
-        // TODO implementare
-
         // controllo che il label siano nulli
         if (label1 == null || label2 == null) {
             throw new NullPointerException("Uno dei label è nullo");
@@ -806,8 +738,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public GraphEdge<L> getEdge(int i, int j) {
-        // TODO implementare
-
         // se i o j sono fuori dai limiti dell'intervallo lancio IndexOutOfBoundsException
         if (i < 0 || i > this.nodeCount() - 1 || j < 0 || j > this.nodeCount() - 1) {
             throw new IndexOutOfBoundsException("i o j sono fuori dai limiti dell'intervallo");
@@ -842,8 +772,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public Set<GraphNode<L>> getAdjacentNodesOf(GraphNode<L> node) {
-        // TODO implementare
-
         // se il nodo è null lancio NullPointerException
         if (node == null) {
             throw new NullPointerException("Il nodo è nullo");
@@ -879,8 +807,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public Set<GraphNode<L>> getAdjacentNodesOf(L label) {
-        // TODO implementare
-
         // se il label è null lancio NullPointerException
         if (label == null) {
             throw new NullPointerException("Il label è nullo");
@@ -907,8 +833,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     // Uguale a checkIndex ma con un indice
     private void checkIndex(int index) {
-        // TODO implementare (macmat)
-
         // se l'indice è fuori dai limiti dell'intervallo lancio IndexOutOfBoundsException
         if (index < 0 || index > this.nodeCount() - 1) {
             throw new IndexOutOfBoundsException("L'indice è fuori dai limiti dell'intervallo");
@@ -917,8 +841,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public Set<GraphNode<L>> getAdjacentNodesOf(int i) {
-        // TODO implementare
-
         // Controllo che l'indice non sia fuori dai limiti dell'intervallo richiamando il metodo di comodo
         checkIndex(i);
 
@@ -958,8 +880,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public Set<GraphEdge<L>> getEdgesOf(GraphNode<L> node) {
-        // TODO implementare
-
         // se il nodo è null lancio NullPointerException
         if (node == null) {
             throw new NullPointerException("Il nodo è nullo");
@@ -998,8 +918,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public Set<GraphEdge<L>> getEdgesOf(L label) {
-        // TODO implementare
-
         // se il label è null lancio NullPointerException
         if (label == null) {
             throw new NullPointerException("Il label è nullo");
@@ -1026,8 +944,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public Set<GraphEdge<L>> getEdgesOf(int i) {
-        // TODO implementare
-
         // se i è fuori dai limiti dell'intervallo lancio IndexOutOfBoundsException
         if (i < 0 || i > this.nodeCount() - 1) {
             throw new IndexOutOfBoundsException("i è fuori dai limiti dell'intervallo");
@@ -1069,8 +985,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
 
     @Override
     public Set<GraphEdge<L>> getEdges() {
-        // TODO implementare
-
         // creo il set di archi
         Set<GraphEdge<L>> edges = new HashSet<>();
 
