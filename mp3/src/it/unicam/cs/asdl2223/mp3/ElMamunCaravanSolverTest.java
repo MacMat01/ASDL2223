@@ -12,8 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class ElMamunCaravanSolverTest {
 
-    private ObjectiveFunction max = new MaximumFunction();
-    private ObjectiveFunction min = new MinimumFunction();
+    private final ObjectiveFunction max = new MaximumFunction();
+    private final ObjectiveFunction min = new MinimumFunction();
 
     /**
      * Test method for {@link it.unicam.cs.asdl2021.mp2sol.ElMamunCaravanSolver#ElMamunCaravanSolver(it.unicam.cs.asdl2021.mp2sol.Expression)}.
@@ -33,7 +33,7 @@ class ElMamunCaravanSolverTest {
         Expression f = new Expression("1+2*3*4+5");
         ElMamunCaravanSolver solver = new ElMamunCaravanSolver(f);
         solver.solve(max);
-        assertTrue(solver.getOptimalSolution() == 81);
+        assertEquals(81, solver.getOptimalSolution());
     }
 
     /**
@@ -44,7 +44,7 @@ class ElMamunCaravanSolverTest {
         Expression f = new Expression("1+2*3*4+5");
         ElMamunCaravanSolver solver = new ElMamunCaravanSolver(f);
         solver.solve(max);
-        assertTrue(solver.getOptimalParenthesization().equals("((1+2)*(3*(4+5)))"));
+        assertEquals("((1+2)*(3*(4+5)))", solver.getOptimalParenthesization());
     }
 
     /**
@@ -55,7 +55,7 @@ class ElMamunCaravanSolverTest {
         Expression f = new Expression("1+2*3*4+5");
         ElMamunCaravanSolver solver = new ElMamunCaravanSolver(f);
         solver.solve(min);
-        assertTrue(solver.getOptimalSolution() == 30);
+        assertEquals(30, solver.getOptimalSolution());
     }
 
     /**
@@ -66,7 +66,7 @@ class ElMamunCaravanSolverTest {
         Expression f = new Expression("1+2*3*4+5");
         ElMamunCaravanSolver solver = new ElMamunCaravanSolver(f);
         solver.solve(min);
-        assertTrue(solver.getOptimalParenthesization().equals("(1+((2*(3*4))+5))"));
+        assertEquals("(1+((2*(3*4))+5))", solver.getOptimalParenthesization());
     }
 
     /**
@@ -77,7 +77,7 @@ class ElMamunCaravanSolverTest {
         Expression f = new Expression("1");
         ElMamunCaravanSolver solver = new ElMamunCaravanSolver(f);
         solver.solve(max);
-        assertTrue(solver.getOptimalSolution() == 1);
+        assertEquals(1, solver.getOptimalSolution());
     }
 
     /**
@@ -88,7 +88,7 @@ class ElMamunCaravanSolverTest {
         Expression f = new Expression("1");
         ElMamunCaravanSolver solver = new ElMamunCaravanSolver(f);
         solver.solve(max);
-        assertTrue(solver.getOptimalParenthesization().equals("1"));
+        assertEquals("1", solver.getOptimalParenthesization());
     }
 
     /**
@@ -99,7 +99,7 @@ class ElMamunCaravanSolverTest {
         Expression f = new Expression("1");
         ElMamunCaravanSolver solver = new ElMamunCaravanSolver(f);
         solver.solve(min);
-        assertTrue(solver.getOptimalSolution() == 1);
+        assertEquals(1, solver.getOptimalSolution());
     }
 
     /**
@@ -110,7 +110,7 @@ class ElMamunCaravanSolverTest {
         Expression f = new Expression("1");
         ElMamunCaravanSolver solver = new ElMamunCaravanSolver(f);
         solver.solve(min);
-        assertTrue(solver.getOptimalParenthesization().equals("1"));
+        assertEquals("1", solver.getOptimalParenthesization());
     }
 
     /**
@@ -121,7 +121,7 @@ class ElMamunCaravanSolverTest {
         Expression f = new Expression("1*3");
         ElMamunCaravanSolver solver = new ElMamunCaravanSolver(f);
         solver.solve(max);
-        assertTrue(solver.getOptimalSolution() == 3);
+        assertEquals(3, solver.getOptimalSolution());
     }
 
     /**
@@ -132,7 +132,7 @@ class ElMamunCaravanSolverTest {
         Expression f = new Expression("1*3");
         ElMamunCaravanSolver solver = new ElMamunCaravanSolver(f);
         solver.solve(max);
-        assertTrue(solver.getOptimalParenthesization().equals("(1*3)"));
+        assertEquals("(1*3)", solver.getOptimalParenthesization());
     }
 
     /**
@@ -143,7 +143,7 @@ class ElMamunCaravanSolverTest {
         Expression f = new Expression("1*3");
         ElMamunCaravanSolver solver = new ElMamunCaravanSolver(f);
         solver.solve(min);
-        assertTrue(solver.getOptimalSolution() == 3);
+        assertEquals(3, solver.getOptimalSolution());
     }
 
     /**
@@ -154,7 +154,7 @@ class ElMamunCaravanSolverTest {
         Expression f = new Expression("1*3");
         ElMamunCaravanSolver solver = new ElMamunCaravanSolver(f);
         solver.solve(min);
-        assertTrue(solver.getOptimalParenthesization().equals("(1*3)"));
+        assertEquals("(1*3)", solver.getOptimalParenthesization());
     }
 
     /**
@@ -165,7 +165,7 @@ class ElMamunCaravanSolverTest {
         Expression f = new Expression("9*3+2");
         ElMamunCaravanSolver solver = new ElMamunCaravanSolver(f);
         solver.solve(max);
-        assertTrue(solver.getOptimalSolution() == 45);
+        assertEquals(45, solver.getOptimalSolution());
     }
 
     /**
@@ -176,7 +176,7 @@ class ElMamunCaravanSolverTest {
         Expression f = new Expression("9*3+2");
         ElMamunCaravanSolver solver = new ElMamunCaravanSolver(f);
         solver.solve(max);
-        assertTrue(solver.getOptimalParenthesization().equals("(9*(3+2))"));
+        assertEquals("(9*(3+2))", solver.getOptimalParenthesization());
     }
 
     /**
@@ -187,7 +187,7 @@ class ElMamunCaravanSolverTest {
         Expression f = new Expression("9*3+2");
         ElMamunCaravanSolver solver = new ElMamunCaravanSolver(f);
         solver.solve(min);
-        assertTrue(solver.getOptimalSolution() == 29);
+        assertEquals(29, solver.getOptimalSolution());
     }
 
     /**
@@ -198,7 +198,7 @@ class ElMamunCaravanSolverTest {
         Expression f = new Expression("9*3+2");
         ElMamunCaravanSolver solver = new ElMamunCaravanSolver(f);
         solver.solve(min);
-        assertTrue(solver.getOptimalParenthesization().equals("((9*3)+2)"));
+        assertEquals("((9*3)+2)", solver.getOptimalParenthesization());
     }
 
 
@@ -210,7 +210,7 @@ class ElMamunCaravanSolverTest {
         Expression f = new Expression("1+2+3*3*2*1");
         ElMamunCaravanSolver solver = new ElMamunCaravanSolver(f);
         solver.solve(max);
-        assertTrue(solver.getOptimalSolution() == 36);
+        assertEquals(36, solver.getOptimalSolution());
     }
 
     /**
@@ -221,7 +221,7 @@ class ElMamunCaravanSolverTest {
         Expression f = new Expression("1+2+3*3*2*1");
         ElMamunCaravanSolver solver = new ElMamunCaravanSolver(f);
         solver.solve(max);
-        assertTrue(solver.getOptimalParenthesization().equals("((1+(2+3))*(3*(2*1)))"));
+        assertEquals("((1+(2+3))*(3*(2*1)))", solver.getOptimalParenthesization());
     }
 
     /**
@@ -232,7 +232,7 @@ class ElMamunCaravanSolverTest {
         Expression f = new Expression("1+2+3*3*2*1");
         ElMamunCaravanSolver solver = new ElMamunCaravanSolver(f);
         solver.solve(min);
-        assertTrue(solver.getOptimalSolution() == 21);
+        assertEquals(21, solver.getOptimalSolution());
     }
 
     /**
@@ -243,7 +243,7 @@ class ElMamunCaravanSolverTest {
         Expression f = new Expression("1+2+3*3*2*1");
         ElMamunCaravanSolver solver = new ElMamunCaravanSolver(f);
         solver.solve(min);
-        assertTrue(solver.getOptimalParenthesization().equals("(1+(2+(3*(3*(2*1)))))"));
+        assertEquals("(1+(2+(3*(3*(2*1)))))", solver.getOptimalParenthesization());
     }
 
     /**

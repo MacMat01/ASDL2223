@@ -3,12 +3,10 @@ package it.unicam.cs.asdl2223.mp3;
 import java.util.List;
 
 /**
- * 
  * Class that implements an objective function that choses the maximum integer
  * value among the given candidates.
- * 
- * @author Daniele Marchei and Luca Tesei
  *
+ * @author Daniele Marchei and Luca Tesei
  */
 public class MaximumFunction implements ObjectiveFunction {
 
