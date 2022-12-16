@@ -75,6 +75,11 @@ public class PrimMSP<L> {
             throw new NullPointerException("Grafo o nodo sorgente nulli");
         }
 
+        // controllo che il nodo sorgente esista nel grafo
+        if (g.getNode(s) == null) {
+            throw new IllegalArgumentException("Il nodo sorgente non esiste nel grafo");
+        }
+
         // controllo se il grafo è orientato
         if (g.isDirected()) {
             throw new IllegalArgumentException("Il grafo non deve essere orientato");
