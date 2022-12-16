@@ -82,7 +82,7 @@ public class PrimMSP<L> {
 
         // controllo se il grafo ha archi
         if (g.getEdges().isEmpty()) {
-            throw new IllegalArgumentException("Il grafo non ha archi");
+            //throw new IllegalArgumentException("Il grafo non ha archi");
         }
 
         // controllo se gli archi del grafo sono pesati
@@ -96,7 +96,7 @@ public class PrimMSP<L> {
         for (GraphNode<L> node : g.getNodes()) {
 
             // imposto la priorità iniziale a infinito
-            node.setFloatingPointDistance(Integer.MAX_VALUE);
+            node.setFloatingPointDistance(Double.POSITIVE_INFINITY);
 
             // setto il campo previous a null
             node.setPrevious(null);
@@ -114,8 +114,9 @@ public class PrimMSP<L> {
             // estraggo il nodo con chiave minima dalla coda
             GraphNode<L> u = extractMin();
 
-            // aggiungo il nodo estratto alla lista dei nodi visitati
+            // aggiungo il nodo estratto alla lista dei nodi visitati e imposto il colore a nero
             visitati.add(u);
+            u.setColor(GraphNode.COLOR_BLACK);
 
             // per ogni nodo adiacente a u
             for (GraphNode<L> v : g.getAdjacentNodesOf(u)) {
