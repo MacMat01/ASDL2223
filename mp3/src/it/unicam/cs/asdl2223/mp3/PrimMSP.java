@@ -39,7 +39,6 @@ public class PrimMSP<L> {
     // Lista dei nodi visitati
     private List<GraphNode<L>> visitati;
 
-
     /**
      * Crea un nuovo algoritmo e inizializza la coda di priorità con una coda
      * vuota.
@@ -47,7 +46,7 @@ public class PrimMSP<L> {
     public PrimMSP() {
         // TODO implementare
 
-        // Inizializza la coda di priorità con una coda vuota
+        // Inizializza la coda di priorità con una coda vuota e la lista dei nodi visitati
         this.coda = new ArrayList<GraphNode<L>>();
         this.visitati = new ArrayList<GraphNode<L>>();
     }
@@ -78,8 +77,74 @@ public class PrimMSP<L> {
 
         // controllo se il grafo è orientato
         if (g.isDirected()) {
-            throw new IllegalArgumentException("Grafo non valido");
+            throw new IllegalArgumentException("Il grafo non deve essere orientato");
+        }
+
+        // controllo se il grafo è pesato e con pesi non negativi
+        for (GraphEdge<L> edge : g.getEdges()) {
+            if (edge.getWeight() <= 0) {
+                throw new IllegalArgumentException("Il grafo deve essere pesato e con pesi positivi");
+            }
+        }
+
+        // per ogni nodo del grafo, setto il campo previous a null
+        for (GraphNode<L> node : g.getNodes()) {
+
+            // imposto la priorità iniziale a infinito
+            node.setFloatingPointDistance(Integer.MAX_VALUE);
+
+            // setto il campo previous a null
+            node.setPrevious(null);
+        }
+
+        // setto la priorità del nodo sorgente a 0
+        s.setFloatingPointDistance(0);
+
+        // aggiungo il nodo sorgente alla coda
+        this.coda = new ArrayList<>(g.getNodes());
+
+        // finché la coda non è vuota
+        while (!coda.isEmpty()) {
+
+            // estraggo il nodo con chiave minima dalla coda
+            GraphNode<L> u = extractMin();
+
+            // aggiungo il nodo estratto alla lista dei nodi visitati
+            visitati.add(u);
+
+            // per ogni nodo adiacente a u
+            for (GraphNode<L> v : g.getAdjacentNodesOf(u)) {
+                if (coda.contains(v) && g.getEdge(u, v).getWeight() < v.getFloatingPointDistance()) {
+                    // se il nodo è nella coda e la sua chiave è maggiore del peso dell'arco tra u e il nodo adiacente
+                    // setto il campo previous del nodo adiacente a u
+                    v.setPrevious(u);
+                    // imposto la posizione 0 della coda con il nodo adiacente
+                    v.setFloatingPointDistance(g.getEdge(u, v).getWeight());
+                }
+            }
         }
     }
 
+    private GraphNode<L> extractMin() {
+
+        // inizializzo il nodo con chiave minima
+        GraphNode<L> min = coda.get(0);
+
+        // per ogni nodo nella coda
+        for (GraphNode<L> node : coda) {
+            // se la chiave del nodo è minore della chiave del nodo con chiave minima
+            if (node.getColor() < min.getColor()) {
+                // aggiorno il nodo con chiave minima
+                min = node;
+            }
+        }
+
+        // rimuovo il nodo con chiave minima dalla coda
+        coda.remove(min);
+
+        // ritorno il nodo con chiave minima
+        return min;
+    }
 }
+
+

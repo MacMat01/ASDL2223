@@ -386,8 +386,6 @@ public class AdjacencyMatrixUndirectedGraph<L> extends Graph<L> {
         if (!this.nodesIndex.containsKey(edge.getNode1()) || !this.nodesIndex.containsKey(edge.getNode2())) {
             throw new IllegalArgumentException("Uno dei nodi dell'arco non esiste in questo grafo");
         }
-
-
         return edgeAdder(edge);
     }
 
