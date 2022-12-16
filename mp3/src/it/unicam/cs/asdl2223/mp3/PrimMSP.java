@@ -80,9 +80,14 @@ public class PrimMSP<L> {
             throw new IllegalArgumentException("Il grafo non deve essere orientato");
         }
 
-        // controllo se il grafo è pesato e con pesi non negativi
+        // controllo se il grafo ha archi
+        if (g.getEdges().isEmpty()) {
+            throw new IllegalArgumentException("Il grafo non ha archi");
+        }
+
+        // controllo se gli archi del grafo sono pesati
         for (GraphEdge<L> edge : g.getEdges()) {
-            if (edge.getWeight() <= 0) {
+            if (!edge.hasWeight() || edge.getWeight() < 0) {
                 throw new IllegalArgumentException("Il grafo deve essere pesato e con pesi positivi");
             }
         }
@@ -130,11 +135,11 @@ public class PrimMSP<L> {
         // inizializzo il nodo con chiave minima
         GraphNode<L> min = coda.get(0);
 
-        // per ogni nodo nella coda
+        // scorro la coda
         for (GraphNode<L> node : coda) {
-            // se la chiave del nodo è minore della chiave del nodo con chiave minima
-            if (node.getColor() < min.getColor()) {
-                // aggiorno il nodo con chiave minima
+            // se il nodo ha una chiave minore di min
+            if (node.getFloatingPointDistance() < min.getFloatingPointDistance()) {
+                // setto min al nodo
                 min = node;
             }
         }
