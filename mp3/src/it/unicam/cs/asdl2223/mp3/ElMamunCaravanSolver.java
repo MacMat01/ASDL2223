@@ -94,13 +94,20 @@ public class ElMamunCaravanSolver {
                     // itero per tutti i possibili valori di k
                     for (int k = 0; i + k + 2 <= j; k += 2) {
 
-                        //aggiungo ai candidati questo valore di k
-                        candidates.add(this.table[i][i + k]);
-                        candidates.add((Integer) this.expression.get(i + k + 1).getValue());
-                        candidates.add(this.table[i + k + 2][j]);
+                        // controllo il tipo di operatore dell'espressione
+                        if (this.expression.get(i + k + 1).getType().toString().charAt(0) == '+') {
+
+                            // aggiungo il candidato alla lista
+                            candidates.add(this.table[i][i + k] + this.table[i + k + 2][j]);
+                        } else {
+
+                            // aggiungo il candidato alla lista
+                            candidates.add(this.table[i][i + k] * this.table[i + k + 2][j]);
+                        }
 
                         // aggiungo il valore ottimo alla tabella
                         this.table[i][j] = function.getBest(candidates);
+
 
                         // libero i candidati
                         candidates.clear();
