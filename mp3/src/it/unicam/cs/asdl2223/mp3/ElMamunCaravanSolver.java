@@ -1,5 +1,6 @@
 package it.unicam.cs.asdl2223.mp3;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -76,31 +77,34 @@ public class ElMamunCaravanSolver {
             return;
         }
 
-        // inizializzo la matrice
+        // itero su tutte le celle della tabella
         for (int i = 0; i < expression.size(); i++) {
             for (int j = 0; j < expression.size(); j++) {
 
                 // riempio la diagonale con le cifre
-                if (i == j && i % 2 == 0) {
-                    this.table[i][j] = expression.get(i).toString().charAt(0) - '0';
+                if (i == j && expression.get(i).getType() == ItemType.DIGIT) {
+                    this.table[i][j] = (Integer) expression.get(i).getValue();
                 }
 
-                // creo una lista di candidati
-                List<Integer> candidates = null;
+                if (i < j && expression.get(i).getType() == ItemType.DIGIT && expression.get(j).getType() == ItemType.DIGIT) {
 
-                // riempio la diagonale con le operazioni
-                for (int k = 0; k < expression.size(); k++) {
-                    candidates.add(this.table[i][i + k]);
-                    candidates.add(this.expression.get(i + k + 1).toString().charAt(0) - '0');
-                    candidates.add(this.table[i + k + 2][j]);
+                    // inizializzo la lista dei candidati
+                    List<Integer> candidates = new ArrayList<>();
 
-                    // scelgo il candidato migliore
-                    if (i < j && i % 2 != 0 && j % 2 != 0) {
+                    // itero per tutti i possibili valori di k
+                    for (int k = 0; i + k + 2 <= j; k += 2) {
+
+                        //aggiungo ai candidati questo valore di k
+                        candidates.add(this.table[i][i + k]);
+                        candidates.add((Integer) this.expression.get(i + k + 1).getValue());
+                        candidates.add(this.table[i + k + 2][j]);
+
+                        // aggiungo il valore ottimo alla tabella
                         this.table[i][j] = function.getBest(candidates);
-                    }
 
-                    // deve aumentare di 2 in 2
-                    k++;
+                        // libero i candidati
+                        candidates.clear();
+                    }
                 }
             }
         }
@@ -126,7 +130,7 @@ public class ElMamunCaravanSolver {
         }
 
         // ritorno la soluzione ottima
-        return 0;
+        return this.table[0][this.expression.size() - 1];
     }
 
     /**
@@ -153,7 +157,7 @@ public class ElMamunCaravanSolver {
         }
 
         // ritorno la parentesizzazione ottima
-        return "";
+        return this.tracebackTable[0][this.expression.size() - 1].toString();
     }
 
     /**
