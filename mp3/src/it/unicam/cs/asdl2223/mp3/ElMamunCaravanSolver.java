@@ -72,42 +72,43 @@ public class ElMamunCaravanSolver {
             throw new NullPointerException("La funzione non può essere nulla");
         }
 
-        if (this.solved) {
-            return;
+        // riempio la diagonale della tabella con le cifre dell'espressione
+        for (int i = 0; i < expression.size(); i++) {
+
+            // ogni posizione pari rappresenta una cifra
+            if (i % 2 == 0) {
+                table[i][i] = (Integer) expression.get(i).getValue();
+
+            }
         }
 
-        // inizializzo la lista dei candidati
-        List<Integer> candidates = new ArrayList<>();
+        // creo una lista di candidati per la funzione best
+        List<Integer> candidates = new ArrayList<Integer>();
 
-        // itero su tutte le celle della tabella
+        // riempio la tabella con le soluzioni ottimali
         for (int i = 0; i < expression.size(); i++) {
             for (int j = 0; j < expression.size(); j++) {
 
-                // riempio la diagonale con le cifre
-                if (i == j && expression.get(i).getType() == ItemType.DIGIT) {
-                    this.table[i][j] = (Integer) expression.get(i).getValue();
-                }
+                // controllo che entrambi i valori siano cifre
+                if (i % 2 == 0 && j % 2 == 0) {
 
-                if (i < j && expression.get(i).getType() == ItemType.DIGIT && expression.get(j).getType() == ItemType.DIGIT) {
-
-                    // itero per tutti i possibili valori di k
+                    // ciclo per variare il valore di k
                     for (int k = 0; i + k + 2 <= j; k += 2) {
 
-                        // controllo il tipo di operatore dell'espressione
-                        if (this.expression.get(i + k + 1).getType().toString().charAt(0) == '+') {
-
-                            // aggiungo il candidato alla lista
-                            candidates.add(this.table[i][i + k] + this.table[i + k + 2][j]);
+                        // se la posizione i+k+1 equivale a + allora eseguo la somma
+                        if (expression.get(i + k + 1).getValue().equals("+")) {
+                            candidates.add(table[i][i + k] + table[i + k + 2][j]);
                         } else {
-
-                            // aggiungo il candidato alla lista
-                            candidates.add(this.table[i][i + k] * this.table[i + k + 2][j]);
+                            candidates.add(table[i][i + k] * table[i + k + 2][j]);
                         }
 
-                        // aggiungo il valore ottimo alla tabella
-                        this.table[i][j] = function.getBest(candidates);
+                        // salvo la soluzione ottimale
+                        table[i][j] = function.getBest(candidates);
 
-                        // libero i candidati
+                        // salvo il valore di k che ha dato la soluzione ottimale
+                        tracebackTable[i][j] = k;
+
+                        // svuoto la lista di candidati
                         candidates.clear();
                     }
                 }
@@ -134,8 +135,8 @@ public class ElMamunCaravanSolver {
             throw new IllegalStateException("Il problema non è mai stato risolto");
         }
 
-        // ritorno la soluzione ottima
-        return this.table[0][this.expression.size() - 1];
+        // ritorno la soluzione ottimale
+        return table[0][expression.size() - 1];
     }
 
     /**
@@ -161,8 +162,8 @@ public class ElMamunCaravanSolver {
             throw new IllegalStateException("Il problema non è mai stato risolto");
         }
 
-        // ritorno la parentesizzazione ottima
-        return this.tracebackTable[0][this.expression.size() - 1].toString();
+        // ritorno la parentesizzazione ottimale
+        return traceback(0, expression.size() - 1);
     }
 
     /**
