@@ -1,9 +1,11 @@
 /**
  * Classe singoletto che fornisce lo schema generico di visita Depth-First di un
  * grafo rappresentato da un oggetto di tipo Graph<L>.
- *
- * @param <L> le etichette dei nodi del grafo
+ * 
  * @author Luca Tesei
+ * 
+ * @param <L>
+ *                le etichette dei nodi del grafo
  */
 public class DFSVisitor<L> {
 
@@ -19,12 +21,15 @@ public class DFSVisitor<L> {
      * metodo visitNode sul nodo. In questa classe il metodo non fa niente,
      * basta creare una sottoclasse e ridefinire il metodo per eseguire azioni
      * particolari.
-     *
-     * @param g il grafo da visitare.
-     * @throws NullPointerException se il grafo passato è null
+     * 
+     * @param g
+     *              il grafo da visitare.
+     * @throws NullPointerException
+     *                                  se il grafo passato è null
      */
     public void DFSVisit(Graph<L> g) {
-        if (g == null) throw new NullPointerException("DFS ERROR: Grafo nullo");
+        if (g == null)
+            throw new NullPointerException("DFS ERROR: Grafo nullo");
         // inizializziamo i nodi del grafo
         for (GraphNode<L> n : g.getNodes()) {
             n.setColor(GraphNode.COLOR_WHITE);
@@ -45,9 +50,9 @@ public class DFSVisitor<L> {
 
     /*
      * Esegue la DFS ricorsivamente sul nodo passato.
-     *
+     * 
      * @param g il grafo
-     *
+     * 
      * @param u il nodo su cui parte la DFS
      */
     protected void recDFS(Graph<L> g, GraphNode<L> u) {
@@ -78,8 +83,9 @@ public class DFSVisitor<L> {
      * nodi visitati durante la DFS nel momento in cui il colore passa da grigio
      * a nero. Ridefinire il metodo in una sottoclasse per effettuare azioni
      * specifiche.
-     *
-     * @param n il nodo visitato
+     * 
+     * @param n
+     *              il nodo visitato
      */
     public void visitNode(GraphNode<L> n) {
         /*

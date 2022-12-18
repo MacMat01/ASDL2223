@@ -3,9 +3,11 @@ import java.util.LinkedList;
 /**
  * Classe singoletto che fornisce lo schema generico di visita Breadth-First di
  * un grafo rappresentato da un oggetto di tipo Graph<L>.
- *
- * @param <L> le etichette dei nodi del grafo
+ * 
  * @author Luca Tesei
+ *
+ * @param <L>
+ *                le etichette dei nodi del grafo
  */
 public class BFSVisitor<L> {
 
@@ -19,18 +21,25 @@ public class BFSVisitor<L> {
      * visitNode sul nodo. In questa classe il metodo non fa niente, basta
      * creare una sottoclasse e ridefinire il metodo per eseguire azioni
      * particolari.
-     *
-     * @param g      il grafo da visitare.
-     * @param source il nodo sorgente.
-     * @throws NullPointerException     se almeno un valore passato è null
-     * @throws IllegalArgumentException se il nodo sorgente non appartiene
-     *                                  al grafo dato
+     * 
+     * @param g
+     *                   il grafo da visitare.
+     * @param source
+     *                   il nodo sorgente.
+     * @throws NullPointerException
+     *                                      se almeno un valore passato è null
+     * @throws IllegalArgumentException
+     *                                      se il nodo sorgente non appartiene
+     *                                      al grafo dato
      */
     public void BFSVisit(Graph<L> g, GraphNode<L> source) {
-        if (g == null) throw new NullPointerException("BFS ERROR: Grafo nullo");
-        if (source == null) throw new NullPointerException("BFS ERROR: Sorgente nulla");
+        if (g == null)
+            throw new NullPointerException("BFS ERROR: Grafo nullo");
+        if (source == null)
+            throw new NullPointerException("BFS ERROR: Sorgente nulla");
         if (!g.getNodes().contains(source))
-            throw new IllegalArgumentException("BFS ERROR: La sorgente non è un nodo del grafo");
+            throw new IllegalArgumentException(
+                    "BFS ERROR: La sorgente non è un nodo del grafo");
 
         // Inizializziamo il grafo
         for (GraphNode<L> n : g.getNodes()) {
@@ -71,8 +80,9 @@ public class BFSVisitor<L> {
      * Questo metodo, che di default non fa niente, viene chiamato su tutti i
      * nodi visitati durante la BFS quando i nodi passano da grigio a nero.
      * Ridefinire il metodo in una sottoclasse per effettuare azioni specifiche.
-     *
-     * @param n il nodo visitato
+     * 
+     * @param n
+     *              il nodo visitato
      */
     public void visitNode(GraphNode<L> n) {
         /*

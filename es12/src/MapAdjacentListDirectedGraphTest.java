@@ -75,11 +75,11 @@ class MapAdjacentListDirectedGraphTest {
         GraphNode<String> nuTest = new GraphNode<String>("u");
         testNodes.add(nuTest);
         testNodes.add(nsTest);
-        assertTrue(nodes.equals(testNodes));
+        assertEquals(nodes, testNodes);
         GraphNode<String> nuTestBis = new GraphNode<String>("u");
         g.addNode(nuTestBis);
         nodes = g.getNodes();
-        assertTrue(nodes.equals(testNodes));
+        assertEquals(nodes, testNodes);
     }
 
     @Test
@@ -132,7 +132,7 @@ class MapAdjacentListDirectedGraphTest {
         GraphNode<String> ns = new GraphNode<String>("s");
         g.addNode(ns);
         Set<GraphNode<String>> adjNodes = new HashSet<GraphNode<String>>();
-        assertTrue(g.getAdjacentNodesOf(ns).equals(adjNodes));
+        assertEquals(g.getAdjacentNodesOf(ns), adjNodes);
         GraphNode<String> nsTest = new GraphNode<String>("s");
         GraphNode<String> nu = new GraphNode<String>("u");
         GraphNode<String> nuTest = new GraphNode<String>("u");
@@ -147,7 +147,7 @@ class MapAdjacentListDirectedGraphTest {
         g.addEdge(esx);
         adjNodes.add(nxTest);
         adjNodes.add(nuTest);
-        assertTrue(g.getAdjacentNodesOf(nsTest).equals(adjNodes));
+        assertEquals(g.getAdjacentNodesOf(nsTest), adjNodes);
     }
 
     @Test
@@ -157,7 +157,7 @@ class MapAdjacentListDirectedGraphTest {
         GraphNode<String> ns = new GraphNode<String>("s");
         g.addNode(ns);
         Set<GraphNode<String>> predNodes = new HashSet<GraphNode<String>>();
-        assertTrue(g.getPredecessorNodesOf(ns).equals(predNodes));
+        assertEquals(g.getPredecessorNodesOf(ns), predNodes);
         GraphNode<String> nsTest = new GraphNode<String>("s");
         GraphNode<String> nu = new GraphNode<String>("u");
         GraphNode<String> nuTest = new GraphNode<String>("u");
@@ -174,7 +174,7 @@ class MapAdjacentListDirectedGraphTest {
         g.addEdge(eux);
         GraphEdge<String> exu = new GraphEdge<String>(nx, nu, true, 3.04);
         g.addEdge(exu);
-        assertTrue(g.getPredecessorNodesOf(ns).equals(predNodes));
+        assertEquals(g.getPredecessorNodesOf(ns), predNodes);
         GraphNode<String> ny = new GraphNode<String>("y");
         GraphNode<String> nyTest = new GraphNode<String>("y");
         g.addNode(ny);
@@ -183,18 +183,18 @@ class MapAdjacentListDirectedGraphTest {
         GraphEdge<String> eys = new GraphEdge<String>(ny, ns, true, 7.03);
         g.addEdge(eys);
         predNodes.add(nyTest);
-        assertTrue(g.getPredecessorNodesOf(nsTest).equals(predNodes));
+        assertEquals(g.getPredecessorNodesOf(nsTest), predNodes);
         predNodes.clear();
         predNodes.add(nsTest);
         predNodes.add(nxTest);
-        assertTrue(g.getPredecessorNodesOf(nuTest).equals(predNodes));
+        assertEquals(g.getPredecessorNodesOf(nuTest), predNodes);
         predNodes.clear();
         predNodes.add(nsTest);
         predNodes.add(nuTest);
-        assertTrue(g.getPredecessorNodesOf(nxTest).equals(predNodes));
+        assertEquals(g.getPredecessorNodesOf(nxTest), predNodes);
         predNodes.clear();
         predNodes.add(nxTest);
-        assertTrue(g.getPredecessorNodesOf(nyTest).equals(predNodes));
+        assertEquals(g.getPredecessorNodesOf(nyTest), predNodes);
     }
 
     @Test
@@ -203,13 +203,13 @@ class MapAdjacentListDirectedGraphTest {
         GraphNode<String> ns = new GraphNode<String>("s");
         g.addNode(ns);
         Set<GraphEdge<String>> edgesTest = new HashSet<GraphEdge<String>>();
-        assertTrue(g.getEdges().equals(edgesTest));
+        assertEquals(g.getEdges(), edgesTest);
         GraphNode<String> nu = new GraphNode<String>("u");
         g.addNode(nu);
         GraphEdge<String> esu = new GraphEdge<String>(ns, nu, true);
         g.addEdge(esu);
         edgesTest.add(esu);
-        assertTrue(g.getEdges().equals(edgesTest));
+        assertEquals(g.getEdges(), edgesTest);
         GraphNode<String> nx = new GraphNode<String>("x");
         g.addNode(nx);
         GraphEdge<String> esx = new GraphEdge<String>(ns, nx, true, 5.12);
@@ -221,7 +221,7 @@ class MapAdjacentListDirectedGraphTest {
         edgesTest.add(eux);
         edgesTest.add(esx);
         edgesTest.add(exu);
-        assertTrue(g.getEdges().equals(edgesTest));
+        assertEquals(g.getEdges(), edgesTest);
         GraphNode<String> ny = new GraphNode<String>("y");
         g.addNode(ny);
         GraphEdge<String> exy = new GraphEdge<String>(nx, ny, true, 2.0);
@@ -230,10 +230,10 @@ class MapAdjacentListDirectedGraphTest {
         g.addEdge(eys);
         edgesTest.add(eys);
         edgesTest.add(exy);
-        assertTrue(g.getEdges().equals(edgesTest));
+        assertEquals(g.getEdges(), edgesTest);
         g.clear();
         edgesTest.clear();
-        assertTrue(g.getEdges().equals(edgesTest));
+        assertEquals(g.getEdges(), edgesTest);
     }
 
     @Test
@@ -300,16 +300,16 @@ class MapAdjacentListDirectedGraphTest {
         g.addEdge(euw);
         edgesTest.add(esu);
         edgesTest.add(esx);
-        assertTrue(g.getEdgesOf(ns).equals(edgesTest));
+        assertEquals(g.getEdgesOf(ns), edgesTest);
         edgesTest.clear();
         edgesTest.add(exu);
         edgesTest.add(exy);
-        assertTrue(g.getEdgesOf(nx).equals(edgesTest));
+        assertEquals(g.getEdgesOf(nx), edgesTest);
         edgesTest.clear();
         edgesTest.add(eys);
-        assertTrue(g.getEdgesOf(ny).equals(edgesTest));
+        assertEquals(g.getEdgesOf(ny), edgesTest);
         edgesTest.clear();
-        assertTrue(g.getEdgesOf(nw).equals(edgesTest));
+        assertEquals(g.getEdgesOf(nw), edgesTest);
     }
 
     @Test
@@ -348,12 +348,12 @@ class MapAdjacentListDirectedGraphTest {
         g.addEdge(ezy);
         edgesTest.add(esu);
         edgesTest.add(exu);
-        assertTrue(g.getIngoingEdgesOf(nu).equals(edgesTest));
+        assertEquals(g.getIngoingEdgesOf(nu), edgesTest);
         edgesTest.clear();
         edgesTest.add(euw);
-        assertTrue(g.getIngoingEdgesOf(nw).equals(edgesTest));
+        assertEquals(g.getIngoingEdgesOf(nw), edgesTest);
         edgesTest.clear();
-        assertTrue(g.getIngoingEdgesOf(nz).equals(edgesTest));
+        assertEquals(g.getIngoingEdgesOf(nz), edgesTest);
     }
 
     @Test
@@ -365,27 +365,27 @@ class MapAdjacentListDirectedGraphTest {
     @Test
     final void testSize() {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
-        assertTrue(g.size() == 0);
+        assertEquals(0, g.size());
         GraphNode<String> ns = new GraphNode<String>("s");
         g.addNode(ns);
-        assertTrue(g.size() == 1);
+        assertEquals(1, g.size());
         GraphNode<String> nu = new GraphNode<String>("u");
         g.addNode(nu);
-        assertTrue(g.size() == 2);
+        assertEquals(2, g.size());
         GraphEdge<String> esu = new GraphEdge<String>(ns, nu, true);
         g.addEdge(esu);
-        assertTrue(g.size() == 3);
+        assertEquals(3, g.size());
         GraphNode<String> nx = new GraphNode<String>("x");
         g.addNode(nx);
-        assertTrue(g.size() == 4);
+        assertEquals(4, g.size());
         GraphEdge<String> esx = new GraphEdge<String>(ns, nx, true, 5.12);
         g.addEdge(esx);
-        assertTrue(g.size() == 5);
+        assertEquals(5, g.size());
         GraphEdge<String> eux = new GraphEdge<String>(nu, nx, true, 2.05);
         g.addEdge(eux);
-        assertTrue(g.size() == 6);
+        assertEquals(6, g.size());
         g.clear();
-        assertTrue(g.size() == 0);
+        assertEquals(0, g.size());
     }
 
     @Test
@@ -404,7 +404,7 @@ class MapAdjacentListDirectedGraphTest {
         Graph<String> g = new MapAdjacentListDirectedGraph<String>();
         GraphNode<String> ns = new GraphNode<String>("s");
         g.addNode(ns);
-        assertTrue(g.getDegreeOf(ns) == 0);
+        assertEquals(0, g.getDegreeOf(ns));
         assertThrows(NullPointerException.class, () -> g.getDegreeOf(null));
         GraphNode<String> nu = new GraphNode<String>("u");
         assertThrows(IllegalArgumentException.class, () -> g.getDegreeOf(nu));
@@ -433,12 +433,12 @@ class MapAdjacentListDirectedGraphTest {
         g.addNode(nz);
         GraphEdge<String> ezy = new GraphEdge<String>(nz, ny, true, 7.107);
         g.addEdge(ezy);
-        assertTrue(g.getDegreeOf(ns) == 3);
-        assertTrue(g.getDegreeOf(nu) == 4);
-        assertTrue(g.getDegreeOf(nx) == 4);
-        assertTrue(g.getDegreeOf(ny) == 3);
-        assertTrue(g.getDegreeOf(nz) == 1);
-        assertTrue(g.getDegreeOf(nw) == 1);
+        assertEquals(3, g.getDegreeOf(ns));
+        assertEquals(4, g.getDegreeOf(nu));
+        assertEquals(4, g.getDegreeOf(nx));
+        assertEquals(3, g.getDegreeOf(ny));
+        assertEquals(1, g.getDegreeOf(nz));
+        assertEquals(1, g.getDegreeOf(nw));
     }
 
 }

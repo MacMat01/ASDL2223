@@ -45,7 +45,6 @@ public class ElMamunCaravanSolver {
         // creo la tabella
         this.table = new Integer[expression.size()][expression.size()];
         this.tracebackTable = new Integer[expression.size()][expression.size()];
-
     }
 
     /**
@@ -77,6 +76,9 @@ public class ElMamunCaravanSolver {
             return;
         }
 
+        // inizializzo la lista dei candidati
+        List<Integer> candidates = new ArrayList<>();
+
         // itero su tutte le celle della tabella
         for (int i = 0; i < expression.size(); i++) {
             for (int j = 0; j < expression.size(); j++) {
@@ -87,9 +89,6 @@ public class ElMamunCaravanSolver {
                 }
 
                 if (i < j && expression.get(i).getType() == ItemType.DIGIT && expression.get(j).getType() == ItemType.DIGIT) {
-
-                    // inizializzo la lista dei candidati
-                    List<Integer> candidates = new ArrayList<>();
 
                     // itero per tutti i possibili valori di k
                     for (int k = 0; i + k + 2 <= j; k += 2) {
@@ -107,7 +106,6 @@ public class ElMamunCaravanSolver {
 
                         // aggiungo il valore ottimo alla tabella
                         this.table[i][j] = function.getBest(candidates);
-
 
                         // libero i candidati
                         candidates.clear();

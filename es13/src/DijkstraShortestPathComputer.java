@@ -48,20 +48,6 @@ public class DijkstraShortestPathComputer<L> implements SingleSourceShortestPath
         this.grafo = graph;
         // TODO implementare
 
-        // se il grafo passato è nullo lancio NullPointerException
-        if (graph == null) {
-            throw new NullPointerException("Il grafo passato è nullo");
-        }
-
-        // se il grafo passato contiene almeno un peso negativo lancio IllegalArgumentException
-        for (GraphEdge<L> edge : graph.getEdges()) {
-            if (edge.getWeight() < 0) {
-                throw new IllegalArgumentException("Il grafo passato contiene almeno un peso negativo");
-            }
-        }
-
-        
-
     }
 
     @Override
