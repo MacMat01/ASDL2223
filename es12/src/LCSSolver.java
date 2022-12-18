@@ -13,7 +13,7 @@ public class LCSSolver {
     private final String y;
 
     /* Matrice per il calcolo di una soluzione ottima */
-    private int[][] m;
+    private final int[][] m;
 
     /*
      * Flag che indica che questo solver ha svolto il proprio calcolo. Alla
@@ -38,6 +38,31 @@ public class LCSSolver {
         // creo la matrice
         this.m = new int[this.x.length() + 1][this.y.length() + 1];
         this.isSolved = false;
+    }
+
+    /*
+     * Determina se una stringa è sottosequenza di un'altra stringa.
+     *
+     * @param z la stringa da testare
+     *
+     * @param w la stringa di cui z dovrebbe essere sottosequenza
+     *
+     * @return true se z è sottosequenza di w, false altrimenti
+     */
+    private static boolean isSubsequence(String z, String w) {
+        // Caso base
+        if (z.equals("")) return true;
+        // considero il primo carattere di z
+        char c = z.charAt(0);
+        // cerco la prima occorrenza di c in w
+        int i = w.indexOf(c);
+        if (i != -1)
+            // richiamo la funzione sul resto di z dopo aver fatto match del
+            // primo carattere di z in w
+            return isSubsequence(z.substring(1), w.substring(i + 1));
+            // il primo carattere di z non occorre mai in w, quindi z non può essere
+            // una sottosequenza
+        else return false;
     }
 
     /**
@@ -152,30 +177,5 @@ public class LCSSolver {
     public boolean isCommonSubsequence(String z) {
         if (z == null) throw new NullPointerException("Test di una sequenza nulla");
         return isSubsequence(z, this.x) && isSubsequence(z, this.y);
-    }
-
-    /*
-     * Determina se una stringa è sottosequenza di un'altra stringa.
-     *
-     * @param z la stringa da testare
-     *
-     * @param w la stringa di cui z dovrebbe essere sottosequenza
-     *
-     * @return true se z è sottosequenza di w, false altrimenti
-     */
-    private static boolean isSubsequence(String z, String w) {
-        // Caso base
-        if (z.equals("")) return true;
-        // considero il primo carattere di z
-        char c = z.charAt(0);
-        // cerco la prima occorrenza di c in w
-        int i = w.indexOf(c);
-        if (i != -1)
-            // richiamo la funzione sul resto di z dopo aver fatto match del
-            // primo carattere di z in w
-            return isSubsequence(z.substring(1), w.substring(i + 1));
-            // il primo carattere di z non occorre mai in w, quindi z non può essere
-            // una sottosequenza
-        else return false;
     }
 }
