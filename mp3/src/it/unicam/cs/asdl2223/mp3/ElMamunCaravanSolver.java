@@ -73,44 +73,37 @@ public class ElMamunCaravanSolver {
         }
 
         // riempio la diagonale della tabella con le cifre dell'espressione
-        for (int i = 0; i < expression.size(); i++) {
+        for (int i = 0; i < expression.size(); i += 2) {
 
             // ogni posizione pari rappresenta una cifra
-            if (i % 2 == 0) {
-                table[i][i] = (Integer) expression.get(i).getValue();
-
-            }
+            table[i][i] = (Integer) expression.get(i).getValue();
         }
 
         // creo una lista di candidati per la funzione best
         List<Integer> candidates = new ArrayList<Integer>();
 
         // riempio la tabella con le soluzioni ottimali
-        for (int i = 0; i < expression.size(); i++) {
-            for (int j = 0; j < expression.size(); j++) {
+        for (int i = 0; i < expression.size(); i += 2) {
+            for (int j = 0; j < expression.size(); j += 2) {
 
-                // controllo che entrambi i valori siano cifre
-                if (i % 2 == 0 && j % 2 == 0) {
+                // ciclo per variare il valore di k
+                for (int k = 0; i + k + 2 <= j; k += 2) {
 
-                    // ciclo per variare il valore di k
-                    for (int k = 0; i + k + 2 <= j; k += 2) {
-
-                        // se la posizione i+k+1 equivale a + allora eseguo la somma
-                        if (expression.get(i + k + 1).getValue().equals("+")) {
-                            candidates.add(table[i][i + k] + table[i + k + 2][j]);
-                        } else {
-                            candidates.add(table[i][i + k] * table[i + k + 2][j]);
-                        }
-
-                        // salvo la soluzione ottimale
-                        table[i][j] = function.getBest(candidates);
-
-                        // salvo il valore di k che ha dato la soluzione ottimale
-                        tracebackTable[i][j] = k;
-
-                        // svuoto la lista di candidati
-                        candidates.clear();
+                    // se la posizione i+k+1 equivale a + allora eseguo la somma
+                    if (expression.get(i + k + 1).getValue().equals("+")) {
+                        candidates.add(table[i][i + k] + table[i + k + 2][j]);
+                    } else {
+                        candidates.add(table[i][i + k] * table[i + k + 2][j]);
                     }
+
+                    // salvo la soluzione ottimale
+                    table[i][j] = function.getBest(candidates);
+
+                    // salvo il valore di k che ha dato la soluzione ottimale
+                    tracebackTable[i][j] = k;
+
+                    // svuoto la lista di candidati
+                    candidates.clear();
                 }
             }
         }
