@@ -46,26 +46,26 @@ class DijkstraShortestPathComputerTest {
         GraphNode<String> nsTest = new GraphNode<String>("s");
         c.computeShortestPathsFrom(nsTest);
         List<GraphEdge<String>> pathTest = new ArrayList<GraphEdge<String>>();
-        assertTrue(c.getShortestPathTo(nsTest).equals(pathTest));
+        assertEquals(c.getShortestPathTo(nsTest), pathTest);
         System.out.println(c.printPath(c.getShortestPathTo(nsTest)));
 
         GraphNode<String> nyTest = new GraphNode<String>("y");
         GraphEdge<String> esyTest = new GraphEdge<String>(nsTest, nyTest, true, 5);
         pathTest.add(esyTest);
-        assertTrue(c.getShortestPathTo(nyTest).equals(pathTest));
+        assertEquals(c.getShortestPathTo(nyTest), pathTest);
         System.out.println(c.printPath(c.getShortestPathTo(nyTest)));
 
         GraphNode<String> ntTest = new GraphNode<String>("t");
         GraphEdge<String> eytTest = new GraphEdge<String>(nyTest, ntTest, true, 3.0);
         pathTest.add(eytTest);
-        assertTrue(c.getShortestPathTo(ntTest).equals(pathTest));
+        assertEquals(c.getShortestPathTo(ntTest), pathTest);
         System.out.println(c.printPath(c.getShortestPathTo(ntTest)));
 
         // aggiunge il nuovo pezzo fino a x
         GraphNode<String> nxTest = new GraphNode<String>("x");
         GraphEdge<String> etxTest = new GraphEdge<String>(ntTest, nxTest, true, 1.0);
         pathTest.add(etxTest);
-        assertTrue(c.getShortestPathTo(nxTest).equals(pathTest));
+        assertEquals(c.getShortestPathTo(nxTest), pathTest);
         System.out.println(c.printPath(c.getShortestPathTo(nxTest)));
 
         // rimuove gli ultimi due pezzi del path
@@ -75,7 +75,7 @@ class DijkstraShortestPathComputerTest {
         GraphNode<String> nzTest = new GraphNode<String>("z");
         GraphEdge<String> eyzTest = new GraphEdge<String>(nyTest, nzTest, true, 2.0);
         pathTest.add(eyzTest);
-        assertTrue(c.getShortestPathTo(nzTest).equals(pathTest));
+        assertEquals(c.getShortestPathTo(nzTest), pathTest);
         System.out.println(c.printPath(c.getShortestPathTo(nzTest)));
     }
 
