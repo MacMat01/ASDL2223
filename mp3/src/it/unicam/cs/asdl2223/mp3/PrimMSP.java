@@ -85,11 +85,6 @@ public class PrimMSP<L> {
             throw new IllegalArgumentException("Il grafo non deve essere orientato");
         }
 
-        // controllo se il grafo ha archi
-        if (g.getEdges().isEmpty()) {
-            //throw new IllegalArgumentException("Il grafo non ha archi");
-        }
-
         // controllo se gli archi del grafo sono pesati
         for (GraphEdge<L> edge : g.getEdges()) {
             if (!edge.hasWeight() || edge.getWeight() < 0) {
