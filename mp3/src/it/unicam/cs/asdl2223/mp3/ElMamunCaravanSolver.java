@@ -73,7 +73,7 @@ public class ElMamunCaravanSolver {
         }
 
         // riempio la diagonale della tabella con le cifre dell'espressione
-        for (int i = 0; i < expression.size() - 2; i += 2) {
+        for (int i = 0; i < expression.size(); i += 2) {
 
             // ogni posizione pari rappresenta una cifra
             table[i][i] = (Integer) expression.get(i).getValue();
@@ -83,8 +83,8 @@ public class ElMamunCaravanSolver {
         List<Integer> candidates = new ArrayList<>();
 
         // riempio la tabella con le soluzioni ottimali
-        for (int i = 0; i < expression.size() - 2; i += 2) {
-            for (int j = 0; j < expression.size() - i - 2; j += 2) {
+        for (int i = 0; i < expression.size(); i += 2) {
+            for (int j = 0; j < expression.size(); j += 2) {
 
                 // ciclo per variare il valore di k
                 for (int k = 0; i + k + 2 <= j; k += 2) {
@@ -97,10 +97,10 @@ public class ElMamunCaravanSolver {
                     }
 
                     // salvo la soluzione ottimale
-                    table[i][j] = function.getBest(candidates) * 2;
+                    table[i][j] = function.getBest(candidates);
 
                     // salvo il valore di k che ha dato la soluzione ottimale
-                    tracebackTable[i][j] = function.getBestIndex(candidates) * 2;
+                    tracebackTable[i][j] = function.getBestIndex(candidates);
 
                     // svuoto la lista di candidati
                     candidates.clear();
