@@ -73,18 +73,18 @@ public class ElMamunCaravanSolver {
         }
 
         // riempio la diagonale della tabella con le cifre dell'espressione
-        for (int i = 0; i < expression.size(); i += 2) {
+        for (int i = 0; i < expression.size() - 2; i += 2) {
 
             // ogni posizione pari rappresenta una cifra
             table[i][i] = (Integer) expression.get(i).getValue();
         }
 
         // creo una lista di candidati per la funzione best
-        List<Integer> candidates = new ArrayList<Integer>();
+        List<Integer> candidates = new ArrayList<>();
 
         // riempio la tabella con le soluzioni ottimali
-        for (int i = 0; i < expression.size(); i += 2) {
-            for (int j = 0; j < expression.size(); j += 2) {
+        for (int i = 0; i < expression.size() - 2; i += 2) {
+            for (int j = 0; j < expression.size() - i - 2; j += 2) {
 
                 // ciclo per variare il valore di k
                 for (int k = 0; i + k + 2 <= j; k += 2) {
@@ -97,10 +97,10 @@ public class ElMamunCaravanSolver {
                     }
 
                     // salvo la soluzione ottimale
-                    table[i][j] = function.getBest(candidates);
+                    table[i][j] = function.getBest(candidates) * 2;
 
                     // salvo il valore di k che ha dato la soluzione ottimale
-                    tracebackTable[i][j] = k;
+                    tracebackTable[i][j] = function.getBestIndex(candidates) * 2;
 
                     // svuoto la lista di candidati
                     candidates.clear();
@@ -167,11 +167,14 @@ public class ElMamunCaravanSolver {
      * @return la parentesizzazione ottimale
      */
     private String traceback(int i, int j) {
-        if (i == j) return this.expression.get(i).toString();
-        else {
-            int k = this.tracebackTable[i][j];
-            return "(" + this.traceback(i, k) + this.expression.get(k + 1).toString() + this.traceback(k + 1, j) + ")";
+
+        // se i e j sono uguali allora ritorno la cifra
+        if (i == j) {
+            return expression.get(i).getValue().toString();
         }
+
+        // altrimenti ritorno la parentesizzazione ottimale
+        return "(" + traceback(i, i + tracebackTable[i][j]) + expression.get(i + tracebackTable[i][j] + 1).getValue() + traceback(i + tracebackTable[i][j] + 2, j) + ")";
     }
 
     /**
