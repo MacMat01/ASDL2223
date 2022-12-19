@@ -2,8 +2,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-// TODO completare gli import con eventuali classi della Java SE
-
 /**
  * Classe che implementa l'algoritmo di Dijkstra per il calcolo dei cammini
  * minimi da una sorgente singola. L'algoritmo usa una coda con priorità
@@ -28,9 +26,6 @@ public class DijkstraShortestPathComputer<L> implements SingleSourceShortestPath
      */
     private List<GraphNode<L>> queue;
 
-    // TODO inserire eventuali altre variabili istanza private per fini di
-    // implementazione
-
     /**
      * Crea un calcolatore di cammini minimi a sorgente singola per un grafo
      * diretto e pesato privo di pesi negativi.
@@ -47,7 +42,6 @@ public class DijkstraShortestPathComputer<L> implements SingleSourceShortestPath
      */
     public DijkstraShortestPathComputer(Graph<L> graph) {
         this.grafo = graph;
-        // TODO implementare
 
         // controllo se il grafo è nullo
         if (graph == null) {
@@ -67,7 +61,6 @@ public class DijkstraShortestPathComputer<L> implements SingleSourceShortestPath
 
     @Override
     public void computeShortestPathsFrom(GraphNode<L> sourceNode) {
-        // TODO implementare
 
         // controllo se la sorgente è nullo
         if (sourceNode == null) {
@@ -148,7 +141,6 @@ public class DijkstraShortestPathComputer<L> implements SingleSourceShortestPath
 
     @Override
     public List<GraphEdge<L>> getShortestPathTo(GraphNode<L> targetNode) {
-        // TODO implementare
 
         // controllo se il nodo è nullo
         if (targetNode == null) {
@@ -193,6 +185,4 @@ public class DijkstraShortestPathComputer<L> implements SingleSourceShortestPath
 
         return path;
     }
-
-    // TODO inserire eventuali metodi privati per fini di implementazione
 }
