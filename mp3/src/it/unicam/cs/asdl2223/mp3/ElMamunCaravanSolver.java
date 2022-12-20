@@ -83,7 +83,7 @@ public class ElMamunCaravanSolver {
         List<Integer> candidates = new ArrayList<>();
 
         // riempio la tabella con le soluzioni ottimali
-        for (int i = 0; i < expression.size(); i += 2) {
+        for (int i = 2; i < expression.size(); i += 2) {
             for (int j = 0; j < expression.size(); j += 2) {
 
                 // ciclo per variare il valore di k

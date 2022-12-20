@@ -39,7 +39,7 @@ public class PrimMSP<L> {
     public PrimMSP() {
 
         // Inizializza la coda di priorità con una coda vuota e la lista dei nodi visitati
-        this.coda = new ArrayList<GraphNode<L>>();
+        this.coda = new ArrayList<>();
     }
 
     /**
