@@ -1,7 +1,5 @@
 package it.unicam.cs.asdl2223.mp3;
 
-//TODO completare gli import necessari
-
 //ATTENZIONE: è vietato includere import a pacchetti che non siano della Java SE
 
 import java.util.ArrayList;
@@ -25,8 +23,6 @@ import java.util.List;
  */
 public class PrimMSP<L> {
 
-    // TODO inserire le variabili istanza che si ritengono necessarie
-
     /*
      * In particolare: si deve usare una coda con priorità che può semplicemente
      * essere realizzata con una List<GraphNode<L>> e si deve mantenere un
@@ -36,19 +32,14 @@ public class PrimMSP<L> {
     // Lista dei nodi del grafo
     private List<GraphNode<L>> coda;
 
-    // Lista dei nodi visitati
-    private List<GraphNode<L>> visitati;
-
     /**
      * Crea un nuovo algoritmo e inizializza la coda di priorità con una coda
      * vuota.
      */
     public PrimMSP() {
-        // TODO implementare
 
         // Inizializza la coda di priorità con una coda vuota e la lista dei nodi visitati
         this.coda = new ArrayList<GraphNode<L>>();
-        this.visitati = new ArrayList<GraphNode<L>>();
     }
 
     /**
@@ -68,7 +59,6 @@ public class PrimMSP<L> {
      *                                  con pesi negativi
      */
     public void computeMSP(Graph<L> g, GraphNode<L> s) {
-        // TODO implementare
 
         // controllo che il grafo o il nodo sorgente non siano null
         if (g == null || s == null) {
@@ -105,7 +95,7 @@ public class PrimMSP<L> {
         // setto la priorità del nodo sorgente a 0
         s.setFloatingPointDistance(0);
 
-        // aggiungo il nodo sorgente alla coda
+        // aggiungo i nodi del grafo alla coda
         this.coda = new ArrayList<>(g.getNodes());
 
         // finché la coda non è vuota
@@ -115,7 +105,6 @@ public class PrimMSP<L> {
             GraphNode<L> u = extractMin();
 
             // aggiungo il nodo estratto alla lista dei nodi visitati e imposto il colore a nero
-            visitati.add(u);
             u.setColor(GraphNode.COLOR_BLACK);
 
             // per ogni nodo adiacente a u
