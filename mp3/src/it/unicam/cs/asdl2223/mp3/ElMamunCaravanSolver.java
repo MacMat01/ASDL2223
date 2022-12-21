@@ -26,6 +26,9 @@ public class ElMamunCaravanSolver {
     // flag indicating that the problem has been solved at least once
     private boolean solved;
 
+    // creo una lista di candidati per la funzione best
+    private List<Integer> candidates;
+
     /**
      * Create a solver for a specific expression.
      *
@@ -45,6 +48,9 @@ public class ElMamunCaravanSolver {
         // creo la tabella
         this.table = new Integer[expression.size()][expression.size()];
         this.tracebackTable = new Integer[expression.size()][expression.size()];
+
+        // inizializzo la lista di candidati
+        this.candidates = new ArrayList<>();
     }
 
     /**
@@ -65,52 +71,50 @@ public class ElMamunCaravanSolver {
      * @throws NullPointerException if the objective function is null
      */
     public void solve(ObjectiveFunction function) {
-        // TODO implementare
-
-        // controllo che la funzione non sia nulla
-        if (function == null) {
-            throw new NullPointerException("La funzione non può essere nulla");
-        }
+        if (function == null) throw new NullPointerException("This function is null!");
 
         // riempio la diagonale della tabella con le cifre dell'espressione
         for (int i = 0; i < expression.size(); i += 2) {
 
-            // ogni posizione pari rappresenta una cifra
+            // se l'elemento è un numero
             table[i][i] = (Integer) expression.get(i).getValue();
         }
 
-        // creo una lista di candidati per la funzione best
-        List<Integer> candidates = new ArrayList<>();
+        // scorro l'espressione per riempire la tabella con le soluzioni ottimali
+        for (int h = 0; h < expression.size(); h += 2)
+            for (int j = 0; j < expression.size() - h; j += 2) {
+                int i = j + h;
 
-        // riempio la tabella con le soluzioni ottimali
-        for (int i = 2; i < expression.size(); i += 2) {
-            for (int j = 0; j < expression.size(); j += 2) {
+                // se j < i allora uso un ciclo per variare il valore di k
+                if (j < i) {
 
-                // ciclo per variare il valore di k
-                for (int k = 0; i + k + 2 <= j; k += 2) {
+                    // controllo se i e j sono numeri
+                    // k deve variare di due in due per tutti i valori consentiti
+                    for (int k = 0; k + j + 2 <= i; k += 2) {
 
-                    // se la posizione i+k+1 equivale a + allora eseguo la somma
-                    if (expression.get(i + k + 1).getValue().equals("+")) {
-                        candidates.add(table[i][i + k] + table[i + k + 2][j]);
-                    } else {
-                        candidates.add(table[i][i + k] * table[i + k + 2][j]);
+                        //separo i due casi in cui posso trovare il + o il *
+                        if (expression.get(j + k + 1).getValue().equals("+")) {
+                            candidates.add(table[j][j + k] + table[j + k + 2][i]);
+                        } else {
+                            candidates.add(table[j][j + k] * table[j + k + 2][i]);
+                        }
                     }
 
                     // salvo la soluzione ottimale
-                    table[i][j] = function.getBest(candidates);
+                    table[j][i] = function.getBest(candidates);
 
-                    // salvo il valore di k che ha dato la soluzione ottimale
-                    tracebackTable[i][j] = function.getBestIndex(candidates);
+                    // salvo il valore della funzione getBestIndex nella tabella
+                    tracebackTable[j][i] = function.getBestIndex(candidates) * 2;
 
-                    // svuoto la lista di candidati
+                    // svuoto la lista dei candidati
                     candidates.clear();
                 }
             }
-        }
 
         // imposto il flag a true
         this.solved = true;
     }
+
 
     /**
      * Returns the current optimal value for the expression of this solver. The
